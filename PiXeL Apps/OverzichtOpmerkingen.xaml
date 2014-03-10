@@ -1,0 +1,89 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="PiXeL_Apps.OverzichtOpmerkingen"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PiXeL_Apps"
+    xmlns:common="using:PiXeL_Apps.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">My Application</x:String>
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid x:Name="paginaGrid"  ManipulationMode="All" Background="{StaticResource DefaultBackgroundColor}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Back button and page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Margin="39,59,39,0"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"
+                        Click="backButton_Click" />
+            <TextBlock x:Name="pageTitle" Text="Overzicht Rijberichten" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,41" />
+        </Grid>
+        <Button x:Name="btnAanpassen" Grid.Row="1" Height="82" Width="194" Click="BtnAanpassen_Click" FontFamily="Global User Interface"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lblAanpassenIcoon" Text="&#xE0D8;" FontSize="45" FontFamily="Segoe UI Symbol" Grid.RowSpan="2" />
+                <TextBlock x:Name="lblAanpassen" Text="Aanpassen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Global User Interface" Margin="16,18,16,2" />
+            </Grid>
+        </Button>
+
+
+        <GridView x:Name="gvwOpmerkingen" HorizontalAlignment="Stretch" Margin="10,22,214,0"  Height="580" Grid.Row="1" VerticalAlignment="Top"
+                      Style="{StaticResource PAGridViewStyle}" ItemsSource="{Binding}" ItemContainerStyle="{StaticResource PAGridViewItemStyleComments}"
+                      ItemTemplate="{StaticResource overzichtTemplate}"
+                      SelectionMode="Single" SelectionChanged="GvwOpmerkingen_SelectionChanged">
+        </GridView>
+
+        <Button x:Name="btnNieuw" Grid.Row="1" Width="194" Height="82" Click="BtnNieuw_Click" FontFamily="Global User Interface"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,92">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lblNieuwIcoon" Text="&#xE0B6;" FontSize="45" FontFamily="Segoe UI Symbol" />
+                <TextBlock x:Name="lblNieuw" Text="Nieuw" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Global User Interface" />
+            </Grid>
+        </Button>
+
+        <TextBlock x:Name="lblBoodschap" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,220,0" TextAlignment="Right" Grid.Row="1" TextWrapping="Wrap" Text="" Width="900"/>
+        <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
+        </StackPanel>
+    </Grid>
+</Page>

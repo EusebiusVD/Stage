@@ -1,0 +1,158 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="PiXeL_Apps.Administratie"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PiXeL_Apps"
+    xmlns:common="using:PiXeL_Apps.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">My Application</x:String>
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Background="{StaticResource DefaultBackgroundColor}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Back button and page title -->
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Margin="39,59,39,0"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" Click="backButton_Click"/>
+            <TextBlock x:Name="pageTitle" Text="Administratie: Wagen" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Global User Interface"/>
+        </Grid>
+
+        <ScrollViewer ZoomMode="Disabled" Margin="-10,0,10,10" VerticalScrollMode="Auto" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <Grid x:Name="grWagen" Visibility="Visible" Height="618">
+                <TextBlock x:Name="lblFeedback" TextWrapping="Wrap" FontSize="30" Margin="10,520,10,0" FontStyle="Italic" TextAlignment="Center" Height="79" VerticalAlignment="Top" />
+
+                <ComboBox x:Name="cbbSelecteerWagen" FontSize="25" Margin="119,252,0,306" Height="60" DisplayMemberPath="Number" FontFamily="Global User Interface" HorizontalAlignment="Left" Width="535" />
+                <Button x:Name="btnWijzigAuto" Click="BtnWijzigAuto_Click" FontFamily="Global User Interface" 
+                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,244,10,308" Height="66" Width="326">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblWijzigAutoIcoon" Text="&#xE2B0;" FontSize="35" FontFamily="Segoe UI Symbol" Width="100" />
+                        <TextBlock x:Name="lblWijzigAuto" Text="Wijzig Auto" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22" Margin="32,10,0,9" />
+                    </Grid>
+                </Button>
+
+                <ProgressRing x:Name="prSynchroniseren" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Background="Transparent" Foreground="White" Margin="646,416,643,146"/>
+
+                <TextBlock x:Name="lblDatabankPad" Foreground="{StaticResource DefaultTextColor}" Margin="186,55,378,540" FontSize="20" FontStyle="Italic" />
+                <ToggleSwitch x:Name="swtOpmerking" Header="" HorizontalAlignment="Left" VerticalAlignment="Top"
+                      Margin="348,325,0,0" Width="176" Height="60" FontSize="25"
+                      OffContent="Nee" OnContent="Ja" Style="{StaticResource PAToggleSwitchTemplate}" Toggled="SwtOpmerking_Toggled" FontFamily="Global User Interface" />
+                <Button x:Name="btnSynchroniseren" Width="464" Click="BtnSynchroniseren_Click" FontFamily="Global User Interface"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,216" Visibility="Visible">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblSynchroniserenIcoon" Text="&#xE117;" FontSize="40" FontFamily="Segoe UI Symbol" Width="100" />
+                        <TextBlock x:Name="lblSynchroniseren" Text="Haal Databank Op" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                    </Grid>
+                </Button>
+                <ProgressBar x:Name="pbStatus" Height="58" VerticalAlignment="Stretch" Margin="86,443,54,127" Grid.Row="1" Visibility="Collapsed"/>
+                <TextBlock x:Name="lblDatabanklocatie" Foreground="{StaticResource DefaultTextColor}" Text="Databanklocatie:" HorizontalAlignment="left" Margin="35,55,0,545" FontSize="20" />
+                <TextBlock x:Name="lblRapporteerDubbeleOpmerking" HorizontalAlignment="Left" Margin="31,350,0,0" TextWrapping="Wrap" Text="Rapporteer dubbele rijberichten:" VerticalAlignment="Top" FontSize="20"/>
+
+                <TextBlock x:Name="lblTolerantieAankomend" HorizontalAlignment="Left" Margin="31,129,0,0" TextWrapping="Wrap" Text="Tolerantie aankomende inspectiekilometers:" VerticalAlignment="Top" FontSize="20"/>
+                <TextBox x:Name="txtTolerantieAankomend" HorizontalAlignment="Left" Margin="436,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Tolerantie Aankomend..." Width="218" FontFamily="Global User Interface" Height="15" />
+                <TextBox x:Name="txtTolerantieDringend" HorizontalAlignment="Left" Margin="436,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Tolerantie Dringend..." Width="218" FontFamily="Global User Interface" Height="23"/>
+                <TextBlock x:Name="lblTolerantieDringend" HorizontalAlignment="Left" Margin="31,201,0,0" TextWrapping="Wrap" Text="Tolerantie dringend inspectiekilometers:" VerticalAlignment="Top" FontSize="20"/>
+                <Button x:Name="btnTolerantieDringend" Width="326" Click="BtnTolerantieDringend_Click" FontFamily="Global User Interface"
+                         HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,210" Height="66">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblInstellenIcoon" Text="&#xE081;" FontSize="35" FontFamily="Segoe UI Symbol" Width="100" />
+                        <TextBlock x:Name="lblInstellen" Text="Instellen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                    </Grid>
+                </Button>
+                <Button x:Name="btnTolerantieAankomend" Width="326" Click="BtnTolerantieAankomend_Click" FontFamily="Global User Interface"
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,340" Height="66">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblInstellenIcoon1" Text="&#xE081;" FontSize="35" FontFamily="Segoe UI Symbol" Width="100" />
+                        <TextBlock x:Name="lblInstellen1" Text="Instellen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                    </Grid>
+                </Button>
+
+                <Button x:Name="btnBestandKiezer" Width="326" Click="BtnDatabankKiezer_Click" FontFamily="Global User Interface"
+                        HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,10,0" Height="65">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblBestandKiezerIcoon" Text="&#xE188;" FontSize="35" FontFamily="Segoe UI Symbol" Width="75" HorizontalAlignment="Right" Margin="0,0,12,0" />
+                        <TextBlock x:Name="lblBestandKiezer" Text="Kies Databank" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                    </Grid>
+                </Button>
+                <TextBlock x:Name="lblAfstandsaanduiding" HorizontalAlignment="Left" Margin="31,398,0,0" TextWrapping="Wrap" Text="Afstandsaanduiding:" VerticalAlignment="Top" FontSize="20"/>
+                <ToggleSwitch x:Name="swtAfstandsaanduiding" Header="" HorizontalAlignment="Left" VerticalAlignment="Top"
+        	Margin="348,379,0,0" Width="176" Height="60" FontSize="25" IsOn="False"
+        	OffContent="Km" OnContent="Mijl" Style="{StaticResource PAToggleSwitchTemplate}" Toggled="SwtAfstandsaanduiding_Toggled" FontFamily="Global User Interface" />
+                <TextBlock x:Name="lblWagen" HorizontalAlignment="Left" Margin="31,276,0,0" TextWrapping="Wrap" Text="Wagen:" VerticalAlignment="Top" FontSize="20" Height="39" Width="83"/>
+                <TextBlock x:Name="lblSynchroniseerRijberichten" Text="Synchoniseer rijberichten:" Visibility="Visible" Margin="31,447,1102,142" FontSize="20" Height="39" />
+                <ToggleSwitch x:Name="swtManierOpslag" Header="" HorizontalAlignment="Left" VerticalAlignment="Top"
+                      Margin="348,437,0,0" Width="182" Height="60" FontSize="25" IsOn="False"
+                      OffContent="USB" OnContent="Internet" Style="{StaticResource PAToggleSwitchTemplate}"/>
+                <TextBlock x:Name="lblUSBInternet" HorizontalAlignment="Left" Margin="383,492,0,0" TextWrapping="Wrap" Text="(USB / Internet)" VerticalAlignment="Top" FontSize="15" FontStyle="Italic"/>
+                <Button x:Name="btnSyncRijberichten" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,114" Visibility="Visible" Click="btnSyncRijberichten_Click">
+                    <Grid Width="298">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="125"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblSynchroniseerRijberichtenIcoon" Text="&#xE105;" FontSize="45" FontFamily="Segoe UI Symbol" Width="75" Margin="0,0,0,11" Height="50" VerticalAlignment="Center" />
+                        <TextBlock x:Name="lblSyncRijberichten" Text="Synchroniseren" VerticalAlignment="Center" FontSize="22" FontFamily="Segoe UI" Height="50" Grid.Column="1" Margin="44,11,-98,0" />
+                    </Grid>
+                </Button>
+                <!--<TextBlock x:Name="lblBandenspanning" HorizontalAlignment="Left" Margin="32,477,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Bandenspanning V L" VerticalAlignment="Top" FontSize="20"/>
+                    <TextBlock x:Name="lblBandenspanning_Copy" HorizontalAlignment="Left" Margin="34,514,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Bandenspanning V R" VerticalAlignment="Top" FontSize="20"/>
+                    <TextBlock x:Name="lblBandenspanning_Copy1" HorizontalAlignment="Left" Margin="34,548,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Bandenspanning A L" VerticalAlignment="Top" FontSize="20"/>
+                    <TextBlock x:Name="lblBandenspanning_Copy2" HorizontalAlignment="Left" Margin="32,582,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Bandenspanning A R" VerticalAlignment="Top" FontSize="20"/>
+                    <TextBox x:Name="txtbandenspanningvoorlinks" HorizontalAlignment="Left" Margin="248,469,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" FontFamily="Global User Interface" PlaceholderText="Voor Links..."/>
+                    <TextBox x:Name="txtbandenspanningvoorrechts" HorizontalAlignment="Left" Margin="248,506,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" PlaceholderText="Voor Rechts..."/>
+                    <TextBox x:Name="txtbandenspanningachterlinks" HorizontalAlignment="Left" Margin="248,545,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" PlaceholderText="Achter Links..."/>
+                    <TextBox x:Name="txtbandenspanningachterrechts" HorizontalAlignment="Left" Margin="248,582,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" PlaceholderText="Achter Rechts..."/>
+                    <Button x:Name="btnBandenspanningOpslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="597,470,0,0" Grid.Row="1" VerticalAlignment="Top" Height="151" Width="142" Click="btnBandenspanningOpslaan_Click"/>-->
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

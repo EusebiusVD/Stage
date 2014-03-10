@@ -1,0 +1,129 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="PiXeL_Apps.Tabs"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PiXeL_Apps"
+    xmlns:common="using:PiXeL_Apps.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" >
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">My Application</x:String>
+        <SolidColorBrush x:Key="AchtergrondKleur" Color="#FF015871"/>
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid x:Name="rootGrid" Background="{StaticResource DefaultBackgroundColor}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Back button and page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" FontFamily="Global User Interface"/>
+            <TextBlock x:Name="pageTitle" Text="Tabs: Voorschriften" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Global User Interface"/>
+        </Grid>
+        
+        <Grid HorizontalAlignment="Left" Grid.Row="1">
+
+            <ScrollViewer ZoomMode="Disabled" Margin="0,70,0,0" VerticalScrollMode="Auto">
+                <StackPanel x:Name="spMetingen" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="lblOliepeil" Text="Oliepeil:" FontSize="20" Margin="10,0,20,0" VerticalAlignment="Center" />
+                        <Grid>
+                            <Slider x:Name="slOliepeil" Maximum="1.25" FontSize="20" Margin="10,0" TickPlacement="None" ValueChanged="SlOliepeil_ValueChanged" FontFamily="Global User Interface" Minimum="-0.25" StepFrequency="0.063" Width="940" HorizontalAlignment="Left" />
+                            <Line X1="0" Y1="60" Margin="165,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Line X1="150" Y1="0" Margin="7,0,129,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Line X1="150" Y1="0" Margin="7,55,129,-59" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Line X1="0" Y1="60" Margin="318,-4,-29,0" StrokeThickness="2" Stroke="White" />
+                            <Line X1="0" Y1="60" Margin="473,-4,-29,0" StrokeThickness="2" Stroke="White" />
+                            <Line X1="0" Y1="60" Margin="627,-4,-29,0" StrokeThickness="2" Stroke="White" />
+
+                            <Line X1="0" Y1="60" Margin="782,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Line X1="170" Y1="0" Margin="782,0,-646,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Line X1="170" Y1="0" Margin="782,56,-646,-60" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+
+                            <Line X1="615" Y1="0" Margin="170,0,-29,-4" StrokeThickness="2" Stroke="White" />
+                            <Line X1="615" Y1="0" Margin="170,54,-29,-58" StrokeThickness="2" Stroke="White" />
+                            <Line X1="0" Y1="60" Margin="0,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Line X1="0" Y1="60" Margin="955,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        </Grid>
+                        <!--<TextBlock x:Name="lblError" Text="" FontSize="20" Margin="641,9,10,10" RenderTransformOrigin="2.233,0.5" Foreground="{StaticResource DefaultTextErrorColor}" />-->
+                    </StackPanel>
+                    <Grid>
+                        <Image Height="350" Source="Assets/CarTop.png" Margin="10"/>
+                        <TextBlock x:Name="lblVooraanRechts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="50" />
+                        <TextBlock x:Name="lblVooraanLichts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,207,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" RenderTransformOrigin="0.552,2.687"  Text="35"/>
+                        <TextBlock x:Name="lblAchteraanRechts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"  Text="40"/>
+                        <TextBlock x:Name="lblAchteraanMidden"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,185,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"  Text="25"/>
+                        <TextBlock x:Name="lblAchteraanLinks"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,235,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="lblMelding" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Margin="62,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1253"/>
+
+                    </Grid>
+                    <Button x:Name="btnOpslaan" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="BtnOpslaanMetingen_Click" FontFamily="Global User Interface" Height="60">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="lblOpslaanIcoon" Text="&#xE105;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" />
+                            <TextBlock x:Name="lblOpslaan" Text="Opslaan" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid x:Name="spWagenmap" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+                <ScrollViewer x:Name="srvwagenMap" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                    <StackPanel x:Name="wagenMapPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+                </ScrollViewer>
+            </Grid>
+            <Grid x:Name="spVoorschriften" Visibility="Visible" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+                <ScrollViewer x:Name="srvVoorschriften" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                    <StackPanel x:Name="voorschriftenPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+                </ScrollViewer>
+            </Grid>
+            <Grid x:Name="spRijinstructies" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+                <ScrollViewer x:Name="srvRijinstructies" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                    <StackPanel x:Name="rijinstructiesPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+                </ScrollViewer>
+            </Grid>
+            <TextBlock x:Name="lblErrorWagenmap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" TextWrapping="Wrap" Foreground="{StaticResource DefaultTextErrorColor}"/>
+            <TextBlock x:Name="lblErrorVoorschriften" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" TextWrapping="Wrap" Foreground="{StaticResource DefaultTextErrorColor}"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="1">
+            <TextBlock x:Name="lblVoorschriften" Margin="20" Text="Voorschriften" FontSize="30" Tapped="LblVoorschriften_Tapped" />
+            <TextBlock x:Name="lblMetingen" Margin="20" Text="Metingen" FontSize="30" Tapped="LblMetingen_Tapped" />
+            <TextBlock x:Name="lblWagenSpecs" Margin="20" Text="Wagenspecificaties" FontSize="30" Tapped="LblWagenmap_Tapped" />
+            <TextBlock x:Name="lblWagenRijinstr" Margin="20" Text="Rij-instructies" FontSize="30" Tapped="lblWagenRijinstr_Tapped" />
+        </StackPanel>
+        <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
+        </StackPanel>
+        
+    </Grid>
+</Page>
+    
