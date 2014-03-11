@@ -47,7 +47,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze constructor vult o.a. de combobox op op het scherm
+        /// Constructor; responsible for filling the combobox
         /// </summary>
         public Administratie()
         {
@@ -55,7 +55,7 @@ namespace PiXeL_Apps
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-            //Event voor het kijken naar internetconnectie
+            //Event for looking at networkconnection
             NetworkInformation.NetworkStatusChanged += VeranderingConnectiviteit;
             VeranderToggle();
 
@@ -83,7 +83,8 @@ namespace PiXeL_Apps
             }
             catch (Exception)
             {
-                lblDatabankPad.Text = @"C:\PiXel-Apps";
+                lblDatabankPad.Text = @"Er is nog geen databank geselecteerd";
+                lblDatabankPad.Foreground = new SolidColorBrush(Colors.Yellow);
             }
 
             object boolRapporteerDubbel = LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");
@@ -157,7 +158,7 @@ namespace PiXeL_Apps
             }
             else
             {
-                //Geen internet -> USB
+                //no network -> USB
                 //UI Thread
                 await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => swtManierOpslag.IsEnabled = false);
                 await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => swtManierOpslag.IsOn = false);
@@ -190,8 +191,8 @@ namespace PiXeL_Apps
 
         #region Button
         /// <summary>
-        /// Deze methode zorgt ervoor dat een tablet toegewezen kan worden aan een wagen.
-        /// Deze methode gaat via de lokale databank de wagen toekennen aan de tablet.
+        /// This method handles the assignment of the tablet to a vehicle.
+        /// This happens via the local sqlite database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -238,7 +239,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode zorgt ervoor dat de databank uitgelezen en lokaal opgeslagen wordt.
+        /// This method reads the database specified and saves it locally
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -247,7 +248,7 @@ namespace PiXeL_Apps
             var gebruikersTest = await LocalDB.database.ControleerGebruikers();
             if (gebruikersTest)
             {
-                //Bestand bestaat
+                //File exists
                 btnSynchroniseren.IsEnabled = false;
                 prSynchroniseren.IsActive = true;
                 lblFeedback.Foreground = new SolidColorBrush(Colors.White);
@@ -270,7 +271,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode zorgt ervoor dat de gebruiker een path kan instellen waarheen de bestanden gestuurd worden
+        /// Changes the path to the MS Access database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -295,7 +296,11 @@ namespace PiXeL_Apps
             else
                 lblDatabankPad.Text = pad;
         }
-      
+        /// <summary>
+        /// Sets the tolerance for oncomming inspections
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnTolerantieAankomend_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(txtTolerantieAankomend.Text, out tolerantieAankomend))
@@ -320,6 +325,11 @@ namespace PiXeL_Apps
             }
         }
 
+        /// <summary>
+        /// Sets the tolerance for urgent inspections
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnTolerantieDringend_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(txtTolerantieDringend.Text, out tolerantieDringend))
@@ -348,6 +358,11 @@ namespace PiXeL_Apps
             ((Frame)Window.Current.Content).Navigate(typeof(Bijlagen));
         }
 
+        /// <summary>
+        /// Method that handles the synchronisation of the rijberichten
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnSyncRijberichten_Click(object sender, RoutedEventArgs e)
         {
             btnSyncRijberichten.IsEnabled = false;
@@ -413,16 +428,26 @@ namespace PiXeL_Apps
 
         #endregion
 
+        /// <summary>
+        /// Lets you choose to rapport and concat double rijberichten
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwtOpmerking_Toggled(object sender, RoutedEventArgs e)
         {
-            //True = Ja
-            //False = Nee
+            //True = yes
+            //False = no
             Common.LocalStorage.localStorage.SlaGegevensOp("rapporteerDubbeleOpmerking", swtOpmerking.IsOn);
         }
 
+        /// <summary>
+        /// Defines the odometer in the car
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwtAfstandsaanduiding_Toggled(object sender, RoutedEventArgs e)
         {
-            //True = Mijl
+            //True = Mile
             //False = Kilometers
             Common.LocalStorage.localStorage.SlaGegevensOp("afstandsaanduiding", swtAfstandsaanduiding.IsOn);
         }

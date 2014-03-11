@@ -37,7 +37,7 @@ namespace PiXeL_Apps
         private Boolean afbeeldingVergroot = false;
 
         /// <summary>
-        /// In deze constructor worden de methodes GetObjectEnDefectCodes() en VeranderingConnectiviteit() aangeroepen 
+        /// In this constructor the methods GetObjectEnDefectCodes() and VeranderConnectiviteit are called()
         /// </summary>
         public Bijlagen()
         {
@@ -49,12 +49,12 @@ namespace PiXeL_Apps
 
             lblBijlagenVullenStatus.Text = "Klaar om te starten.";
 
-            //Event voor het kijken naar internetconnectie
+            //Event for checking network connectivity
             VeranderingConnectiviteit();
         }
 
         /// <summary>
-        /// Inspecties ophalen voor de geselecteerde wagen, indien deze bestaat.
+        /// Gets the inspections for the selected and assigned car, if they exist
         /// </summary>
         private void StartVoorbereidingen()
         {
@@ -63,7 +63,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode haalt alle mappen op en zoekt vervolgens naar bestanden met PDF-formaat
+        /// This method gets all folders and searches after PDF files
         /// </summary>
         /// <returns>Task</returns>
         private async Task ControleerPdfAfbeeldingen()
@@ -79,10 +79,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode haalt alle objectcodes, defectcodes en opmerkingen op
-        /// De eerste 5 opmerkingen en de bijlagen worden getoont, indien er opmerkingen zijn
-        /// Ook de worden de PDF bestanden opgehaald en ingeladen in het stackpanel
-        /// Als deze er echter niet zijn of er trad een fout op dan wordt er een melding getoond
+        /// Gets all object- and defectcodes, as well as the rijberichten.
+        /// The bijlagen and the first 5 rijberichten will be showed
+        /// If there are no PDF files a message will be showed
         /// </summary>
         private async Task VulBijlagen()
         {
