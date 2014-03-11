@@ -116,7 +116,8 @@ namespace PiXeL_Apps
             {
                 try
                 {
-                    //await CopyFiles.copyVideosToUSB();
+                    await CopyFiles.copyPhotosToUSB();
+                    await CopyFiles.copyVideosToUSB();
                     if (await LocalDB.database.SynchroniseerNaarUSB())
                     {
                         lblBoodschap.Text = "De gegevens zijn met succes verstuurd naar de USB!";
@@ -133,6 +134,9 @@ namespace PiXeL_Apps
             }
             else
             {
+                await CopyFiles.copyPhotosViaNetwork();
+                await CopyFiles.copyVideosViaNetwork();
+
                 List<String> lijstGegevens = new List<String>();
                 List<Comment> opmerkingen = await OverzichtOpmerkingen.GetOverzichtComments();
 
