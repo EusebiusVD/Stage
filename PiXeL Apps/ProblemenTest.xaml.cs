@@ -864,10 +864,18 @@ namespace PiXeL_Apps
         {
             await file.MoveAsync(folder);
             string status = file.MoveAsync(folder).Status.ToString();
-            while (status.Equals("Started"))
-            {
-                status = file.MoveAsync(folder).Status.ToString();
-            }
+            //while (status.Equals("Started"))
+            //{
+                try
+                {
+                    //status = file.MoveAsync(folder).Status.ToString();
+                }
+                catch
+                {
+                    goto BREAK;
+                }
+            //}
+            BREAK:
             if (status.Equals("Completed") || status.Equals("Error"))
             {
                 return true;
@@ -888,7 +896,7 @@ namespace PiXeL_Apps
                 photoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
             }
             catch
-            { /*Kan doelfolder niet aanmaken omdat geen await in catch-clause gedaan kan worden*/ }
+            { /*Can't create folder here because await is not allowed in the catch clause.*/ }
 
             if (photoFolder == null) //Dus als doelfolder == null -> hier aanmaken
                 photoFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
@@ -904,7 +912,7 @@ namespace PiXeL_Apps
                 videoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
             }
             catch
-            { /*Kan doelfolder niet aanmaken omdat geen await in catch-clause gedaan kan worden*/ }
+            { /*Can't create folder here because await is not allowed in the catch clause.*/ }
 
             if (videoFolder == null) //Dus als doelfolder == null -> hier aanmaken
                 videoFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
@@ -938,51 +946,83 @@ namespace PiXeL_Apps
                 CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
                 User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
                 // if-structure doesn't work entirely
-                if (photoFolder.GetFileAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Equals(true))
+                if (photoFolder.GetFileAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + ".png").Equals(true))
                 {
-                    await foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + photoCounter + ").png");
+                    await foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png");
                     photoCounter++;
                     var fileStream = await foto.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    string renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    /*while (renamed.Equals("Started"))
-                    {
-                        renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    }*/
-                    btnMaakFoto.IsEnabled = true;
+                    AsyncStatus renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png").Status;
+                    
+                        try
+                        {
+                            //renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png").Status;
+                        }
+                        catch
+                        {
+                            lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
+                            lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
+                            btnMaakFoto.IsEnabled = true;
+                            goto BREAK;
+                        }                        
+
+                    BREAK:
                     bool completed = await movePhotoVideo(foto, photoFolder);
                     if (completed)
                     {
                         lblError.Foreground = new SolidColorBrush(Colors.White);
                         lblError.Text = "De foto is succesvol opgeslagen!";
+                        btnMaakFoto.IsEnabled = true;
                     }
                     else
                     {
                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
+                        btnMaakFoto.IsEnabled = true;
                     }
                 }
                 else
                 {
-                    await foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png");
+                    await foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
                     photoCounter = 0;
                     var fileStream = await foto.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    string renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                  /*while (renamed.Equals("Started"))
+                    AsyncStatus renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
+                    //while (renamed.Equals("Started"))
+                    //{
+                        try
+                        {
+                            //renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
+                        }
+                        catch
+                        {
+                            lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
+                            lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
+                            btnMaakFoto.IsEnabled = true;
+                            goto BREAK;
+                        }
+                    //}
+                    BREAK:
+                    try
                     {
-                        renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    }*/
-                    btnMaakFoto.IsEnabled = true;
-                    bool completed = await movePhotoVideo(foto, photoFolder);
-                    if (completed)
-                    {
-                        lblError.Foreground = new SolidColorBrush(Colors.White);
-                        lblError.Text = "De foto is succesvol opgeslagen!";
+                        bool completed = await movePhotoVideo(foto, photoFolder);
+                            if (completed)
+                            {   
+                                lblError.Foreground = new SolidColorBrush(Colors.White);
+                                lblError.Text = "De foto is succesvol opgeslagen!";
+                                btnMaakFoto.IsEnabled = true;
+                            }
+                            else
+                            {
+                                lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
+                                lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
+                                btnMaakFoto.IsEnabled = true;
+                            }
                     }
-                    else
+                    catch
                     {
                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                        lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";                        
-                    }
+                        lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
+                        btnMaakFoto.IsEnabled = true;
+                    }                                              
                 }
             }
         }
@@ -1019,11 +1059,11 @@ namespace PiXeL_Apps
                     await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4");
                     videoCounter++;
                     var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    string renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    /*while (renamed.Equals("Started"))
+                    AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
+                    while (renamed.Equals("Started"))
                     {
-                        renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    }*/
+                        renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
+                    }
                     btnMaakVideo.IsEnabled = true;
                     bool completed = await movePhotoVideo(video, videoFolder);
                     if (completed)
@@ -1042,11 +1082,11 @@ namespace PiXeL_Apps
                     await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4");
                     videoCounter = 0;
                     var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    string renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    /*while (renamed.Equals("Started"))
+                    AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
+                    while (renamed.Equals("Started"))
                     {
-                        renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status.ToString();
-                    }*/
+                        renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
+                    }
                     btnMaakVideo.IsEnabled = true;
                     bool completed = await movePhotoVideo(video, videoFolder);
                     if (completed)
