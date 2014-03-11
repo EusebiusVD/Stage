@@ -1,0 +1,109 @@
+﻿<Page x:Name="page"
+    IsTabStop="false"
+    x:Class="PiXeL_Apps.Hoofdscherm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PiXeL_Apps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <x:String x:Key="AppName">My Application</x:String>
+    </Page.Resources>
+
+    <Grid x:Name="achtergrondKleur" Background="{StaticResource DefaultBackgroundColor}">
+        <Popup x:Name="invoerPopup" IsOpen="False" Width="960" Height="458">
+            <StackPanel Background="{StaticResource DefaultBackgroundColor}">
+                <StackPanel>
+                    <TextBlock x:Name="lblInvoerVereist" Text="Er dienen een paar gegevens ingevoerd te worden" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,20" />
+                    <TextBlock x:Name="lblOliepeil" FontSize="20" Text="Oliepeil:" Margin="0,0,0,20" />
+                    <Grid>
+                        <Slider x:Name="slOliepeil" Maximum="1.25" FontSize="20" Margin="10,0" TickPlacement="None" ValueChanged="SlOliepeil_ValueChanged" FontFamily="Global User Interface" Minimum="-0.25" StepFrequency="0.063" />
+                        <Line X1="0" Y1="60" Margin="165,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        <Line X1="150" Y1="0" Margin="7,0,129,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        <Line X1="150" Y1="0" Margin="7,55,129,-59" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        <Line X1="0" Y1="60" Margin="318,-4,-29,0" StrokeThickness="2" Stroke="White" />
+                        <Line X1="0" Y1="60" Margin="473,-4,-29,0" StrokeThickness="2" Stroke="White" />
+                        <Line X1="0" Y1="60" Margin="627,-4,-29,0" StrokeThickness="2" Stroke="White" />
+
+                        <Line X1="0" Y1="60" Margin="782,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        <Line X1="170" Y1="0" Margin="782,0,-646,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        <Line X1="170" Y1="0" Margin="782,56,-646,-60" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+
+                        <Line X1="615" Y1="0" Margin="170,0,-29,-4" StrokeThickness="2" Stroke="White" />
+                        <Line X1="615" Y1="0" Margin="170,54,-29,-58" StrokeThickness="2" Stroke="White" />
+                        <Line X1="0" Y1="60" Margin="0,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                        <Line X1="0" Y1="60" Margin="955,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+
+                        <TextBlock x:Name="lblMin" Text="Minimum" Margin="142,68,740,16" FontSize="16"/>
+                        <TextBlock x:Name="lblMax" Text="Maximum" Margin="753,68,129,16" FontSize="16"/>
+                    </Grid>
+
+                    <TextBlock x:Name="lblKilometerstand" FontSize="20" Text="Kilometerstand:" Margin="0 20 0 10" />
+                    <TextBox x:Name="txtKilometerstand" PlaceholderText="Kilometerstand..." />
+
+                    <TextBlock x:Name="lblError" TextWrapping="Wrap" Text="Gelieve geldige gegevens in te geven!" FontSize="22" Foreground="#FFFFE74E" Visibility="Collapsed" HorizontalAlignment="Center" FontStyle="Italic" Margin="0,10,0,0"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 50 0 0">
+                        <Button x:Name="btnAnnuleren" Width="320" FontFamily="Global User Interface" Click="BtnAnnuleren_Click">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="180"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="lblAnnulerenIcoon" Text="&#xE27F;" FontSize="50" FontFamily="Segoe UI Symbol" Width="100" />
+                                <TextBlock x:Name="lblAnnuleren" Text="Annuleren" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="btnOpslaan" Grid.Row="1" Width="610" FontFamily="Global User Interface" Margin="30,0,0,0" Click="BtnOpslaan_Click">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="180"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="lblOpslaanIcoon" Text="&#xE105;" FontSize="50" FontFamily="Segoe UI Symbol" Width="100" />
+                                <TextBlock x:Name="lblOpslaan" Text="Opslaan" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Popup>
+
+        <Grid x:Name="grHoofdscherm" Visibility="Collapsed">
+            <GridView x:Name="gvwScripten" HorizontalAlignment="Right" VerticalAlignment="Top"
+                  Width="370" Height="582" Margin="0,66,600,0" Padding="5,0,5,0"
+                  Background="Transparent" ItemTemplate="{StaticResource hoofdschermTemplate}"
+                  Style="{StaticResource PAGridViewStyle}" ItemContainerStyle="{StaticResource PAGridViewItemStyle}"
+                  IsDoubleTapEnabled="False" IsRightTapEnabled="False" IsTabStop="false"
+                  SelectionChanged="GvwScripten_SelectieVeranderd" />
+            <StackPanel Name="menuPanel" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
+            </StackPanel>
+
+
+
+            <Button x:Name="btnStartRit" Click="BtnStartRit_Click" FontFamily="Global User Interface" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="593" Height="87">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="125"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblStartRitIcoon" Text="&#xE102;" FontSize="35" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblStartRit" Text="Start Rit" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" />
+                </Grid>
+            </Button>
+
+
+
+
+            <TextBlock x:Name="lblTechnischeFiche" HorizontalAlignment="Right" Margin="0,41,10,0" TextWrapping="Wrap" Text="Technische Fiche" VerticalAlignment="Top" FontSize="20" Height="20" Width="590"/>
+            <Grid x:Name="grUserControl" HorizontalAlignment="Right" Height="368" Margin="0,66,10,0" VerticalAlignment="Top" Width="590" />
+            <TextBlock x:Name="lblScripts" HorizontalAlignment="Right" Margin="0,41,600,0" TextWrapping="Wrap" Text="Script" VerticalAlignment="Top"
+                   FontSize="20" Height="20" Width="370" />
+
+        </Grid>
+
+    </Grid>
+</Page>

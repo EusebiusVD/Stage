@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="PiXeL_Apps.Inlogscherm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PiXeL_Apps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="rootGrid" Background="{StaticResource DefaultBackgroundColor}">
+        <!--  <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Image x:Name="imgWagenmap" Source="Assets/Exelbestand.png" VerticalAlignment="Top" Margin="706,133,-17,76" Tapped="imgWagenmap_Tapped" Width="550" Height="800" />
+        </ScrollViewer>-->
+        <Grid x:Name="grInloggen" Margin="0,6,0,-6">
+            <Image x:Name="imgLogo" HorizontalAlignment="Left" Height="175" Margin="139,59,0,0" VerticalAlignment="Top" Width="311" Source="Assets/LogoPA.png"/>
+
+            <TextBlock x:Name="lblPersoneelsnummer" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Personeelsnummer:" VerticalAlignment="Top" Margin="75,306,0,0" Width="173" FontSize="18"/>
+            <TextBox x:Name="txtPersoneelsnummer" HorizontalAlignment="Left" Margin="253,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Personeelsnummer" Width="254" InputScope="Number" FontFamily="Global User Interface"/>
+
+            <TextBlock x:Name="lblWachtwoord" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Wachtwoord:" VerticalAlignment="Top" Margin="75,343,0,0" Width="173" FontSize="18"/>
+            <PasswordBox x:Name="txtWachtwoord" HorizontalAlignment="Left" Margin="253,338,0,0" VerticalAlignment="Top" Width="254" PlaceholderText="Wachtwoord"/>
+
+            <TextBlock x:Name="lblErrorInlog" HorizontalAlignment="Left" Margin="75,397,0,0" TextWrapping="Wrap" Text="U hebt een verkeerd personeelsnummer en/of wachtwoord ingegeven" VerticalAlignment="Top" Width="432" FontSize="16" FontStyle="Italic" Foreground="{StaticResource DefaultTextErrorColor}" Visibility="Collapsed"/>
+            <Button x:Name="btnInloggen" Click="BtnInloggen_Click" FontFamily="Global User Interface" Margin="136,449,0,258" Width="293" Height="61">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="125"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblInloggenIcoon" Text="&#xE13D;" FontSize="35" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblInloggen" Text="Inloggen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+                </Grid>
+            </Button>
+            <TextBlock x:Name="lblWagen" HorizontalAlignment="Left" Margin="140,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Visibility="Visible" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="360.253"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+
+        <Grid x:Name="wagenMapGrid" HorizontalAlignment="Left" Height="{Binding Width, ElementName=rootGrid - 20}" Margin="585,10,10,10" VerticalAlignment="Top">
+            <ScrollViewer x:Name="srvWagenMap" VerticalScrollMode="Auto" HorizontalScrollMode="Auto">
+                <StackPanel x:Name="wagenMapPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.VerticalScrollMode="Auto" />
+            </ScrollViewer>
+        </Grid>
+        <!--
+        <StackPanel x:Name="spWagenmap" Grid.Row="2" Grid.ColumnSpan="2" Margin="686,59,0,0">
+            <Grid x:Name="grWagenmap"  Visibility="Visible">
+                <TextBlock x:Name="lblWagenmap" Text="Wagenmap" FontSize="28" />
+                <ListView x:Name="lvWagenmap" Margin="0,39,0,-39" SelectionMode="None" FontSize="15"/>
+            </Grid>
+        </StackPanel>
+-->
+
+        <!-- <Grid x:Name="grUserControl" Margin="37,0,-37,0">
+
+        </Grid>-->
+    </Grid>
+</Page>

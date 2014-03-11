@@ -1,0 +1,139 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="PiXeL_Apps.ProblemenTest"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PiXeL_Apps"
+    xmlns:common="using:PiXeL_Apps.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">My Application</x:String>
+    </Page.Resources>
+    <Grid x:Name="paginaGrid" ManipulationMode="All" Background="{StaticResource DefaultBackgroundColor}">
+        <Grid x:Name="grProblemen">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Back button and page title -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" />
+                <TextBlock x:Name="pageTitle" Text="Rijbericht Aanmaken" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" />
+            </Grid>
+
+            <TextBlock x:Name="lblObjectcode" FontSize="18" HorizontalAlignment="Left" Margin="20,96,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Objectcode" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtZoekObjectCode" TextChanged="TxtZoekObjectCode_TextChanged" PlaceholderText="Zoek objectcode of omschrijving."
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,127,0,0" Height="37" 
+                     Grid.Row="1" TabIndex="2" Width="701" />
+            <TextBlock x:Name="lblObjectCodeStatus" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Margin="0,118,10,0" TextWrapping="Wrap" FontSize="18" Width="469" Height="53" />
+
+            <TextBlock x:Name="lblDefectcode" FontSize="18" HorizontalAlignment="Left" Margin="20,189,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Defectcode" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtZoekDefectCode" TextChanged="TxtZoekDefectCode_TextChanged" PlaceholderText="Zoek defectcode of omschrijving."
+                             HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,211,0,0" Height="37" Grid.Row="1" TabIndex="3" Width="701" />
+            <TextBlock x:Name="lblDefectCodeStatus" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Margin="0,214,10,0" TextWrapping="Wrap" FontSize="18" Width="469" Height="53" />
+
+            <TextBlock x:Name="lblObjectCategorie" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Object categorie" VerticalAlignment="Top" FontSize="18"/>
+            <TextBlock x:Name="lblDefectCategorie" HorizontalAlignment="Left" Margin="410,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Defect categorie" VerticalAlignment="Top" FontSize="18"/>
+            <ComboBox x:Name="cbbDefectCategorie" HorizontalAlignment="Left" Margin="411,37,0,0" VerticalAlignment="Top" Width="311" Height="35" SelectionChanged="CbbDefectCategorie_SelectionChanged" Grid.Row="1" TabIndex="1" />
+            <ComboBox x:Name="cbbObjectCategorie" HorizontalAlignment="Left" Margin="20,37,0,0" VerticalAlignment="Top" Width="311" Height="35" SelectionChanged="CbbObjectCategorie_SelectionChanged" Grid.Row="1" TabIndex="2" />
+
+            <TextBlock x:Name="lblOpmerking" FontSize="18" HorizontalAlignment="Left" Margin="20,290,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Notitie" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtProblem" HorizontalAlignment="Left" Margin="20,321,0,0" Grid.Row="1" TextWrapping="Wrap" InputScope="AlphanumericFullWidth" VerticalAlignment="Top" Height="254" Width="701" TabIndex="3" />
+            <!--<Button x:Name="btnMicrofoon" HorizontalAlignment="Left" Margin="1129,319,0,0" Grid.Row="1" VerticalAlignment="Top" Height="131" Width="216" Click="BtnMicrofoon_Click" FontFamily="Global User Interface">
+                <TextBlock x:Name="lblMicrofoonIcoon" Text="&#xE1D6;" FontSize="70" FontFamily="Segoe UI Symbol" />
+            </Button>-->
+            <!--<Button x:Name="SpeakButton" Click="BtnMicrofoon_Click" Margin="1127,321,142,222"
+                    Style="{StaticResource MicrophoneAppBarButtonStyle}" 
+                    HorizontalAlignment="Center" Grid.Row="1" Width="97" FontSize="28" />
+            <TextBlock x:Name="VolumeMeter" Text="Volume" FontSize="24" 
+                       HorizontalAlignment="Center" Margin="1247,334,38,234" Grid.Row="1" />-->
+
+            <Button x:Name="btnOpslaan" Grid.Row="1" Width="210" Height="66" Click="BtnOpslaan_Click" FontFamily="Global User Interface"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,100">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblOpslaanIcoon" Text="&#xE105;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblOpslaan" Text="Opslaan" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                </Grid>
+            </Button>
+
+
+
+            <TextBlock x:Name="lblError" Foreground="{StaticResource DefaultTextErrorColor}" FontStyle="Italic" FontSize="24" HorizontalAlignment="Left" Margin="20,580,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="962"/>
+
+            <Popup x:Name="VoorstelPopup" x:Uid="VoorstelPopup" IsOpen="False" Width="350" HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom" Grid.Row="2" Margin="0,80,10,305">
+                <GridView x:Name="gvwVoorstellen" Background="{StaticResource DefaultPopupColor}" Width="350" MaxHeight="380" ItemContainerStyle="{StaticResource PAGridViewVoorstelItemStyle}" VerticalAlignment="Top"
+                      ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" CanDragItems="False" CanReorderItems="False"
+                      ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+            </Popup>
+            <Button x:Name="btnZoekObject" Content="&#xE1A3;" FontSize="20" FontFamily="Segoe UI Symbol" Margin="750,115,0,0" Grid.Row="1" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="69" Click="BtnZoekObject_Click" />
+            <Button x:Name="btnZoekDefect" Content="&#xE1A3;" FontSize="20" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="750,211,0,0" Grid.Row="1" VerticalAlignment="Top" Height="59" Width="69" Click="BtnZoekDefect_Click" />
+
+            <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
+            </StackPanel>
+            <Button x:Name="btnVerwijderen1"  Grid.Row="1" Width="210" Height="66" Click="BtnVerwijderen_Click" FontFamily="Global User Interface"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblVerwijderenIcoon1" Text="&#xE107;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblVerwijderen1" Text="Verwijderen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnMaakFoto" Grid.Row="1" Width="210" Height="100" Click="BtnMaakFoto_Click" FontFamily="Global User Interface"
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="740,340,0,0" Visibility="Visible">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblMaakFotoIcoon" Text="&#xE114;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblMaakFoto" Text="Maak Foto" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnMaakVideo" Grid.Row="1" Width="210" Height="100" Click="BtnMaakVideo_Click" FontFamily="Global User Interface"
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="740,440,0,0" Visibility="Visible">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblMaakVideoIcoon" Text="&#xE116;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblMaakVideo" Text="Maak Video" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                </Grid>
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

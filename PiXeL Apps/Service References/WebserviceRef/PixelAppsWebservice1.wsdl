@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SQLite_GetBrands">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="brandId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetBrandsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetBrandsResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfSerializableKeyValuePair">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfSerializableKeyValuePair" nillable="true" type="tns:ArrayOfSerializableKeyValuePair" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSerializableKeyValuePair">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerializableKeyValuePair" type="tns:SerializableKeyValuePair" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerializableKeyValuePair">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SQLite_GetDefectcodes">
+        <s:complexType />
+      </s:element>
+      <s:element name="SQLite_GetDefectcodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetDefectcodesResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetEenheiden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="eenheidId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetEenheidenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetEenheidenResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetEngines">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="engineId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetEnginesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetEnginesResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetFuels">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fuelId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetFuelsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetFuelsResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetScripts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Vehicle_Id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetScriptsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetScriptsResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetUsers">
+        <s:complexType />
+      </s:element>
+      <s:element name="SQLite_GetUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetUsersResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetVehicles">
+        <s:complexType />
+      </s:element>
+      <s:element name="SQLite_GetVehiclesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetVehiclesResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetObjectCodes">
+        <s:complexType />
+      </s:element>
+      <s:element name="SQLite_GetObjectCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetObjectCodesResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetComments">
+        <s:complexType />
+      </s:element>
+      <s:element name="SQLite_GetCommentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetCommentsResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetTransmissions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="transmissionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SQLite_GetTransmissionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SQLite_GetTransmissionsResult" type="tns:ArrayOfArrayOfSerializableKeyValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaakCSV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lijstGegevens" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="bestandsnaam" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MaakCSVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MaakCSVResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaakCSVUSB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lijstGegevens" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="bestandsnaam" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaakCSVUSBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MaakCSVUSBResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SynchroniseerVanUSB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wagennummer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SynchroniseerVanUSBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SynchroniseerVanUSBResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="haalPdfBestandenOp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vehicle_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pdfNamen" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBase64Binary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="base64Binary" nillable="true" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="haalPdfBestandenOpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="haalPdfBestandenOpResult" type="tns:ArrayOfBase64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="haalPdfNamenOp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vehicle_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="haalPdfNamenOpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="haalPdfNamenOpResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="haalPdfWijzigingsdataOp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vehicle_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="haalPdfWijzigingsdataOpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="haalPdfWijzigingsdataOpResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeesExcel">
+        <s:complexType />
+      </s:element>
+      <s:element name="LeesExcelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LeesExcelResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZetConnectieString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pad" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZetConnectieStringResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SQLite_GetBrandsSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetBrands" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetBrandsSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetBrandsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetDefectcodesSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetDefectcodes" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetDefectcodesSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetDefectcodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetEenheidenSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetEenheiden" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetEenheidenSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetEenheidenResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetEnginesSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetEngines" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetEnginesSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetEnginesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetFuelsSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetFuels" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetFuelsSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetFuelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetScriptsSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetScripts" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetScriptsSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetScriptsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetVehiclesSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetVehicles" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetVehiclesSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetVehiclesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetObjectCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetObjectCodes" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetObjectCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetObjectCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetCommentsSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetComments" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetCommentsSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetCommentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetTransmissionsSoapIn">
+    <wsdl:part name="parameters" element="tns:SQLite_GetTransmissions" />
+  </wsdl:message>
+  <wsdl:message name="SQLite_GetTransmissionsSoapOut">
+    <wsdl:part name="parameters" element="tns:SQLite_GetTransmissionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="MaakCSVSoapIn">
+    <wsdl:part name="parameters" element="tns:MaakCSV" />
+  </wsdl:message>
+  <wsdl:message name="MaakCSVSoapOut">
+    <wsdl:part name="parameters" element="tns:MaakCSVResponse" />
+  </wsdl:message>
+  <wsdl:message name="MaakCSVUSBSoapIn">
+    <wsdl:part name="parameters" element="tns:MaakCSVUSB" />
+  </wsdl:message>
+  <wsdl:message name="MaakCSVUSBSoapOut">
+    <wsdl:part name="parameters" element="tns:MaakCSVUSBResponse" />
+  </wsdl:message>
+  <wsdl:message name="SynchroniseerVanUSBSoapIn">
+    <wsdl:part name="parameters" element="tns:SynchroniseerVanUSB" />
+  </wsdl:message>
+  <wsdl:message name="SynchroniseerVanUSBSoapOut">
+    <wsdl:part name="parameters" element="tns:SynchroniseerVanUSBResponse" />
+  </wsdl:message>
+  <wsdl:message name="haalPdfBestandenOpSoapIn">
+    <wsdl:part name="parameters" element="tns:haalPdfBestandenOp" />
+  </wsdl:message>
+  <wsdl:message name="haalPdfBestandenOpSoapOut">
+    <wsdl:part name="parameters" element="tns:haalPdfBestandenOpResponse" />
+  </wsdl:message>
+  <wsdl:message name="haalPdfNamenOpSoapIn">
+    <wsdl:part name="parameters" element="tns:haalPdfNamenOp" />
+  </wsdl:message>
+  <wsdl:message name="haalPdfNamenOpSoapOut">
+    <wsdl:part name="parameters" element="tns:haalPdfNamenOpResponse" />
+  </wsdl:message>
+  <wsdl:message name="haalPdfWijzigingsdataOpSoapIn">
+    <wsdl:part name="parameters" element="tns:haalPdfWijzigingsdataOp" />
+  </wsdl:message>
+  <wsdl:message name="haalPdfWijzigingsdataOpSoapOut">
+    <wsdl:part name="parameters" element="tns:haalPdfWijzigingsdataOpResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeesExcelSoapIn">
+    <wsdl:part name="parameters" element="tns:LeesExcel" />
+  </wsdl:message>
+  <wsdl:message name="LeesExcelSoapOut">
+    <wsdl:part name="parameters" element="tns:LeesExcelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZetConnectieStringSoapIn">
+    <wsdl:part name="parameters" element="tns:ZetConnectieString" />
+  </wsdl:message>
+  <wsdl:message name="ZetConnectieStringSoapOut">
+    <wsdl:part name="parameters" element="tns:ZetConnectieStringResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PixelAppsWebserviceSoap">
+    <wsdl:operation name="SQLite_GetBrands">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een MERK object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetBrandsSoapIn" />
+      <wsdl:output message="tns:SQLite_GetBrandsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetDefectcodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een DEFECTCODE object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetDefectcodesSoapIn" />
+      <wsdl:output message="tns:SQLite_GetDefectcodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetEenheiden">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een EENHEID object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetEenheidenSoapIn" />
+      <wsdl:output message="tns:SQLite_GetEenheidenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetEngines">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een MOTOR object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetEnginesSoapIn" />
+      <wsdl:output message="tns:SQLite_GetEnginesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetFuels">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een BRANDSTOF object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetFuelsSoapIn" />
+      <wsdl:output message="tns:SQLite_GetFuelsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetScripts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een SCRIPT object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetScriptsSoapIn" />
+      <wsdl:output message="tns:SQLite_GetScriptsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een GEBRUIKER object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetUsersSoapIn" />
+      <wsdl:output message="tns:SQLite_GetUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetVehicles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een AUTO object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetVehiclesSoapIn" />
+      <wsdl:output message="tns:SQLite_GetVehiclesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetObjectCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een OBJECTCODE object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetObjectCodesSoapIn" />
+      <wsdl:output message="tns:SQLite_GetObjectCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetComments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een COMMENTAAR object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetCommentsSoapIn" />
+      <wsdl:output message="tns:SQLite_GetCommentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetTransmissions">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst met lijsten van keypairs terug. Elke lijst met keypairs omschrijft een TRANSMISSIE object</wsdl:documentation>
+      <wsdl:input message="tns:SQLite_GetTransmissionsSoapIn" />
+      <wsdl:output message="tns:SQLite_GetTransmissionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MaakCSV">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Maakt een CSV bestand aan op basis van een meegegeven lijst</wsdl:documentation>
+      <wsdl:input message="tns:MaakCSVSoapIn" />
+      <wsdl:output message="tns:MaakCSVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MaakCSVUSB">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Maakt een CSV bestand aan op basis van een meegegeven lijst en schrijft het bestand naar een USB medium</wsdl:documentation>
+      <wsdl:input message="tns:MaakCSVUSBSoapIn" />
+      <wsdl:output message="tns:MaakCSVUSBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchroniseerVanUSB">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Haalt bestanden op van een USB apparaat</wsdl:documentation>
+      <wsdl:input message="tns:SynchroniseerVanUSBSoapIn" />
+      <wsdl:output message="tns:SynchroniseerVanUSBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfBestandenOp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst van byte arrays. Elke array is een pdf bestand.</wsdl:documentation>
+      <wsdl:input message="tns:haalPdfBestandenOpSoapIn" />
+      <wsdl:output message="tns:haalPdfBestandenOpSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfNamenOp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst van strings. Elke string omschrijft de titel van een gevonden document</wsdl:documentation>
+      <wsdl:input message="tns:haalPdfNamenOpSoapIn" />
+      <wsdl:output message="tns:haalPdfNamenOpSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfWijzigingsdataOp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst van wijzigingsdata voor de bijlagebestanden. Controleer of een nieuwe versie opgehaald moet worden.</wsdl:documentation>
+      <wsdl:input message="tns:haalPdfWijzigingsdataOpSoapIn" />
+      <wsdl:output message="tns:haalPdfWijzigingsdataOpSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeesExcel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft de inhoud van een Excel bestand</wsdl:documentation>
+      <wsdl:input message="tns:LeesExcelSoapIn" />
+      <wsdl:output message="tns:LeesExcelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZetConnectieString">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Veranderd de connectiepad</wsdl:documentation>
+      <wsdl:input message="tns:ZetConnectieStringSoapIn" />
+      <wsdl:output message="tns:ZetConnectieStringSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PixelAppsWebserviceSoap" type="tns:PixelAppsWebserviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SQLite_GetBrands">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetBrands" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetDefectcodes">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetDefectcodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetEenheiden">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetEenheiden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetEngines">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetEngines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetFuels">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetFuels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetScripts">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetScripts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetUsers">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetVehicles">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetVehicles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetObjectCodes">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetObjectCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetComments">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetComments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetTransmissions">
+      <soap:operation soapAction="http://tempuri.org/SQLite_GetTransmissions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaakCSV">
+      <soap:operation soapAction="http://tempuri.org/MaakCSV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaakCSVUSB">
+      <soap:operation soapAction="http://tempuri.org/MaakCSVUSB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchroniseerVanUSB">
+      <soap:operation soapAction="http://tempuri.org/SynchroniseerVanUSB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfBestandenOp">
+      <soap:operation soapAction="http://tempuri.org/haalPdfBestandenOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfNamenOp">
+      <soap:operation soapAction="http://tempuri.org/haalPdfNamenOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfWijzigingsdataOp">
+      <soap:operation soapAction="http://tempuri.org/haalPdfWijzigingsdataOp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeesExcel">
+      <soap:operation soapAction="http://tempuri.org/LeesExcel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZetConnectieString">
+      <soap:operation soapAction="http://tempuri.org/ZetConnectieString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PixelAppsWebserviceSoap12" type="tns:PixelAppsWebserviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SQLite_GetBrands">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetBrands" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetDefectcodes">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetDefectcodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetEenheiden">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetEenheiden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetEngines">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetEngines" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetFuels">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetFuels" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetScripts">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetScripts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetUsers">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetVehicles">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetVehicles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetObjectCodes">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetObjectCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetComments">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetComments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SQLite_GetTransmissions">
+      <soap12:operation soapAction="http://tempuri.org/SQLite_GetTransmissions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaakCSV">
+      <soap12:operation soapAction="http://tempuri.org/MaakCSV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaakCSVUSB">
+      <soap12:operation soapAction="http://tempuri.org/MaakCSVUSB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchroniseerVanUSB">
+      <soap12:operation soapAction="http://tempuri.org/SynchroniseerVanUSB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfBestandenOp">
+      <soap12:operation soapAction="http://tempuri.org/haalPdfBestandenOp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfNamenOp">
+      <soap12:operation soapAction="http://tempuri.org/haalPdfNamenOp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="haalPdfWijzigingsdataOp">
+      <soap12:operation soapAction="http://tempuri.org/haalPdfWijzigingsdataOp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeesExcel">
+      <soap12:operation soapAction="http://tempuri.org/LeesExcel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZetConnectieString">
+      <soap12:operation soapAction="http://tempuri.org/ZetConnectieString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PixelAppsWebservice">
+    <wsdl:port name="PixelAppsWebserviceSoap" binding="tns:PixelAppsWebserviceSoap">
+      <soap:address location="http://localhost:52506/PixelAppsWebservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PixelAppsWebserviceSoap12" binding="tns:PixelAppsWebserviceSoap12">
+      <soap12:address location="http://localhost:52506/PixelAppsWebservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
