@@ -152,7 +152,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Haalt een lijst met opmerkingen op en geeft de 5 meest recente opmerkingen weer op het bijlagenscherm.
+        /// Gets a list with the 5 most recent rijberichten and shows them on the bijlage screen.
         /// </summary>
         /// <returns></returns>
         private async Task VulRecenteCommentaren()
@@ -221,9 +221,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Eventhandler voor de getoonde afbeeldingen.
-        /// Als hierop getapped (geklikked) wordt, dan wordt het scrollview vergroot zodat de inhoud duidelijker is.
-        /// Anders wordt het scrollview terug verkleind naar de originele grootte.
+        /// Eventhandler for displayed images.
+        /// When they are tapped the scrollview expands to make the text more readable.
+        /// When tapped again it goes back to its original size
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -250,7 +250,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode toont een PDF op het scherm. Dit door een PDF om te zetten naar een afbeelding
+        /// Show the PDF's on the screen. It converts the PDF's to a PNG image
         /// </summary>
         /// <param name="pdfNaam">naam van de PDF van het type String</param>
         /// <returns>Task</returns>
@@ -285,8 +285,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode wordt opgeroepen wanneer er op het gelezenknop gedrukt wordt.
-        /// De methode zorgt ervoor dat er naar het inlogscherm genavigeerd wordt.
+        /// This method handles the click of the btnGelezen.
+        /// When clicked you will be redirected to the login screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -362,8 +362,8 @@ namespace PiXeL_Apps
         #endregion
 
         /// <summary>
-        /// Bij het inloggen van de bijlagenpagina kan enkel een administrator inloggen.
-        /// De inlogknop kan enkel gebruikt worden als er geen auto is toegewezen aan de tablet.
+        /// The inlog button on the bijlage screen is only visible when there isn't a car assigned to the tablet.
+        /// Only administrators can login
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -384,7 +384,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Probeert de bijlagen op te halen en te vullen. Er wordt opnieuw gecontroleert op internetconnectie
+        /// Tries to retrieve tie bijlage and show them.
+        /// Networkconnection will be checked again
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -433,8 +434,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Roept de methode in LocalDB op die bestanden van de usb overzet naar een lokale map.
-        /// Daarna doorloopt het programma het gewoonlijke procedure om PDF bestanden om te zetten.
+        /// Calls the method in the local database which copies the files from an USB drive to a local folder (AppData)
+        /// After this is done the program will continue its usual procedure
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

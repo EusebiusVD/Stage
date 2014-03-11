@@ -35,10 +35,10 @@ namespace PiXeL_Apps
         private static double oliepeil = 0.0;
 
         /// <summary>
-        /// Deze constructor vult een GridView op.
-        /// Daarnaast laadt deze constructor een User Control in en toont deze op het scherm.
-        /// Wanneer de gebruiker naar dit scherm gaat vanuit het inlogscherm, krijgt de gebruiker een pop-up
-        /// te zien waar hij/zij het oliepeil en kilometerstand moet ingeven.
+        /// Constructor; Fills the GridView
+        /// It also loads a User control and shows this on the screen
+        /// When a user goes to this screen directly from the login screen, the user will get a popup where
+        /// they have to fill in the oil reservoir level and mileage of the car
         /// </summary>
         public Hoofdscherm()
         {
@@ -67,8 +67,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode vraagt de meegegeven waarden van het inlogscherm op en toont daarna,
-        /// naargelang de meegegeven waarden, een pop-up.
+        /// Asks the given values from the login screen and shows, depending on the values, a popup
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -98,7 +97,7 @@ namespace PiXeL_Apps
         #region GridView Events
 
         /// <summary>
-        /// Zorgt ervoor dat alle inspecties uit de database opgehaald worden en gebonden worden aan het gridview.
+        /// Gets all inspections from the database and and bind them to the gridview
         /// </summary>
         private async void VulInspectieGridView()
         {
@@ -108,7 +107,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// De geselecteerde index in een statische variabele bijhouden indien deze veranderd wordt door de gebruiker.
+        /// Holds the selected index in a static variable when changed by user
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -122,8 +121,8 @@ namespace PiXeL_Apps
         #region Button Clicks
 
         /// <summary>
-        /// Deze methode navigeert naar het inspecties scherm waar de testrijder kan zien welke inspecties
-        /// nodig zijn op welke intervallen.
+        /// Navigates to the inspetion screen where the user can see which inspections are needed at 
+        /// which milage/cylci
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -132,8 +131,8 @@ namespace PiXeL_Apps
             this.Frame.Navigate(typeof(VerschillendeInspecties), geselecteerdeIndex + 1);
         }
         /// <summary>
-        /// In deze methode worden de kilometerstand en het oliepeil weggeschreven
-        /// De usercontrol van Visuelewagen aangemaakt + toevoegen aan het scherm en het hoofdscherm visible gezet
+        /// Writes the mileage and oil level reservoir
+        /// The user control "Visuelewagen" is created and made visible on the homescreen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -188,7 +187,7 @@ namespace PiXeL_Apps
             }
         }
         /// <summary>
-        /// Via de knop Annuleren wordt er genavigeerd naar het inlogscherm
+        /// Handles the click of btnAnnuleren. The user will be redirected to the login screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -198,7 +197,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode wordt telkens opgeroepen wanneer de slider verschoven wordt
+        /// Method that is called when SlOliepeil is slided
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -210,9 +209,9 @@ namespace PiXeL_Apps
 
         #region DoorgevenWagendetails
         /// <summary>
-        /// Via deze methode kan het oliepeil doorgegeven worden aan andere pagina's
+        /// Passes the oil reservoir level to other screens
         /// </summary>
-        /// <returns>Een int instantie</returns>
+        /// <returns>Double</returns>
         public static double GetOliepeil()
         {
             return oliepeil;
@@ -224,9 +223,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Via deze methode kan de kilometerstand doorgegeven worden aan andere pagina's
+        /// Passes mileage to other screens
         /// </summary>
-        /// <returns>Een float instantie</returns>
+        /// <returns>Float</returns>
         public static float GetKilometerstand()
         {
             return kilometerstandWagen;

@@ -35,8 +35,9 @@ namespace PiXeL_Apps
         private static List<string> PDFBestanden = new List<string>();
 
         /// <summary>
-        /// in deze constructor wordt de logging instantie aangemaakt en de delegate van de logwriter gelinkt
-        /// GPS wordt geïnitialiseerd, zodat deze klaar is vooraleer de gebruiker een script opvraagt en de User Control wordt opgeroepen
+        /// This contstructor prepares the logger and links te delegate of the logwriter.
+        /// GPS is initialized to make shure it's ready when the user asks the script.
+        /// The last thing this does is call the user control
         /// </summary>
         public Inlogscherm()
         {
@@ -47,7 +48,7 @@ namespace PiXeL_Apps
             //Event voor het kijken naar internetconnectie
         }
         /// <summary>
-        /// Methode om het wagennummer op te halen en te tonen op het inlogscherm
+        /// Method to get the number of the assigned vehicle and show it on the login screen
         /// </summary>
         private async void ToonWagenNummer()
         {
@@ -67,7 +68,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze methode zorgt ervoor dat er naar het hoofdscherm genavigeerd kan worden of naar het admin-gedeelte
+        /// Handles the btnInloggen click.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,7 +120,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze tijdelijke methode zorgt ervoor dat alles uit de MS Access databank ingeladen wordt en in de LocalDB geplaatst wordt.
+        /// Tis temporary method makes shure everything from the MS Access database is loaded and put in the
+        /// local sqlite database.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -131,7 +133,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Via deze methode kan een pdf vergroot worden 
+        /// Method to enlarge a PDF fil
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -158,7 +160,7 @@ namespace PiXeL_Apps
         #region Initialisatie
 
         /// <summary>
-        /// Het ophalen van de pdfnamen en de storagefolders
+        /// Retrieve PDF names and storagefolders
         /// </summary>
         /// <returns>Task</returns>
         private async Task HaalPdfNamenOp()
@@ -168,7 +170,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Via deze methode wordt de wagenmap getoont op het scherm
+        /// Shows the vehicle specs
         /// </summary>
         private async void VulWagenmap()
         {
@@ -204,9 +206,9 @@ namespace PiXeL_Apps
             }
         }
         /// <summary>
-        /// De pdf's worden toegevoegd aan het Stackpanel
+        /// Adds PDF's to the stackpanel
         /// </summary>
-        /// <param name="pdfNaam">De naam van de PDF van het type string</param>
+        /// <param name="pdfNaam">Name of the PDF </param>
         /// <returns>Task</returns>
         private async Task VoegPdfToeAanBijlagen(string pdfNaam)
         {
@@ -238,9 +240,9 @@ namespace PiXeL_Apps
             }
         }
         /// <summary>
-        /// De afbeeldingen van een pdf worden opgehaald
+        /// Gets the images of the PDF's
         /// </summary>
-        /// <param name="pdfNaam">De naam van de PDF van het type string</param>
+        /// <param name="pdfNaam">Name of the PDF</param>
         /// <returns>Task</returns>
         private async Task<IReadOnlyList<StorageFile>> HaalPdfAfbeeldingenOp(string pdfNaam)
         {
