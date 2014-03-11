@@ -124,21 +124,22 @@ namespace PiXeL_Apps
         #region Populate Combobox
 
         /// <summary>
-        /// Deze methode zorgt dat er een lijst is van wagens in de databank. Daarna wordt deze lijst in de combobox gestoken.
+        /// Gets the list of vehicles from the database and puts them in the "cbbSelecteerWagen".
         /// </summary>
         private async void PopulateCombobox()
         {
             wagenOpties = await LocalDB.database.GetAutos(true);
             cbbSelecteerWagen.ItemsSource = wagenOpties;
+            string a;
         }
 
         /// <summary>
-        /// Deze methode wordt opgeroepen na het intypen van een letter in de combobox. Deze methode zorgt er dan voor dat de items met
-        /// de ingegeven letters getoond wordt.
+        /// Adapts the list in the combobox when a letter is typed. Unfortunally there are no free toolkits that supports editable 
+        /// comboboxes at the moment. This method is here so it can be implemented easilly.
         /// </summary>
         private void PopulateComboboxFilter()
         {
-            cbbSelecteerWagen.ItemsSource = wagenOptiesFilter;
+           cbbSelecteerWagen.ItemsSource = wagenOptiesFilter;
         }
         async void VeranderingConnectiviteit(object sender)
         {

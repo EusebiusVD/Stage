@@ -51,7 +51,9 @@
             <Grid x:Name="grWagen" Visibility="Visible" Height="618">
                 <TextBlock x:Name="lblFeedback" TextWrapping="Wrap" FontSize="30" Margin="10,520,10,0" FontStyle="Italic" TextAlignment="Center" Height="79" VerticalAlignment="Top" />
 
-                <ComboBox x:Name="cbbSelecteerWagen" FontSize="25" Margin="119,252,0,306" Height="60" DisplayMemberPath="Number" FontFamily="Global User Interface" HorizontalAlignment="Left" Width="535" />
+                <ComboBox x:Name="cbbSelecteerWagen" FontSize="25" Margin="119,252,0,306" Height="60" DisplayMemberPath="Number" FontFamily="Global User Interface" HorizontalAlignment="Left" Width="535" >
+                    <ComboBox Height="100" Width="120"/>                    
+                </ComboBox>
                 <Button x:Name="btnWijzigAuto" Click="BtnWijzigAuto_Click" FontFamily="Global User Interface" 
                         VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,244,10,308" Height="66" Width="326">
                     <Grid>
