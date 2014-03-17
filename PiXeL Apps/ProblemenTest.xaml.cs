@@ -771,8 +771,13 @@ namespace PiXeL_Apps
                                                where defectcode.Id == defectId
                                                select defectcode;
             if (defCode.Count() > 0)
+            {
                 return defCode.First();
-            return null;
+            }
+            else
+            {
+                return null;
+            }   
         }
         /// <summary>
         /// De lijst van objectCodes wordt opgevuld met de lijst van ObjectoCodes die aan deze methode werd meegegeven

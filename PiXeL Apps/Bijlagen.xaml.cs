@@ -95,7 +95,7 @@ namespace PiXeL_Apps
                 StorageFile sqLiteDatabase = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("LocalDBSQLite.sqlite");
                 if ((await sqLiteDatabase.GetBasicPropertiesAsync()).Size == 0)
                     databaseBestaat = false;
-            }catch (FileNotFoundException)
+            }catch (Exception)
             {
                 databaseBestaat = false;
             }
