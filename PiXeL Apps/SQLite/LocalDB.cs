@@ -1227,7 +1227,7 @@ namespace PiXeL_Apps
         /// Geeft een lege lijst terug als er geen categorieën gevonden werd.
         /// </summary>
         /// <returns>Een lijst van string instanties</returns>
-        public async Task<List<string>> GetCategorieën()
+        public async Task<List<string>> GetDefectCategorieën()
         {
             if (categoriëën.Count > 0)
                 return categoriëën;
@@ -1243,6 +1243,34 @@ namespace PiXeL_Apps
                         for (int i = 0; i < problemen.Count; i++)
                         {
                             lijst.Add(problemen[i].Type_Defect.ToLower());
+                        }
+                        return lijst;
+                    }
+                }
+                catch (Exception e)
+                {
+                    paLogging.log.Error("Fout bij het ophalen van de problemen uit de database\nFoutmelding: " + e.Message);
+                }
+            }
+            return null;
+        }
+
+        public async Task<List<string>> GetObjectCategorieën()
+        {
+            if (categoriëën.Count > 0)
+                return categoriëën;
+            else
+            {
+                try
+                {
+                    List<String> lijst = new List<String>();
+                    lijst.Add("alle categorieën");
+                    var problemen = await db.QueryAsync<OBJECT_CODES>("SELECT distinct Type FROM DSS_OBJECT_CODES");
+                    if (problemen.Any())
+                    {
+                        for (int i = 0; i < problemen.Count; i++)
+                        {
+                            lijst.Add(problemen[i].Type.ToLower());
                         }
                         return lijst;
                     }

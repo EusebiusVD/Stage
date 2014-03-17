@@ -46,7 +46,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Deze constructor vult voegt het menu toe an het scherm, registreert de gps updates en swype comamnds voor het menu
+        /// This constructor add the menu to the screen, registers GPS updates and the swype commands for the menu
         /// </summary>
         public VerschillendeInspecties()
         {
@@ -67,8 +67,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Wordt opgeroepen wanneer een swype gesture begint.
-        /// In tegenstelling tot manipulationstarting wordt aan deze functie het absolute beginpunt (voor X en Y) meegegeven.
+        /// Get's called when a swype gesture starts.
+        /// The difference between ManipulationStarting and this method is that this function needs
+        /// the absolute starting point (X & Y).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -78,9 +79,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
-        /// Word opgeroepen tijdens het swypen.
-        /// er wordt gecontroleerd of de swype beëindigd is of niet (e.IsInertial). Indien wel, dan wordt het eindpunt bepaald
-        /// en wordt gekeken of de swype afstand op de X-as ver genoeg was om de menuanimatie te starten.
+        /// Called during swyoe
+        /// Checks if the swype is done (e.IsInertial) and when it's done determines the end point.
+        /// there will be checked if the distance on the X-axis is far enough to start the menu animation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -106,9 +107,12 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method will set the list of inspections as ItemSource for the grid as soon as the page is loaded.
+        /// Inspections that are completed will be SelectedItems
         /// In deze methode zal zodra de pagina geladen is, de lijst met inspecties als ItemSource voor het grid instellen.
         /// Inspecties die eerder afgerond werden worden aan de SelectedItems van het grid toegevoegd zodat deze worden aangevinkt.
-        /// Tenslotte wordt de eerste inspectie in de lijst die niet aangevinkt werd in beeld gescrolled. Indien een dringend (volgens de gps) eerst komt wordt deze in beeld gebracht.
+        /// Tenslotte wordt de eerste inspectie in de lijst die niet aangevinkt werd in beeld gescrolled. Indien een dringend 
+        /// (volgens de gps) eerst komt wordt deze in beeld gebracht.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

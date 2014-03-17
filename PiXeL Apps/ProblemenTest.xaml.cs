@@ -37,7 +37,8 @@ namespace PiXeL_Apps
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        private static List<String> categorieën = new List<String>(); //Categorieën voor alle defect en objectcodes
+        private static List<String> DefectCategorieën = new List<String>(); //Categorieën voor alle defectcodes
+        private static List<String> ObjectCategorieën = new List<String>(); // Categorieën voor alle objectcodes
         private static List<DefectCodes> defectCodes = new List<DefectCodes>(); //Alle defectcode objecten
         private List<string> categorieDefectCodes = new List<string>(); //Indien een categorie geselecteerd wordt, is dit de lijst van defectinstanties waarin gezocht word.
         private static List<ObjectCodes> objectCodes = new List<ObjectCodes>(); //Alle objectcode objecten
@@ -82,10 +83,10 @@ namespace PiXeL_Apps
             nieuwCommentaar.DefectCodeId = -1;
             this.Loaded += ProblemenTest_Loaded;
             //Comboboxen initialiseren en declareren
-            cbbDefectCategorie.ItemsSource = categorieën;
+            cbbDefectCategorie.ItemsSource = DefectCategorieën;
             if (cbbDefectCategorie.Items.Count > 0)
                 cbbDefectCategorie.SelectedIndex = 0;
-            cbbObjectCategorie.ItemsSource = categorieën;
+            cbbObjectCategorie.ItemsSource = ObjectCategorieën;
             if (cbbObjectCategorie.Items.Count > 0)
                 cbbObjectCategorie.SelectedIndex = 0;
 
@@ -181,7 +182,8 @@ namespace PiXeL_Apps
         /// </summary>
         public static async void HaalCodesOp()
         {
-            categorieën = await LocalDB.database.GetCategorieën();
+            DefectCategorieën = await LocalDB.database.GetDefectCategorieën();
+            ObjectCategorieën = await LocalDB.database.GetObjectCategorieën();
             objectCodes = await LocalDB.database.GetObjectCodes();
             defectCodes = await LocalDB.database.GetDefectCodes();
             await HaalCodeOmschrijvingenOp();
@@ -529,7 +531,7 @@ namespace PiXeL_Apps
         private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
             if (nieuwCommentaar.DefectCodeId < 0 || nieuwCommentaar.ObjectCodeId < 0)
-                lblError.Text = "U moet een objectcode en defectcode ingeven";
+                lblError.Text = "U moet een object- en defectcode ingeven";
             else
             {
                 //  filterOpmerking = (List<String>)Common.LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");

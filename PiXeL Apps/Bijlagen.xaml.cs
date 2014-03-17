@@ -362,7 +362,7 @@ namespace PiXeL_Apps
         #endregion
 
         /// <summary>
-        /// The inlog button on the bijlage screen is only visible when there isn't a car assigned to the tablet.
+        /// The login button on the bijlage screen is only visible when there isn't a car assigned to the tablet.
         /// Only administrators can login
         /// </summary>
         /// <param name="sender"></param>

@@ -902,8 +902,9 @@ namespace SQLite
 				var savePoint = SaveTransactionPoint ();
 				action ();
 				Release (savePoint);
-			} catch (Exception) {
+			} catch (Exception e) {
 				Rollback ();
+                paLogging.log.Critical(e.Message + " " + e.StackTrace);
 				throw;
 			}
 		}
