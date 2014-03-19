@@ -160,8 +160,8 @@ namespace PiXeL_Apps
 
                 if (!toegewezenAuto)
                 {
-                await db.DropTableAsync<INSPECTIE>(); //Tabel INSPECTIE verwijderen
-                await db.CreateTableAsync<INSPECTIE>(); //Tabel INSPECTIE aanmaken
+                    await db.DropTableAsync<INSPECTIE>(); //Tabel INSPECTIE verwijderen
+                    await db.CreateTableAsync<INSPECTIE>(); //Tabel INSPECTIE aanmaken
 
                     await db.DropTableAsync<COMMENT>(); //Tabel COMMENT verwijderen
                     await db.CreateTableAsync<COMMENT>(); //Tabel COMMENT aanmaken
@@ -424,7 +424,7 @@ namespace PiXeL_Apps
 
                 #region Inspecties aanmaken & toevoegen
 
-                if (completeAuto != null)
+                if (toegewezenAuto)
                 {
                     try
                     {
@@ -470,7 +470,7 @@ namespace PiXeL_Apps
                     }
                     catch (Exception e)
                     {
-                        paLogging.log.Error("Er is een fout opgetreden bij het opvullen van de database (tabel scripts) : " + e.Message);
+                        paLogging.log.Error("Er is een fout opgetreden bij het opvullen van de database (tabel inspecties) : " + e.Message + " " + e.StackTrace);
                     }
                 }
                 else

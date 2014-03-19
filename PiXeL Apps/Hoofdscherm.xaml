@@ -71,7 +71,7 @@
             </StackPanel>
         </Popup>
 
-        <Grid x:Name="grHoofdscherm" Visibility="Collapsed">
+        <Grid x:Name="grHoofdscherm" Visibility="Visible">
             <GridView x:Name="gvwScripten" HorizontalAlignment="Right" VerticalAlignment="Top"
                   Width="370" Height="582" Margin="0,66,600,0" Padding="5,0,5,0"
                   Background="Transparent" ItemTemplate="{StaticResource hoofdschermTemplate}"

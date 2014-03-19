@@ -96,7 +96,7 @@ namespace PiXeL_Apps
                             List<object> objectenLijst = new List<object>();
                             objectenLijst.Add(user);
                             objectenLijst.Add(true);
-                            this.Frame.Navigate(typeof(Hoofdscherm), objectenLijst);
+                            this.Frame.Navigate(typeof(OilOdoInput), objectenLijst);
                         }
                         else
                         {

@@ -85,8 +85,8 @@ namespace PiXeL_Apps.UserControls
 
             CompleteAuto caAuto = (CompleteAuto) await LocalDB.database.GetToegewezenAuto();
             
-            kilometerstand = Hoofdscherm.GetKilometerstand();
-            oliepeil = Hoofdscherm.GetOliepeil();
+            kilometerstand = OilOdoInput.GetKilometerstand();
+            oliepeil = OilOdoInput.GetOliepeil();
             lblKilometerstand.Text = afstandssoort + kilometerstand.ToString("N2") + afkortingAfstand;
             if(oliepeil == 0.0)
                 lblOliepijl.Text = "Oliepeil: 0" + oliepeil.ToString("#.##") + " %";

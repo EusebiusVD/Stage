@@ -149,6 +149,9 @@
     </Compile>
     <Compile Include="Logging\paLogging.cs" />
     <Compile Include="Logging\paLogWriter.cs" />
+    <Compile Include="OilOdoInput.xaml.cs">
+      <DependentUpon>OilOdoInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProblemenTest.xaml.cs">
       <DependentUpon>ProblemenTest.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\CarTop.png" />
+    <Content Include="Assets\Car_pictogram.png" />
     <Content Include="Assets\Exelbestand.PNG" />
     <Content Include="Assets\FordImage.jpg" />
     <Content Include="Assets\Logo.png" />
@@ -304,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inlogscherm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OilOdoInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

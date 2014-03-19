@@ -49,11 +49,11 @@ namespace PiXeL_Apps
             menuPanel.Children.Add(ucMenu);
 
             //Het aanmaken v de usercontrol+toevoegen an het scherm
-            if (teller != 0)
-            {
+            //if (teller != 0)
+            //{
                 UserControls.VisueleAuto ucWagen = new UserControls.VisueleAuto();
                 grUserControl.Children.Add(ucWagen);
-            }
+            //}
 
             object boolAfstandsaanduiding = LocalStorage.localStorage.LaadGegevens("afstandsaanduiding");
             if (boolAfstandsaanduiding != null)

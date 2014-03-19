@@ -67,7 +67,7 @@ namespace PiXeL_Apps
 
             inhoudExcel = new List<KeyValuePair<string, string>>();
 
-            slOliepeil.Value = Hoofdscherm.GetOliepeil() / 100;
+            slOliepeil.Value = OilOdoInput.GetOliepeil() / 100;
 
             //Dynamisch menu (usercontrol) inladen
             UserControls.Menu ucMenu = new UserControls.Menu(false);
@@ -396,7 +396,7 @@ namespace PiXeL_Apps
 
                     if (await LocalDB.database.UpdateOliepeil(oliepeil.ToString("#.###")))
                     {
-                        Hoofdscherm.SetOliepeil(oliepeil);
+                        OilOdoInput.SetOliepeil(oliepeil);
                         lblMelding.Foreground = new SolidColorBrush(Colors.White);
                         lblMelding.Text = "De gegevens werden opgeslagen";
                         //lblError.Foreground = new SolidColorBrush(Colors.White);
