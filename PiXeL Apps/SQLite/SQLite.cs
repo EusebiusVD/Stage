@@ -1744,7 +1744,7 @@ namespace SQLite
 		}
 
 		public int ExecuteNonQuery ()
-		{
+        {
 			if (_conn.Trace) {
 				Debug.WriteLine ("Executing: " + this);
 			}
@@ -1758,9 +1758,11 @@ namespace SQLite
 				return rowsAffected;
 			} else if (r == SQLite3.Result.Error) {
 				string msg = SQLite3.GetErrmsg (_conn.Handle);
-				throw SQLiteException.New (r, msg);
+				//throw SQLiteException.New (r, msg);
+                return 0;
 			} else {
-				throw SQLiteException.New (r, r.ToString ());
+				//throw SQLiteException.New (r, r.ToString ());
+                return 0;
 			}
 		}
 

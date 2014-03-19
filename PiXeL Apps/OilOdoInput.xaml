@@ -76,7 +76,6 @@
             <TextBlock x:Name="lblMin" HorizontalAlignment="Left" Margin="408,290,0,0" TextWrapping="Wrap" Text="Minimum" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top" Height="29"/>
             <TextBlock x:Name="lblMax" HorizontalAlignment="Left" Margin="1019,290,0,0" TextWrapping="Wrap" Text="Maximum" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top"/>
             <TextBlock x:Name="lblOdo" HorizontalAlignment="Left" Margin="276,409,0,0" TextWrapping="Wrap" Text="Kilometerstand" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top"/>
-            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="234,327,0,0" VerticalAlignment="Top"/>
             <!--</StackPanel>-->
             <!--</Popup>-->
         </Grid>

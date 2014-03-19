@@ -13,7 +13,7 @@
     </Page.Resources>
 
     <Grid x:Name="achtergrondKleur" Background="{StaticResource DefaultBackgroundColor}">
-        <Popup x:Name="invoerPopup" IsOpen="False" Width="960" Height="458">
+       <!-- <Popup x:Name="invoerPopup" IsOpen="False" Width="960" Height="458">
             <StackPanel Background="{StaticResource DefaultBackgroundColor}">
                 <StackPanel>
                     <TextBlock x:Name="lblInvoerVereist" Text="Er dienen een paar gegevens ingevoerd te worden" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,20" />
@@ -69,7 +69,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </Popup>
+        </Popup> -->
 
         <Grid x:Name="grHoofdscherm" Visibility="Visible">
             <GridView x:Name="gvwScripten" HorizontalAlignment="Right" VerticalAlignment="Top"

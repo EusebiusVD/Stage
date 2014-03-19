@@ -89,9 +89,9 @@ namespace PiXeL_Apps.UserControls
             oliepeil = OilOdoInput.GetOliepeil();
             lblKilometerstand.Text = afstandssoort + kilometerstand.ToString("N2") + afkortingAfstand;
             if(oliepeil == 0.0)
-                lblOliepijl.Text = "Oliepeil: 0" + oliepeil.ToString("#.##") + " %";
+                lblOliepeil.Text = "Oliepeil: 0" + oliepeil.ToString("#.##") + " %";
             else
-                lblOliepijl.Text = "Oliepeil: " + oliepeil.ToString("#.##") + " %";
+                lblOliepeil.Text = "Oliepeil: " + oliepeil.ToString("#.##") + " %";
         }
 
         public static readonly DependencyProperty ExpanderContentProperty =

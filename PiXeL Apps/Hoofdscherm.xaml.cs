@@ -56,14 +56,14 @@ namespace PiXeL_Apps
             //}
 
             object boolAfstandsaanduiding = LocalStorage.localStorage.LaadGegevens("afstandsaanduiding");
-            if (boolAfstandsaanduiding != null)
+           /* if (boolAfstandsaanduiding != null)
             {
                 if (Convert.ToBoolean(boolAfstandsaanduiding))
                 {
                     lblKilometerstand.Text = "Mijlstand:";
                     txtKilometerstand.PlaceholderText = "Mijlstand...";
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode != NavigationMode.Back && e.Parameter != null)
+            /*if (e.NavigationMode != NavigationMode.Back && e.Parameter != null)
             {
                 List<object> lijstGegevens = (List<object>)e.Parameter;
 
@@ -91,7 +91,7 @@ namespace PiXeL_Apps
             {
                 grHoofdscherm.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 invoerPopup.IsOpen = false;
-            }
+            }*/
         }
 
         #region GridView Events
@@ -136,7 +136,7 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
+        /*private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
             //int oliepeil;
             float kilometerstand;
@@ -204,7 +204,7 @@ namespace PiXeL_Apps
         private void SlOliepeil_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             oliepeil = slOliepeil.Value * 100;
-        }
+        }*/
         #endregion
 
         #region DoorgevenWagendetails

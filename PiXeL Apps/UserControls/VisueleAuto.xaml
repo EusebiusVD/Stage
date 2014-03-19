@@ -36,7 +36,7 @@
         <!--<Line x:Name="lineBandenspanningAchter" Stroke="yellow" X1="495" Y1="250" X2="520" Y2="325" StrokeThickness="3" />-->
         <!--Textblock met omkadering-->
         <Border BorderBrush="#FF005DFF" BorderThickness="2"  Margin="10,96,385,235" >
-            <TextBlock x:Name="lblOliepijl" TextAlignment="Center" FontSize="18" Foreground="White" HorizontalAlignment="Left" Margin="8,5,0,-2" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="1.149,0.721" Height="27" Width="170"/>
+            <TextBlock x:Name="lblOliepeil" TextAlignment="Center" FontSize="18" Foreground="White" HorizontalAlignment="Left" Margin="8,5,0,-2" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="1.149,0.721" Height="27" Width="170"/>
         </Border>
         <Line x:Name="lineBandenSpanningVoor" Stroke="#FF005DFF" X1="80" Y1="310" X2="110" Y2="290" StrokeThickness="3" Margin="17,10,-17,-10" />
         <Border BorderBrush="#FF005DFF" BorderThickness="2"  Margin="24,320,361,11" >

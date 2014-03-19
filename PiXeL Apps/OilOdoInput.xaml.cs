@@ -32,7 +32,7 @@ namespace PiXeL_Apps
         public OilOdoInput()
         {
             this.InitializeComponent();
-            slOliepeil.Value = OilOdoInput.GetOliepeil();
+            slOliepeil.Value = GetOliepeil()/100;
         }
         /// <summary>
         /// Writes the mileage and oil level reservoir
@@ -111,7 +111,9 @@ namespace PiXeL_Apps
         {
             this.Frame.Navigate(typeof(Hoofdscherm));
         }
-
+        /// <summary>
+        /// Saves just the odometer when the oil level hasn't changed
+        /// </summary>
         private async void saveOdo()
         {
             float kilometerstand;
@@ -155,6 +157,9 @@ namespace PiXeL_Apps
             }
         }
 
+        /// <summary>
+        /// saves the oil level when you didn't enter a mileage.
+        /// </summary>
         private async void saveOilLevel()
         {
             try
@@ -171,6 +176,9 @@ namespace PiXeL_Apps
             }
         }
 
+        /// <summary>
+        /// Saves both milage and oil level
+        /// </summary>
         private async void saveOdoAndOil()
         {
             float kilometerstand;

@@ -1025,6 +1025,11 @@ namespace PiXeL_Apps
             }
         }
 
+        /// <summary>
+        /// Set the odometer in the table DSS_ASSIGNEDVEHICLE
+        /// </summary>
+        /// <param name="Kilometerstand"></param>
+        /// <returns></returns>
         public async Task<bool> Setkilometer(String Kilometerstand)
         {
             try
