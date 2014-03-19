@@ -32,6 +32,7 @@ namespace PiXeL_Apps
         public OilOdoInput()
         {
             this.InitializeComponent();
+            slOliepeil.Value = OilOdoInput.GetOliepeil();
         }
         /// <summary>
         /// Writes the mileage and oil level reservoir
@@ -39,48 +40,19 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
+        private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
-            //int oliepeil;
-            float kilometerstand;
-
-            if (float.TryParse(txtKilometerstand.Text, out kilometerstand))
+            if (!txtKilometerstand.Text.Equals("") && slOliepeil.Value.CompareTo(GetOliepeil()) == 0.0)
             {
-                if (kilometerstand < 2147483647) //2147483647 = max. waarde Int32
-                {
-                    if (kilometerstand >= 0)
-                    {
-                        kilometerstandWagen = kilometerstand;
-
-                        try
-                        {
-                            await LocalDB.database.SetkilometerstandEnOliepeil(oliepeil.ToString(), kilometerstand.ToString());
-                            this.Frame.Navigate(typeof(Hoofdscherm));
-                        }
-                        catch (Exception)
-                        {
-                            lblError.Text = "Er trad een fout op tijdens het opslaan van de gegevens, gelieve nog eens te proberen.";
-                            lblError.Text += "\nU kan dit ook overslaan door op de knop de klikken";
-                        }
-
-                        GpsSupport.gpsSupport.SetKilometersGereden(Convert.ToInt32(kilometerstand));
-                    }
-                    else
-                    {
-                        lblError.Text = "Uw ingevoerde afstand moet boven 0 zijn...";
-                        lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                    }
-                }
-                else
-                {
-                    lblError.Text = "Uw ingevoerde afstand is veel te hoog...";
-                    lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                }
+                saveOdo();
+            }
+            else if (txtKilometerstand.Text.Equals("") && slOliepeil.Value.CompareTo(GetOliepeil()) != 0.0)
+            {
+                saveOilLevel();
             }
             else
             {
-                lblError.Text = "U hebt (een) verkeerde waarde(n) ingegeven...";
-                lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                saveOdoAndOil();
             }
         }
         /// <summary>
@@ -135,10 +107,111 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void BtnSkip_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Hoofdscherm));
+        }
+
+        private async void saveOdo()
+        {
+            float kilometerstand;
+            if (float.TryParse(txtKilometerstand.Text, out kilometerstand))
+            {
+                if (kilometerstand < 2147483647) //2147483647 = max. waarde Int32
+                {
+                    if (kilometerstand >= 0)
+                    {
+                        kilometerstandWagen = kilometerstand;
+
+                        try
+                        {
+                            await LocalDB.database.Setkilometer(kilometerstand.ToString());
+                            this.Frame.Navigate(typeof(Hoofdscherm));
+                        }
+                        catch (Exception)
+                        {
+                            lblError.Text = "Er trad een fout op tijdens het opslaan van de gegevens, gelieve nog eens te proberen.";
+                            lblError.Text += "\nU kan dit ook overslaan door op de knop de klikken";
+                        }
+
+                        GpsSupport.gpsSupport.SetKilometersGereden(Convert.ToInt32(kilometerstand));
+                    }
+                    else
+                    {
+                        lblError.Text = "Uw ingevoerde afstand moet boven 0 zijn...";
+                        lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    lblError.Text = "Uw ingevoerde afstand is veel te hoog...";
+                    lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+            }
+            else
+            {
+                lblError.Text = "U hebt (een) verkeerde waarde(n) ingegeven...";
+                lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+        }
+
+        private async void saveOilLevel()
+        {
+            try
+            {
+                {
+                    await LocalDB.database.UpdateOliepeil(oliepeil.ToString("#.###"));
+                    this.Frame.Navigate(typeof(Hoofdscherm));
+                }
+            }
+            catch (Exception)
+            {
+                lblError.Foreground = new SolidColorBrush(Colors.Yellow);
+                lblError.Text = "Er is iets fout gelopen bij de opslag, gelieve dit later opnieuw te proberen";
+            }
+        }
+
+        private async void saveOdoAndOil()
+        {
+            float kilometerstand;
+            if (float.TryParse(txtKilometerstand.Text, out kilometerstand))
+            {
+                if (kilometerstand < 2147483647) //2147483647 = max. waarde Int32
+                {
+                    if (kilometerstand >= 0)
+                    {
+                        kilometerstandWagen = kilometerstand;
+
+                        try
+                        {
+                            await LocalDB.database.SetkilometerstandEnOliepeil(oliepeil.ToString(), kilometerstand.ToString());
+                            this.Frame.Navigate(typeof(Hoofdscherm));
+                        }
+                        catch (Exception)
+                        {
+                            lblError.Text = "Er trad een fout op tijdens het opslaan van de gegevens, gelieve nog eens te proberen.";
+                            lblError.Text += "\nU kan dit ook overslaan door op de knop de klikken";
+                        }
+
+                        GpsSupport.gpsSupport.SetKilometersGereden(Convert.ToInt32(kilometerstand));
+                    }
+                    else
+                    {
+                        lblError.Text = "Uw ingevoerde afstand moet boven 0 zijn...";
+                        lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    lblError.Text = "Uw ingevoerde afstand is veel te hoog...";
+                    lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+            }
+            else
+            {
+                lblError.Text = "U hebt (een) verkeerde waarde(n) ingegeven...";
+                lblError.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
         }
     }
 }

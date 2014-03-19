@@ -14,9 +14,9 @@ namespace PiXeL_Apps.SQLite.Tables
         public int Id { get; set; }
         public String Omschrijving { get; set; }
         public int ObjectCodeId { get; set; }
-        public string ObjectCode { get; set; }
+        public String ObjectCode { get; set; }
         public int DefectCodeId { get; set; }
-        public string DefectCode { get; set; }
+        public String DefectCode { get; set; }
         public int Vehicle_Id { get; set; }
         public String Chauffeur { get; set; }
         public DateTime Datum { get; set; }

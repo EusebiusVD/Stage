@@ -165,8 +165,8 @@ namespace PiXeL_Apps
         /// <param name="comment">comment is van het type Comment en bevat een nieuwe opmerking</param>
         public static void AddComment(Comment comment)
         {
-            DefectCodes defectcode = ProblemenTest.GetDefectCode(comment.DefectCodeId);
-            ObjectCodes objectcode = ProblemenTest.GetObjectCode(comment.ObjectCodeId);
+            DefectCodes defectcode = ProblemenTest.GetDefectCode(comment.DefectCode);
+            ObjectCodes objectcode = ProblemenTest.GetObjectCode(comment.ObjectCode);
             comment.ObjectCode = objectcode.Code;
             comment.DefectCode = defectcode.Code;
             opmerkingen.Insert(0, comment);

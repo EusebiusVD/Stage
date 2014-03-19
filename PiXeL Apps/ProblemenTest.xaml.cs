@@ -750,10 +750,15 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="objectId">objectId is van het type int en bevat het Id van een objectcode</param>
         /// <returns></returns>
-        public static ObjectCodes GetObjectCode(int objectId)
+        /// <summary>
+        /// Via deze methode kan de code van een objectcode opgehaald worden vanaf een andere pagina in de applicatie
+        /// </summary>
+        /// <param name="objectId">objectId is van het type int en bevat het Id van een objectcode</param>
+        /// <returns></returns>
+        public static ObjectCodes GetObjectCode(string objectCode)
         {
             IEnumerable<ObjectCodes> objCode = from objectcode in objectCodes
-                                               where objectcode.Id == objectId
+                                               where objectcode.Code == objectCode
                                                select objectcode;
             if (objCode.Count() > 0)
                 return objCode.First();
@@ -765,19 +770,14 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="defectId">defectId is van het type int en bevat het Id van een defectId </param>
         /// <returns></returns>
-        public static DefectCodes GetDefectCode(int defectId)
+        public static DefectCodes GetDefectCode(string defectCode)
         {
             IEnumerable<DefectCodes> defCode = from defectcode in defectCodes
-                                               where defectcode.Id == defectId
+                                               where defectcode.Code == defectCode
                                                select defectcode;
             if (defCode.Count() > 0)
-            {
                 return defCode.First();
-            }
-            else
-            {
-                return null;
-            }   
+            return null;
         }
         /// <summary>
         /// De lijst van objectCodes wordt opgevuld met de lijst van ObjectoCodes die aan deze methode werd meegegeven

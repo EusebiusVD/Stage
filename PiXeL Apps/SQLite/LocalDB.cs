@@ -1025,6 +1025,32 @@ namespace PiXeL_Apps
             }
         }
 
+        public async Task<bool> Setkilometer(String Kilometerstand)
+        {
+            try
+            {
+
+                var auto = await db.QueryAsync<ASSIGNEDVEHICLE>("SELECT * FROM DSS_ASSIGNEDVEHICLE");
+                ASSIGNEDVEHICLE updateKilometer = new ASSIGNEDVEHICLE
+                {
+                    Id = auto[0].Id,
+                    Number = auto[0].Number,
+                    Brand_Id = auto[0].Brand_Id,
+                    Engine_Id = auto[0].Engine_Id,
+                    Transmission_Id = auto[0].Transmission_Id,
+                    Kilometerstand = Kilometerstand,
+                    Oliepeil = auto[0].Oliepeil
+                };
+                await db.UpdateAsync(updateKilometer);
+                return true;
+            }
+            catch (Exception e)
+            {
+                paLogging.log.Error(String.Format("Fout bij het wijzigen van de kilometerstand", e.Message));
+                return false;
+            }
+        }
+
         /// <summary>
         /// Deze methode zorgt ervoor dat de gewichten van een wagen veranderd kunnen worden 
         /// </summary>
@@ -1309,7 +1335,7 @@ namespace PiXeL_Apps
                     Datum = commentaar.Datum
                 };
                 await db.InsertAsync(nieuwCommentaar);
-                Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum);
+                Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.DefectCode, nieuwCommentaar.ObjectCode, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum);
                 aantalCommentaren++;
                 return opmerking;
             }
