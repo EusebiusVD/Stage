@@ -138,5 +138,10 @@ namespace PiXeL_Apps.Classes
         {
             return Eenheid_Naam;
         }
+
+        public string getOilLevel()
+        {
+            return Oliepeil;
+        }
     }
 }

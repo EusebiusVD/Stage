@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using PiXeL_Apps.Classes;
+using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,10 +30,21 @@ namespace PiXeL_Apps
     {
         private static float kilometerstandWagen = 0;
         private static double oliepeil = 0.0;
+        private double backup;
+        ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
         public OilOdoInput()
         {
             this.InitializeComponent();
-            slOliepeil.Value = GetOliepeil()/100;
+            if (!localSettings.Values.ContainsKey("Oillevel"))
+            {
+                backup = GetOliepeil();
+            }
+            else
+            {
+                backup = double.Parse(localSettings.Values["Oillevel"].ToString());
+            }
+            slOliepeil.Value = backup/100;
         }
         /// <summary>
         /// Writes the mileage and oil level reservoir
@@ -42,11 +54,11 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
-            if (!txtKilometerstand.Text.Equals("") && slOliepeil.Value.CompareTo(GetOliepeil()) == 0.0)
+            if (!txtKilometerstand.Text.Equals("") && slOliepeil.Value.CompareTo(backup) == 0)
             {
                 saveOdo();
             }
-            else if (txtKilometerstand.Text.Equals("") && slOliepeil.Value.CompareTo(GetOliepeil()) != 0.0)
+            else if (txtKilometerstand.Text.Equals("") && slOliepeil.Value.CompareTo(backup) != 0)
             {
                 saveOilLevel();
             }
@@ -109,7 +121,9 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private void BtnSkip_Click(object sender, RoutedEventArgs e)
         {
+            slOliepeil.Value = backup/100;
             this.Frame.Navigate(typeof(Hoofdscherm));
+            
         }
         /// <summary>
         /// Saves just the odometer when the oil level hasn't changed
@@ -128,6 +142,7 @@ namespace PiXeL_Apps
                         try
                         {
                             await LocalDB.database.Setkilometer(kilometerstand.ToString());
+                            localSettings.Values["Odometer"] = kilometerstand;
                             this.Frame.Navigate(typeof(Hoofdscherm));
                         }
                         catch (Exception)
@@ -166,6 +181,7 @@ namespace PiXeL_Apps
             {
                 {
                     await LocalDB.database.UpdateOliepeil(oliepeil.ToString("#.###"));
+                    localSettings.Values["Oillevel"] = slOliepeil.Value * 100;
                     this.Frame.Navigate(typeof(Hoofdscherm));
                 }
             }
@@ -193,6 +209,8 @@ namespace PiXeL_Apps
                         try
                         {
                             await LocalDB.database.SetkilometerstandEnOliepeil(oliepeil.ToString(), kilometerstand.ToString());
+                            localSettings.Values["Oillevel"] = slOliepeil.Value * 100;
+                            localSettings.Values["Odometer"] = kilometerstand;
                             this.Frame.Navigate(typeof(Hoofdscherm));
                         }
                         catch (Exception)

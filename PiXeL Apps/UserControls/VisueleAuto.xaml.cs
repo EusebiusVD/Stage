@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -24,6 +25,8 @@ namespace PiXeL_Apps.UserControls
         private float kilometerstand;
         private double oliepeil;
         private string afstandssoort, afkortingAfstand;
+        ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
         /// <summary>
         /// In deze constructor wordt de de methode ToevoegenGegevensAfbeelding() en HaalBandenSpanningOp() opgeroepen
@@ -31,7 +34,6 @@ namespace PiXeL_Apps.UserControls
         public VisueleAuto()
         {
             this.InitializeComponent();
-
             object boolAfstandsaanduiding = LocalStorage.localStorage.LaadGegevens("afstandsaanduiding");
             if (boolAfstandsaanduiding != null)
             {
@@ -87,11 +89,22 @@ namespace PiXeL_Apps.UserControls
             
             kilometerstand = OilOdoInput.GetKilometerstand();
             oliepeil = OilOdoInput.GetOliepeil();
-            lblKilometerstand.Text = afstandssoort + kilometerstand.ToString("N2") + afkortingAfstand;
-            if(oliepeil == 0.0)
-                lblOliepeil.Text = "Oliepeil: 0" + oliepeil.ToString("#.##") + " %";
+            if (!localSettings.Values.ContainsKey("Odometer"))
+            {
+                lblKilometerstand.Text = afstandssoort + kilometerstand.ToString() + afkortingAfstand;
+            }
             else
+            {
+                lblKilometerstand.Text = afstandssoort + localSettings.Values["Odometer"].ToString() + afkortingAfstand;
+            }
+            if (oliepeil == 0.0)
+            {
+                lblOliepeil.Text = "Oliepeil: 0" + oliepeil.ToString("#.##") + " %";
+            }
+            else
+            {
                 lblOliepeil.Text = "Oliepeil: " + oliepeil.ToString("#.##") + " %";
+            }
         }
 
         public static readonly DependencyProperty ExpanderContentProperty =

@@ -943,7 +943,7 @@ namespace PiXeL_Apps
                 await db.CreateTableAsync<ASSIGNEDVEHICLE>(); //Tabel ASSIGNEDVEHICLE aanmaken
 
                 ASSIGNEDVEHICLE auto = (await GetAuto(number)).GetASSIGNEDVEHICLE();
-                completeAuto = new CompleteAuto(auto.Id, auto.Number);
+                completeAuto = new CompleteAuto(auto.Id, auto.Number, auto.Oliepeil);
                 completeAuto.SetBrand(await GetMerk(auto.Brand_Id));
                 completeAuto.SetEngine(await GetMotor(auto.Engine_Id));
                 completeAuto.SetFuel(await GetBrandstof(completeAuto.Motor_Brandstof_Id));
@@ -1054,6 +1054,22 @@ namespace PiXeL_Apps
                 paLogging.log.Error(String.Format("Fout bij het wijzigen van de kilometerstand", e.Message));
                 return false;
             }
+        }
+
+        public async Task<ASSIGNEDVEHICLE> getOilLevel()
+        {
+            var auto = await db.QueryAsync<ASSIGNEDVEHICLE>("Select * from DSS_ASSIGNEDVEHICLE");
+            ASSIGNEDVEHICLE test = new ASSIGNEDVEHICLE
+            {
+                Id = auto[0].Id,
+                Number = auto[0].Number,
+                Brand_Id = auto[0].Brand_Id,
+                Engine_Id = auto[0].Engine_Id,
+                Transmission_Id = auto[0].Transmission_Id,
+                Kilometerstand = auto[0].Kilometerstand,
+                Oliepeil = auto[0].Oliepeil
+            };
+            return test;
         }
 
         /// <summary>

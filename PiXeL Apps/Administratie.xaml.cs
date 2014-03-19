@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 
 namespace PiXeL_Apps
@@ -35,6 +36,8 @@ namespace PiXeL_Apps
         private List<Vehicle> wagenOpties, wagenOptiesFilter;
         private int tolerantieAankomend, tolerantieDringend;
         private static List<string> filterOpmerking = new List<string>();
+        ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
         public ObservableDictionary DefaultViewModel
         {
@@ -200,6 +203,8 @@ namespace PiXeL_Apps
         {
             try
             {
+                localSettings.Values.Remove("Oillevel");
+                localSettings.Values.Remove("Odometer");
                 Vehicle v = (Vehicle)cbbSelecteerWagen.SelectedItem;
                 btnWijzigAuto.IsEnabled = false;
                 prSynchroniseren.IsActive = true;
