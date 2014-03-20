@@ -32,6 +32,24 @@
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="allow_photo">
+            <DisplayName>Photo</DisplayName>
+            <SupportedFileTypes>
+              <FileType ContentType="image/jpeg">.jpg</FileType>
+              <FileType ContentType="image/png">.png</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="allow_video">
+            <DisplayName>Video</DisplayName>
+            <SupportedFileTypes>
+              <FileType ContentType="video/wmv">.wmv</FileType>
+              <FileType ContentType="video/mp4">.mp4</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

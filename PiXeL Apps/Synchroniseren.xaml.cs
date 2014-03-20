@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using System.Runtime.InteropServices;
+using Windows.UI;
 
 namespace PiXeL_Apps
 {
@@ -120,15 +121,18 @@ namespace PiXeL_Apps
                     await CopyFiles.copyVideosToUSB();
                     if (await LocalDB.database.SynchroniseerNaarUSB())
                     {
+                        lblBoodschap.Foreground = new SolidColorBrush(Colors.White);
                         lblBoodschap.Text = "De gegevens zijn met succes verstuurd naar de USB!";
                     }
                     else
                     {
+                        lblBoodschap.Foreground = new SolidColorBrush(Colors.Yellow);
                         lblBoodschap.Text = "Er is iets fout gelopen. Controleer of u een opslagmedium ingestoken heeft...";
                     }
                 }
                 catch(Exception)
                 {
+                    lblBoodschap.Foreground = new SolidColorBrush(Colors.Yellow);
                     lblBoodschap.Text = "Er is iets fout gelopen. Controleer of u een opslagmedium ingestoken heeft...";
                 }
             }

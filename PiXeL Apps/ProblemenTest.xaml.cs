@@ -47,6 +47,12 @@ namespace PiXeL_Apps
         private static List<string> objectCodeOmschrijvingen; //Lijst van strings met alle omschrijvingen van alle objectcodes
         private List<string> defectCodeOmschrijvingenResultaat = new List<string>(); //Na het zoeken naar defectcodes wordt het resultaat bijgehouden in deze lijst als suggesties
         private List<string> objectCodeOmschrijvingenResultaat = new List<string>(); //Na het zoeken naar objectcodes wordt het resultaat bijgehouden in deze lijst als suggesties
+        //private StorageFile[] Photos = new StorageFile[];
+        //private StorageFile[] Videos;
+        private static int countPhoto = 0;
+        private static int countVideo = 0;
+        private List<StorageFile> Photos = new List<StorageFile>();
+        private List<StorageFile> Videos = new List<StorageFile>();
 
 
         private int indexDefectCode = -1;
@@ -535,7 +541,7 @@ namespace PiXeL_Apps
             else
             {
                 //  filterOpmerking = (List<String>)Common.LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");
-                if (updateComment) //aanmaken van een nieuwe opmerking
+                if (updateComment) //Update a comment
                 {
                     User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
                     //ophalen chauffeur van opm met ID ...
@@ -545,16 +551,44 @@ namespace PiXeL_Apps
                     nieuwCommentaar.Vehicle_Id = opmerking.Vehicle_Id;
                     nieuwCommentaar.Chauffeur = gebruiker.Username;
                     nieuwCommentaar.Datum = DateTime.Now;
+                    CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
+                    
+                    for (int i = 0; i < Photos.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            await Photos[i].RenameAsync(ca.Number + "_" + opmerking.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                        }
+                        else
+                        {
+                            await Photos[i].RenameAsync(ca.Number + "_" + opmerking.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                        }
+                        await movePhotoVideo(Photos[i], photoFolder);
+                    }
 
+                    for (int i = 0; i < Videos.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            await Videos[i].RenameAsync(ca.Number + "_" + opmerking.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                        }
+                        else
+                        {
+                            await Videos[i].RenameAsync(ca.Number + "_" + opmerking.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                        }
+                        await movePhotoVideo(Videos[i], videoFolder);
+                    }
                     await CommentaarAanpassen(nieuwCommentaar);
                     this.Frame.Navigate(typeof(OverzichtOpmerkingen));
                 }
-                else //updaten van een bestaande opmerking
+                else //Create a new rijbericht
                 {
                     User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
                     nieuwCommentaar.Omschrijving = txtProblem.Text;
                     nieuwCommentaar.Chauffeur = gebruiker.Username;
                     nieuwCommentaar.Datum = DateTime.Now;
+
+                    CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
 
                     object settingRapporteerDubbele = LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");
                     bool rapporteerDubbele;
@@ -567,6 +601,34 @@ namespace PiXeL_Apps
                     else
                     {
                         await CommentaarToevoegen(nieuwCommentaar);
+
+                        var commentList = await LocalDB.database.GetComments();
+                        Comment LastComment = commentList[0];
+                        for (int i = 0; i < Photos.Count(); i++)
+                        {
+                            if (i == 0)
+                            {
+                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                            }
+                            else
+                            {
+                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                            }                        
+                            await movePhotoVideo(Photos[i], photoFolder);
+                        }
+
+                        for (int i = 0; i < Videos.Count(); i++)
+                        {
+                            if (i == 0)
+                            {
+                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                            }
+                            else
+                            {
+                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                            }
+                            await movePhotoVideo(Videos[i], videoFolder);
+                        }
                         this.Frame.Navigate(typeof(OverzichtOpmerkingen));
                     }
                 }
@@ -871,17 +933,17 @@ namespace PiXeL_Apps
         {
             await file.MoveAsync(folder);
             string status = file.MoveAsync(folder).Status.ToString();
-            //while (status.Equals("Started"))
-            //{
+            while (status.Equals("Started"))
+            {
                 try
                 {
-                    //status = file.MoveAsync(folder).Status.ToString();
+                    status = file.MoveAsync(folder).Status.ToString();
                 }
-                catch
+                catch(Exception e)
                 {
                     goto BREAK;
                 }
-            //}
+            }
             BREAK:
             if (status.Equals("Completed") || status.Equals("Error"))
             {
@@ -931,7 +993,7 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private async void BtnMaakFoto_Click(object sender, RoutedEventArgs e)
         {
-            btnMaakFoto.IsEnabled = false;
+            //btnMaakFoto.IsEnabled = false;
             await GetphotoFolder();
             CameraCaptureUI fotoScherm = new CameraCaptureUI();
             fotoScherm.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Png; //.png is veel lichter
@@ -941,7 +1003,10 @@ namespace PiXeL_Apps
             var foto = await fotoScherm.CaptureFileAsync(CameraCaptureUIMode.Photo); //Enkel een foto maken
             if (foto != null)
             {
-                int messageID;
+
+                Photos.Add(foto);
+                countPhoto++;
+                /*int messageID;
                 if (OverzichtOpmerkingen.getSelectedIndex() == 0)
                 {
                     messageID = OverzichtOpmerkingen.getSelectedIndex();
@@ -962,9 +1027,9 @@ namespace PiXeL_Apps
                     
                         try
                         {
-                            //renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png").Status;
+                            renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png").Status;
                         }
-                        catch
+                        catch(Exception ex)
                         {
                             lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
                             lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
@@ -993,20 +1058,20 @@ namespace PiXeL_Apps
                     photoCounter = 0;
                     var fileStream = await foto.OpenAsync(Windows.Storage.FileAccessMode.Read);
                     AsyncStatus renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
-                    //while (renamed.Equals("Started"))
-                    //{
+                    while (renamed.Equals("Started"))
+                    {
                         try
                         {
-                            //renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
+                            renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
                         }
-                        catch
+                        catch(Exception ex)
                         {
                             lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
                             lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
                             btnMaakFoto.IsEnabled = true;
                             goto BREAK;
                         }
-                    //}
+                    }
                     BREAK:
                     try
                     {
@@ -1030,9 +1095,10 @@ namespace PiXeL_Apps
                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
                         btnMaakFoto.IsEnabled = true;
                     }                                              
-                }
+                }*/
             }
         }
+
         /// <summary>
         /// This method handles videos in the "Rijberichten" screen. Videos will be MP4 format and the highest available resolution. 
         /// </summary>
@@ -1040,7 +1106,6 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private async void BtnMaakVideo_Click(object sender, RoutedEventArgs e)
         {
-            btnMaakVideo.IsEnabled = false;
             await GetVideoFolder();
             var videoScherm = new CameraCaptureUI();
             videoScherm.VideoSettings.Format = CameraCaptureUIVideoFormat.Mp4;
@@ -1049,7 +1114,9 @@ namespace PiXeL_Apps
             var video = await videoScherm.CaptureFileAsync(CameraCaptureUIMode.Video); //Video opnemen
             if (video != null)
             {
-                int messageID;
+                Videos.Add(video);
+                countVideo++;
+               /* int messageID;
                 if (OverzichtOpmerkingen.getSelectedIndex() == 0)
                 {
                     messageID = OverzichtOpmerkingen.getSelectedIndex();
@@ -1106,7 +1173,7 @@ namespace PiXeL_Apps
                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
                     }
-                }
+                }*/
             }
         }
     }

@@ -40,7 +40,7 @@ namespace PiXeL_Apps.Common
             //Setting the destination folder
             StorageFolder destinationFolder;
             string carnumber = LocalDB.database.GetAutoId();
-            destinationFolder = await rightDevice.CreateFolderAsync(@"Videos\" + carnumber, CreationCollisionOption.OpenIfExists);
+            destinationFolder = await rightDevice.CreateFolderAsync(carnumber + @"\Videos", CreationCollisionOption.OpenIfExists);
 
             //Reading the files in the source folder
             IReadOnlyList<StorageFile> videos = await sourceFolder.GetFilesAsync();
@@ -48,7 +48,7 @@ namespace PiXeL_Apps.Common
             //Copying the videos
             foreach (StorageFile video in videos)
             {
-                await video.CopyAsync(destinationFolder);
+                await video.CopyAsync(destinationFolder, video.Name, NameCollisionOption.ReplaceExisting);
             }
 
         }
@@ -68,7 +68,7 @@ namespace PiXeL_Apps.Common
 
             //Setting the destination folder
             StorageFolder destinationFolder;
-            destinationFolder = await KnownFolders.VideosLibrary.CreateFolderAsync("Videos", CreationCollisionOption.ReplaceExisting);
+            destinationFolder = await KnownFolders.VideosLibrary.CreateFolderAsync("Videos", CreationCollisionOption.OpenIfExists);
 
             //Reading the files in the source folder
             IReadOnlyList<StorageFile> videos = await sourceFolder.GetFilesAsync();
@@ -76,7 +76,7 @@ namespace PiXeL_Apps.Common
             //Copying the videos
             foreach (StorageFile video in videos)
             {
-                await video.CopyAsync(destinationFolder);
+                await video.CopyAsync(destinationFolder, video.Name, NameCollisionOption.ReplaceExisting);
             }
         }
 
@@ -109,7 +109,7 @@ namespace PiXeL_Apps.Common
             //Setting the destination folder
             StorageFolder destinationFolder;
             string carnumber = LocalDB.database.GetAutoId();
-            destinationFolder = await rightDevice.CreateFolderAsync(@"Photos\" + carnumber, CreationCollisionOption.OpenIfExists);
+            destinationFolder = await rightDevice.CreateFolderAsync(carnumber + @"\Photos", CreationCollisionOption.OpenIfExists);
 
             //Reading the files in the source folder
             IReadOnlyList<StorageFile> photos = await sourceFolder.GetFilesAsync();
@@ -117,7 +117,7 @@ namespace PiXeL_Apps.Common
             //Copying the photos
             foreach (StorageFile photo in photos)
             {
-                await photo.CopyAsync(destinationFolder);
+                await photo.CopyAsync(destinationFolder, photo.Name, NameCollisionOption.ReplaceExisting); 
             }
 
         }
@@ -145,7 +145,7 @@ namespace PiXeL_Apps.Common
             //Copying the photos
             foreach (StorageFile photo in photos)
             {
-                await photo.CopyAsync(destinationFolder);
+                await photo.CopyAsync(destinationFolder, photo.Name, NameCollisionOption.ReplaceExisting);
             }
         }
 
