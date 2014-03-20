@@ -47,30 +47,20 @@
             <TextBlock x:Name="pageTitle" Text="Tabs: Voorschriften" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Global User Interface"/>
         </Grid>
-        
+
         <Grid HorizontalAlignment="Left" Grid.Row="1">
 
             <ScrollViewer ZoomMode="Disabled" Margin="0,70,0,0" VerticalScrollMode="Auto">
-                <StackPanel x:Name="spMetingen" Visibility="Collapsed">
+                <StackPanel x:Name="spMetingen" Visibility="Visible">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="lblOliepeil" Text="Oliepeil:" FontSize="20" Margin="10,0,20,0" VerticalAlignment="Center" />
+                        <TextBlock x:Name="lblOliepeil" Text="Oliepeil:" FontSize="20" Margin="10,-15,20,0" VerticalAlignment="Center" />
                         <Grid>
-                            <Slider x:Name="slOliepeil" Maximum="1.25" FontSize="20" Margin="10,0" TickPlacement="None" ValueChanged="SlOliepeil_ValueChanged" FontFamily="Global User Interface" Minimum="-0.25" StepFrequency="0.063" Width="940" HorizontalAlignment="Left" />
-                            <Line X1="0" Y1="60" Margin="165,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-                            <Line X1="150" Y1="0" Margin="7,0,129,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-                            <Line X1="150" Y1="0" Margin="7,55,129,-59" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-                            <Line X1="0" Y1="60" Margin="318,-4,-29,0" StrokeThickness="2" Stroke="White" />
-                            <Line X1="0" Y1="60" Margin="473,-4,-29,0" StrokeThickness="2" Stroke="White" />
-                            <Line X1="0" Y1="60" Margin="627,-4,-29,0" StrokeThickness="2" Stroke="White" />
-
-                            <Line X1="0" Y1="60" Margin="782,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-                            <Line X1="170" Y1="0" Margin="782,0,-646,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-                            <Line X1="170" Y1="0" Margin="782,56,-646,-60" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-
-                            <Line X1="615" Y1="0" Margin="170,0,-29,-4" StrokeThickness="2" Stroke="White" />
-                            <Line X1="615" Y1="0" Margin="170,54,-29,-58" StrokeThickness="2" Stroke="White" />
-                            <Line X1="0" Y1="60" Margin="0,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
-                            <Line X1="0" Y1="60" Margin="955,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" />
+                            <Slider x:Name="slOliepeil" Maximum="1.25" FontSize="20" Margin="10,0" TickFrequency="0.25" TickPlacement="Outside"  ValueChanged="SlOliepeil_ValueChanged" FontFamily="Global User Interface" Minimum="-0.25" StepFrequency="0.063" Width="940" HorizontalAlignment="Left" />
+                            <TextBlock x:Name="lblMinimum" HorizontalAlignment="Left" Margin="143,36,0,0" TextWrapping="Wrap" Text="Minimum" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                            <TextBlock x:Name="lblTick1" HorizontalAlignment="Left" Margin="315,36,0,0" TextWrapping="Wrap" Text="1/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                            <TextBlock x:Name="lblTick2" HorizontalAlignment="Left" Margin="470,36,0,0" TextWrapping="Wrap" Text="1/2" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                            <TextBlock  x:Name="lblTick3" HorizontalAlignment="Left" Margin="624,36,0,0" TextWrapping="Wrap" Text="3/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                            <TextBlock  x:Name="lblMaximum" HorizontalAlignment="Left" Margin="760,36,0,0" TextWrapping="Wrap" Text="Maximum" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
                         </Grid>
                         <!--<TextBlock x:Name="lblError" Text="" FontSize="20" Margin="641,9,10,10" RenderTransformOrigin="2.233,0.5" Foreground="{StaticResource DefaultTextErrorColor}" />-->
                     </StackPanel>
@@ -104,7 +94,6 @@
             </Grid>
             <Grid x:Name="spVoorschriften" Visibility="Visible" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
                 <ScrollViewer x:Name="srvVoorschriften" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                    <StackPanel x:Name="voorschriftenPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
                 </ScrollViewer>
             </Grid>
             <Grid x:Name="spRijinstructies" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
@@ -123,7 +112,6 @@
         </StackPanel>
         <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
         </StackPanel>
-        
     </Grid>
 </Page>
     

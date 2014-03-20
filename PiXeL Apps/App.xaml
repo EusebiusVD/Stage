@@ -718,6 +718,10 @@
         <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="#BBBBBB" />
         <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="DarkGreen" />
         <SolidColorBrush x:Key="ListViewItemSelectedForegroundThemeBrush" Color="White" />
+        
+        <!--________________________SLIDERKLEUREN AANPASSEN-->
+        <SolidColorBrush x:Key="SliderTickMarkOutsideBackgroundThemeBrush" Color="Green" />
+        <SolidColorBrush x:Key="SliderTickMarkOutsideDisabledForegroundThemeBrush" Color="Green" />
 
     </Application.Resources>
 </Application>

@@ -16,29 +16,6 @@
             <!--<Popup x:Name="invoerPopup" IsOpen="True" Width="960" Height="458">-->
             <!-- <StackPanel Background="{StaticResource DefaultBackgroundColor}" Margin="0,0,0,0"> -->
             <TextBlock x:Name="lblInvoerVereist" Text="Er dienen een paar gegevens ingevoerd te worden" FontSize="30" HorizontalAlignment="Center" Margin="323,66,358,0" Height="42" VerticalAlignment="Top" />
-            <Grid Background="{StaticResource DefaultBackgroundColor}" Margin="237,240,0,0" Height="66" VerticalAlignment="Top" HorizontalAlignment="Left" Width="973">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25*"/>
-                    <RowDefinition Height="167*"/>
-                    <RowDefinition Height="576*"/>
-                </Grid.RowDefinitions>
-                <Slider x:Name="slOliepeil" Maximum="1.25" FontSize="20" Margin="0,-7,23,0" TickPlacement="None" ValueChanged="SlOliepeil_ValueChanged" FontFamily="Global User Interface" Minimum="-0.25" StepFrequency="0.063" Height="39" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2" />
-                <Line X1="0" Y1="60" Margin="165,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="3" />
-                <Line X1="150" Y1="0" Margin="7,0,129,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="3" />
-                <Line X1="150" Y1="0" Margin="7,30.075,129,-59" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="2" Grid.Row="1" />
-                <Line X1="0" Y1="60" Margin="318,-4,-29,0" StrokeThickness="2" Stroke="White" Grid.RowSpan="3" />
-                <Line X1="0" Y1="60" Margin="473,-4,-29,0" StrokeThickness="2" Stroke="White" Grid.RowSpan="3" />
-                <Line X1="0" Y1="60" Margin="627,-4,-29,0" StrokeThickness="2" Stroke="White" Grid.RowSpan="3" />
-
-                <Line X1="0" Y1="60" Margin="782,-4,-29,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="3" />
-                <Line X1="170" Y1="0" Margin="782,0,-646,-4" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="3" />
-                <Line X1="170" Y1="0" Margin="782,31.075,-646,-60" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="2" Grid.Row="1" />
-
-                <Line X1="615" Y1="0" Margin="170,0,-29,-4" StrokeThickness="2" Stroke="White" Grid.RowSpan="3" />
-                <Line X1="615" Y1="0" Margin="170,29.075,-29,-58" StrokeThickness="2" Stroke="White" Grid.RowSpan="2" Grid.Row="1" />
-                <Line X1="0" Y1="60" Margin="0,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="3" />
-                <Line X1="0" Y1="60" Margin="955,-4,-357,0" StrokeThickness="2" Stroke="White" StrokeDashArray="2,4" Grid.RowSpan="3" />
-            </Grid>
             <TextBox x:Name="txtKilometerstand" PlaceholderText="Kilometerstand..." HorizontalAlignment="Left" Width="794" Margin="276,434,0,281" />
 
             <TextBlock x:Name="lblError" TextWrapping="Wrap" Text="Gelieve geldige gegevens in te geven!" FontSize="22" Foreground="#FFFFE74E" Visibility="Collapsed" HorizontalAlignment="Center" FontStyle="Italic" Margin="0,10,0,0"/>
@@ -72,10 +49,16 @@
                     <TextBlock x:Name="lblAnnuleren" Text="Annuleren" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" Grid.ColumnSpan="2" Margin="79,8,117,9" />
                 </Grid>
             </Button>
-            <TextBlock x:Name="lblOilLevel" HorizontalAlignment="Left" Margin="237,211,0,0" TextWrapping="Wrap" Text="Oliepeil:" FontFamily="Segoe UI Symbol" FontSize="20" VerticalAlignment="Top"/>
-            <TextBlock x:Name="lblMin" HorizontalAlignment="Left" Margin="408,290,0,0" TextWrapping="Wrap" Text="Minimum" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top" Height="29"/>
-            <TextBlock x:Name="lblMax" HorizontalAlignment="Left" Margin="1019,290,0,0" TextWrapping="Wrap" Text="Maximum" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top"/>
             <TextBlock x:Name="lblOdo" HorizontalAlignment="Left" Margin="276,409,0,0" TextWrapping="Wrap" Text="Kilometerstand" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top"/>
+            <Grid>
+                <TextBlock x:Name="lblOilLevel" HorizontalAlignment="Left" Margin="237,211,0,0" TextWrapping="Wrap" Text="Oliepeil:" FontFamily="Segoe UI Symbol" FontSize="20" VerticalAlignment="Top"/>
+                <TextBlock x:Name="lblMin" HorizontalAlignment="Left" Margin="359,283,0,0" TextWrapping="Wrap" Text="Minimum" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top" Height="29"/>
+                <TextBlock x:Name="lblMax" HorizontalAlignment="Left" Margin="983,283,0,0" TextWrapping="Wrap" Text="Maximum" FontFamily="Segoe UI Symbol" FontSize="15" VerticalAlignment="Top"/>
+                <Slider x:Name="slOliepeil" Maximum="1.25" FontSize="20" Margin="224,242,172,0" TickFrequency="0.25" TickPlacement="Outside" ValueChanged="SlOliepeil_ValueChanged" FontFamily="Global User Interface" Minimum="-0.25" StepFrequency="0.063" Height="39" VerticalAlignment="Top" />
+                <TextBlock x:Name="lblTick1" HorizontalAlignment="Left" Margin="533,283,0,0" TextWrapping="Wrap" Text="1/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15" RenderTransformOrigin="0.591,0.2"/>
+                <TextBlock x:Name="lblTick2" HorizontalAlignment="Left" Margin="690,283,0,0" TextWrapping="Wrap" Text="1/2" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                <TextBlock x:Name="lblTick3" HorizontalAlignment="Left" Margin="846,283,0,0" TextWrapping="Wrap" Text="3/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+            </Grid>
             <!--</StackPanel>-->
             <!--</Popup>-->
         </Grid>
