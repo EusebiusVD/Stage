@@ -51,7 +51,7 @@
         <Grid HorizontalAlignment="Left" Grid.Row="1">
 
             <ScrollViewer ZoomMode="Disabled" Margin="0,70,0,0" VerticalScrollMode="Auto">
-                <StackPanel x:Name="spMetingen" Visibility="Visible">
+                <StackPanel x:Name="spMetingen" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="lblOliepeil" Text="Oliepeil:" FontSize="20" Margin="10,-15,20,0" VerticalAlignment="Center" />
                         <Grid>
@@ -59,8 +59,8 @@
                             <TextBlock x:Name="lblMinimum" HorizontalAlignment="Left" Margin="143,36,0,0" TextWrapping="Wrap" Text="Minimum" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
                             <TextBlock x:Name="lblTick1" HorizontalAlignment="Left" Margin="315,36,0,0" TextWrapping="Wrap" Text="1/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
                             <TextBlock x:Name="lblTick2" HorizontalAlignment="Left" Margin="470,36,0,0" TextWrapping="Wrap" Text="1/2" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
-                            <TextBlock  x:Name="lblTick3" HorizontalAlignment="Left" Margin="624,36,0,0" TextWrapping="Wrap" Text="3/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
-                            <TextBlock  x:Name="lblMaximum" HorizontalAlignment="Left" Margin="760,36,0,0" TextWrapping="Wrap" Text="Maximum" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                            <TextBlock x:Name="lblTick3" HorizontalAlignment="Left" Margin="624,36,0,0" TextWrapping="Wrap" Text="3/4" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
+                            <TextBlock x:Name="lblMaximum" HorizontalAlignment="Left" Margin="760,36,0,0" TextWrapping="Wrap" Text="Maximum" VerticalAlignment="Top" FontFamily="Segoe UI Symbol" FontSize="15"/>
                         </Grid>
                         <!--<TextBlock x:Name="lblError" Text="" FontSize="20" Margin="641,9,10,10" RenderTransformOrigin="2.233,0.5" Foreground="{StaticResource DefaultTextErrorColor}" />-->
                     </StackPanel>
@@ -68,11 +68,10 @@
                         <Image Height="350" Source="Assets/CarTop.png" Margin="10"/>
                         <TextBlock x:Name="lblVooraanRechts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="50" />
                         <TextBlock x:Name="lblVooraanLichts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,207,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" RenderTransformOrigin="0.552,2.687"  Text="35"/>
-                        <TextBlock x:Name="lblAchteraanRechts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"  Text="40"/>
-                        <TextBlock x:Name="lblAchteraanMidden"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,185,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"  Text="25"/>
+                        <TextBlock x:Name="lblAchteraanRechts" FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="40"/>
+                        <TextBlock x:Name="lblAchteraanMidden" FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,185,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="25"/>
                         <TextBlock x:Name="lblAchteraanLinks"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,235,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"/>
                         <TextBlock x:Name="lblMelding" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Margin="62,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1253"/>
-
                     </Grid>
                     <Button x:Name="btnOpslaan" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="BtnOpslaanMetingen_Click" FontFamily="Global User Interface" Height="60">
                         <Grid>
@@ -94,6 +93,7 @@
             </Grid>
             <Grid x:Name="spVoorschriften" Visibility="Visible" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
                 <ScrollViewer x:Name="srvVoorschriften" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                    <StackPanel x:Name="voorschriftenPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
                 </ScrollViewer>
             </Grid>
             <Grid x:Name="spRijinstructies" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
@@ -113,5 +113,4 @@
         <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
         </StackPanel>
     </Grid>
-</Page>
-    
+</Page>    
