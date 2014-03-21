@@ -44,7 +44,6 @@ namespace PiXeL_Apps
         {
             this.InitializeComponent();
             VulInspectieGridView();
-
             UserControls.Menu ucMenu = new UserControls.Menu(true);
             menuPanel.Children.Add(ucMenu);
 
@@ -105,7 +104,6 @@ namespace PiXeL_Apps
             gvwScripten.Items.Add(await LocalDB.database.GetToegewezenAuto());
             gvwScripten.SelectedIndex = 0;
         }
-
         /// <summary>
         /// Holds the selected index in a static variable when changed by user
         /// </summary>

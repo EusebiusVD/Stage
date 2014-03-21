@@ -18,6 +18,8 @@ namespace PiXeL_Apps.Classes
         public string ObjectCode { get; set; }
         public string Chauffeur { get; set; }
         public DateTime Datum { get; set; }
+        public int Duplicate { get; set; }
+        public int OriginalId { get; set; }
 
         public Comment() { }
         public Comment(int id, string omschrijving)
@@ -25,45 +27,59 @@ namespace PiXeL_Apps.Classes
             Id = id;
             Omschrijving = omschrijving;
         }
-        public Comment(int id, string omschrijving, int objectCodeId, int defectcodeid, int assignedvehicle)
+        public Comment(int id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id)
         {
-            Id = id;
-            Omschrijving = omschrijving;
-            ObjectCodeId = objectCodeId;
-            DefectCodeId = defectcodeid;
-            Vehicle_Id = assignedvehicle;
+            this.Id = id;
+            this.Omschrijving = Omschrijving;
+            this.ObjectCodeId = ObjectCodeId;
+            this.DefectCodeId = DefectCodeId;
+            this.Vehicle_Id = Vehicle_Id;
         }
-        public Comment(int id, string omschrijving, int objectCodeId, int defectcodeid, int assignedvehicle, string defectcode, string objectcode)
+        public Comment(int Id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id, string DefectCode, string ObjectCode)
         {
-            Id = id;
-            Omschrijving = omschrijving;
-            ObjectCodeId = objectCodeId;
-            DefectCodeId = defectcodeid;
-            Vehicle_Id = assignedvehicle;
-            DefectCode = defectcode;
-            ObjectCode = objectcode;
+            this.Id = Id;
+            this.Omschrijving = Omschrijving;
+            this.ObjectCodeId = ObjectCodeId;
+            this.DefectCodeId = DefectCodeId;
+            this.Vehicle_Id = Vehicle_Id;
+            this.DefectCode = DefectCode;
+            this.ObjectCode = ObjectCode;
         }
-        public Comment(int id, string omschrijving, int objectCodeId, int defectcodeid, int assignedvehicle, string defectcode, string objectcode, string chauffeur, DateTime datum)
+        public Comment(int Id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id, string DefectCode, string ObjectCode, string Chauffeur, DateTime Datum)
         {
-            Id = id;
-            Omschrijving = omschrijving;
-            ObjectCodeId = objectCodeId;
-            DefectCodeId = defectcodeid;
-            Vehicle_Id = assignedvehicle;
-            DefectCode = defectcode;
-            ObjectCode = objectcode;
-            Chauffeur = chauffeur;
-            Datum = datum;
+            this.Id = Id;
+            this.Omschrijving = Omschrijving;
+            this.ObjectCodeId = ObjectCodeId;
+            this.DefectCodeId = DefectCodeId;
+            this.Vehicle_Id = Vehicle_Id;
+            this.DefectCode = DefectCode;
+            this.ObjectCode = ObjectCode;
+            this.Chauffeur = Chauffeur;
+            this.Datum = Datum;
         }
-        public Comment(int id, string omschrijving, int objectCodeId, int defectcodeid, int assignedvehicle, string chauffeur, DateTime datum)
+        public Comment(int Id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id, string Chauffeur, DateTime Datum)
         {
-            Id = id;
-            Omschrijving = omschrijving;
-            ObjectCodeId = objectCodeId;
-            DefectCodeId = defectcodeid;
-            Vehicle_Id = assignedvehicle;
-            Chauffeur = chauffeur;
-            Datum = datum;
+            this.Id = Id;
+            this.Omschrijving = Omschrijving;
+            this.ObjectCodeId = ObjectCodeId;
+            this.DefectCodeId = DefectCodeId;
+            this.Vehicle_Id = Vehicle_Id;
+            this.Chauffeur = Chauffeur;
+            this.Datum = Datum;
+        }
+        public Comment(int Id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id, string DefectCode, string ObjectCode, string Chauffeur, DateTime Datum, int Duplicate, int OriginalId)
+        {
+            this.Id = Id;
+            this.Omschrijving = Omschrijving;
+            this.ObjectCodeId = ObjectCodeId;
+            this.DefectCodeId = DefectCodeId;
+            this.Vehicle_Id = Vehicle_Id;
+            this.DefectCode = DefectCode;
+            this.ObjectCode = ObjectCode;
+            this.Chauffeur = Chauffeur;
+            this.Datum = Datum;
+            this.Duplicate = Duplicate;
+            this.OriginalId = OriginalId;
         }
 
         public COMMENT GetCOMMENT()
@@ -78,7 +94,9 @@ namespace PiXeL_Apps.Classes
                 Vehicle_Id = this.Vehicle_Id,
                 Omschrijving = this.Omschrijving,
                 Chauffeur = this.Chauffeur,
-                Datum = this.Datum
+                Datum = this.Datum,
+                Duplicate = this.Duplicate,
+                OriginalId = this.OriginalId
             };
         }
 

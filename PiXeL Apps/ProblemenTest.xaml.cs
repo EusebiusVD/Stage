@@ -157,27 +157,28 @@ namespace PiXeL_Apps
         {
             if (opmerking != null)
             {
-                IEnumerable<String> objCode = from objectcode in objectCodes
-                                              where objectcode.Id == opmerking.ObjectCodeId
-                                              select objectcode.Code;
+                IEnumerable<ObjectCodes> objCode = from objectcode in objectCodes
+                                              where objectcode.Code.Equals(opmerking.ObjectCode)
+                                              select objectcode;
                 if (objCode.Count() > 0)
                 {
-                    txtZoekObjectCode.Text = objCode.First();
-                    zoekCode(false, objCode.First());
+                    txtZoekObjectCode.Text = objCode.First().Code;
+                    zoekCode(false, objCode.First().Code);
                 }
 
-                IEnumerable<String> defCode = from defectcode in defectCodes
-                                              where defectcode.Id == opmerking.DefectCodeId
-                                              select defectcode.Code;
+                IEnumerable<DefectCodes> defCode = from defectcode in defectCodes
+                                              where defectcode.Code.Equals(opmerking.DefectCode)
+                                              select defectcode;
                 if (defCode.Count() > 0)
                 {
-                    txtZoekDefectCode.Text = defCode.First();
-                    zoekCode(true, defCode.First());
+                    txtZoekDefectCode.Text = defCode.First().Code;
+                    zoekCode(true, defCode.First().Code);
                 }
 
                 txtProblem.Text = opmerking.Omschrijving;
             }
         }
+
 
         #endregion
 
@@ -774,8 +775,9 @@ namespace PiXeL_Apps
             }
             else
             {
-                foreach (Comment dubbele in dubbeleOpmerkingenlijst)
-                {
+                //foreach (Comment dubbele in dubbeleOpmerkingenlijst)
+                //{
+                    Comment dubbele = dubbeleOpmerkingenlijst.Last<Comment>();
                     string bericht;
                     if (dubbele.Chauffeur == nieuwCommentaar.Chauffeur)
                         bericht = String.Format("U heeft eerder al een rijbericht aangemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {0}, Defectcode: {1}\nOmschrijving: {2}.",
@@ -787,205 +789,29 @@ namespace PiXeL_Apps
                     //Melding weergeven indien er dubbele commentaren gevonden zijn
                     MessageDialog okAnnuleer = new MessageDialog(bericht, "Dubbele rijberichten");
                     okAnnuleer.Commands.Add(new UICommand("Samenvoegen"));
-                    okAnnuleer.Commands.Add(new UICommand("Doorgaan met bewerken"));
-                    okAnnuleer.Commands.Add(new UICommand("Annuleren"));
+                    okAnnuleer.Commands.Add(new UICommand("Opslaan als nieuw rijbericht"));
+                    //okAnnuleer.Commands.Add(new UICommand("Annuleren"));
                     var resultaat = await okAnnuleer.ShowAsync();
                     if (resultaat.Label.Equals("Samenvoegen"))
                     {
-                        dubbele.Omschrijving += String.Format("{0}Toevoeging chauffeur {1}: {2}.", Environment.NewLine, nieuwCommentaar.Chauffeur, nieuwCommentaar.Omschrijving);
-                        await CommentaarAanpassen(dubbele);
+                        nieuwCommentaar.Duplicate += 1;
+                        nieuwCommentaar.OriginalId = dubbele.Id;
+                        await CommentaarToevoegen(nieuwCommentaar);
+                        //dubbele.Omschrijving += String.Format("{0}Toevoeging chauffeur {1}: {2}.", Environment.NewLine, nieuwCommentaar.Chauffeur, nieuwCommentaar.Omschrijving);
+                        //await CommentaarAanpassen(dubbele);
                     }
-                    else if (resultaat.Label.Equals("Opmerking aanmaken annuleren"))
-                        doorgaanMetBewerken = true;
-                }
+                    else if (resultaat.Label.Equals("Opslaan als nieuw rijbericht"))
+                    {
+                        nieuwCommentaar.Duplicate = 0;
+                        nieuwCommentaar.OriginalId = 0;
+                        await CommentaarToevoegen(nieuwCommentaar);
+                    }
+                //}
             }
             if (!doorgaanMetBewerken)
                 this.Frame.Navigate(typeof(OverzichtOpmerkingen));
         }
 
-        #endregion
-
-        #region Toegangsmethodes
-
-        /// <summary>
-        /// Via deze methode kan de code van een objectcode opgehaald worden vanaf een andere pagina in de applicatie
-        /// </summary>
-        /// <param name="objectId">objectId is van het type int en bevat het Id van een objectcode</param>
-        /// <returns></returns>
-        /// <summary>
-        /// Via deze methode kan de code van een objectcode opgehaald worden vanaf een andere pagina in de applicatie
-        /// </summary>
-        /// <param name="objectId">objectId is van het type int en bevat het Id van een objectcode</param>
-        /// <returns></returns>
-        public static ObjectCodes GetObjectCode(string objectCode)
-        {
-            IEnumerable<ObjectCodes> objCode = from objectcode in objectCodes
-                                               where objectcode.Code == objectCode
-                                               select objectcode;
-            if (objCode.Count() > 0)
-                return objCode.First();
-            return null;
-        }
-
-        /// <summary>
-        /// Via deze methode kan de code van een defectcode opgehaald worden vanaf een andere pagina in de applicatie
-        /// </summary>
-        /// <param name="defectId">defectId is van het type int en bevat het Id van een defectId </param>
-        /// <returns></returns>
-        public static DefectCodes GetDefectCode(string defectCode)
-        {
-            IEnumerable<DefectCodes> defCode = from defectcode in defectCodes
-                                               where defectcode.Code == defectCode
-                                               select defectcode;
-            if (defCode.Count() > 0)
-                return defCode.First();
-            return null;
-        }
-        /// <summary>
-        /// De lijst van objectCodes wordt opgevuld met de lijst van ObjectoCodes die aan deze methode werd meegegeven
-        /// </summary>
-        /// <param name="inTeVoeren"></param>
-        public static void SetObjectCodes(List<ObjectCodes> inTeVoeren)
-        {
-            objectCodes = inTeVoeren;
-        }
-        /// <summary>
-        /// De lijst van defectcodes wordt opgevuld met de lijst van DefectCodes die aan deze methode werd meegegeven
-        /// Ook wordt de methode HaalCodeOmschrijvingenOp() aangeroepen
-        /// </summary>
-        /// <param name="inTeVoeren"></param>
-        public static async void SetDefectCodes(List<DefectCodes> inTeVoeren)
-        {
-            defectCodes = inTeVoeren;
-            await HaalCodeOmschrijvingenOp();
-        }
-
-        /// <summary>
-        /// Via deze methode kan er gecontroleerd worden of een opmerking al eens werd ingegeven door dezelfde/andere chauffeur
-        /// </summary>
-        /// <param name="opmerkingInvoer">De nieuwe opmerking van het type Comment</param>
-        /// <returns>Een boolean</returns>
-
-
-        #endregion
-
-        #region NavigationHelper registration
-
-        /// <summary>
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
-
-        /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-        }
-
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// In deze methode worden de tekstvelden opgevuld met waarden uit de gekregen parameter 
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-            if (e.Parameter != null)
-            {
-                opmerking = e.Parameter as Comment;
-                if (opmerking != null)
-                    updateComment = true;
-            }
-            else
-            {
-                updateComment = false;
-            }
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Returns true if the file is moved, false if it isn't or an error has occured. With this bool we change the message 
-        /// displayed in "lblError".
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="folder"></param>
-        /// <returns></returns>
-        private async Task<bool> movePhotoVideo(StorageFile file, StorageFolder folder)
-        {
-            await file.MoveAsync(folder);
-            string status = file.MoveAsync(folder).Status.ToString();
-            while (status.Equals("Started"))
-            {
-                try
-                {
-                    status = file.MoveAsync(folder).Status.ToString();
-                }
-                catch(Exception e)
-                {
-                    goto BREAK;
-                }
-            }
-            BREAK:
-            if (status.Equals("Completed") || status.Equals("Error"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }            
-        }
-        /// <summary>
-        /// Checks if the folder "Photos" already exists in the AppData folder, and if it doesn't exsists creates it.
-        /// </summary>
-        /// <returns></returns>
-        private async Task GetphotoFolder()
-        {
-            try
-            {
-                photoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
-            }
-            catch
-            { /*Can't create folder here because await is not allowed in the catch clause.*/ }
-
-            if (photoFolder == null) //Dus als doelfolder == null -> hier aanmaken
-                photoFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
-        }
-        /// <summary>
-        /// Checks if the folder "Videos" already exists in the AppData folder, and if it doesn't exsists creates it.
-        /// </summary>
-        /// <returns></returns>
-        private async Task GetVideoFolder()
-        {
-            try
-            {
-                videoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
-            }
-            catch
-            { /*Can't create folder here because await is not allowed in the catch clause.*/ }
-
-            if (videoFolder == null) //Dus als doelfolder == null -> hier aanmaken
-                videoFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
-        }
         /// <summary>
         /// This method handles photo's in the "Rijberichten" screen. Photo's will be PNG format and the highest available resolution.
         /// </summary>
@@ -993,8 +819,6 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private async void BtnMaakFoto_Click(object sender, RoutedEventArgs e)
         {
-            //btnMaakFoto.IsEnabled = false;
-            await GetphotoFolder();
             CameraCaptureUI fotoScherm = new CameraCaptureUI();
             fotoScherm.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Png; //.png is veel lichter
             fotoScherm.PhotoSettings.MaxResolution = CameraCaptureUIMaxPhotoResolution.HighestAvailable;
@@ -1003,7 +827,6 @@ namespace PiXeL_Apps
             var foto = await fotoScherm.CaptureFileAsync(CameraCaptureUIMode.Photo); //Enkel een foto maken
             if (foto != null)
             {
-
                 Photos.Add(foto);
                 countPhoto++;
                 /*int messageID;
@@ -1106,7 +929,6 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private async void BtnMaakVideo_Click(object sender, RoutedEventArgs e)
         {
-            await GetVideoFolder();
             var videoScherm = new CameraCaptureUI();
             videoScherm.VideoSettings.Format = CameraCaptureUIVideoFormat.Mp4;
             videoScherm.VideoSettings.MaxResolution = CameraCaptureUIMaxVideoResolution.HighestAvailable;
@@ -1116,65 +938,253 @@ namespace PiXeL_Apps
             {
                 Videos.Add(video);
                 countVideo++;
-               /* int messageID;
-                if (OverzichtOpmerkingen.getSelectedIndex() == 0)
-                {
-                    messageID = OverzichtOpmerkingen.getSelectedIndex();
-                }
-                else
-                {
-                    messageID = await LocalDB.database.getAantalCommentaren();
-                }
-                User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
-                CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
-                // if-structuur werkt niet, als er te snel foto's genomen worden doet hij het nog altijd
-                if (videoFolder.GetFileAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4").Equals(true))
-                {
-                    await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4");
-                    videoCounter++;
-                    var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
-                    while (renamed.Equals("Started"))
-                    {
-                        renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
-                    }
-                    btnMaakVideo.IsEnabled = true;
-                    bool completed = await movePhotoVideo(video, videoFolder);
-                    if (completed)
-                    {
-                        lblError.Foreground = new SolidColorBrush(Colors.White);
-                        lblError.Text = "De video is succesvol opgeslagen!";
-                    }
-                    else
-                    {
-                        lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                        lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
-                    }
-                }
-                else
-                {
-                    await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4");
-                    videoCounter = 0;
-                    var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
-                    while (renamed.Equals("Started"))
-                    {
-                        renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
-                    }
-                    btnMaakVideo.IsEnabled = true;
-                    bool completed = await movePhotoVideo(video, videoFolder);
-                    if (completed)
-                    {
-                        lblError.Foreground = new SolidColorBrush(Colors.White);
-                        lblError.Text = "De video is succesvol opgeslagen!";
-                    }
-                    else
-                    {
-                        lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                        lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
-                    }
-                }*/
+                /* int messageID;
+                 if (OverzichtOpmerkingen.getSelectedIndex() == 0)
+                 {
+                     messageID = OverzichtOpmerkingen.getSelectedIndex();
+                 }
+                 else
+                 {
+                     messageID = await LocalDB.database.getAantalCommentaren();
+                 }
+                 User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
+                 CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
+                 // if-structuur werkt niet, als er te snel foto's genomen worden doet hij het nog altijd
+                 if (videoFolder.GetFileAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4").Equals(true))
+                 {
+                     await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4");
+                     videoCounter++;
+                     var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                     AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
+                     while (renamed.Equals("Started"))
+                     {
+                         renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
+                     }
+                     btnMaakVideo.IsEnabled = true;
+                     bool completed = await movePhotoVideo(video, videoFolder);
+                     if (completed)
+                     {
+                         lblError.Foreground = new SolidColorBrush(Colors.White);
+                         lblError.Text = "De video is succesvol opgeslagen!";
+                     }
+                     else
+                     {
+                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
+                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
+                     }
+                 }
+                 else
+                 {
+                     await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4");
+                     videoCounter = 0;
+                     var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                     AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
+                     while (renamed.Equals("Started"))
+                     {
+                         renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
+                     }
+                     btnMaakVideo.IsEnabled = true;
+                     bool completed = await movePhotoVideo(video, videoFolder);
+                     if (completed)
+                     {
+                         lblError.Foreground = new SolidColorBrush(Colors.White);
+                         lblError.Text = "De video is succesvol opgeslagen!";
+                     }
+                     else
+                     {
+                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
+                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
+                     }
+                 }*/
             }
+        }
+
+        #endregion
+
+        #region Toegangsmethodes
+
+        /// <summary>
+        /// Via deze methode kan de code van een objectcode opgehaald worden vanaf een andere pagina in de applicatie
+        /// </summary>
+        /// <param name="objectId">objectId is van het type int en bevat het Id van een objectcode</param>
+        /// <returns></returns>
+        /// <summary>
+        /// Via deze methode kan de code van een objectcode opgehaald worden vanaf een andere pagina in de applicatie
+        /// </summary>
+        /// <param name="objectId">objectId is van het type int en bevat het Id van een objectcode</param>
+        /// <returns></returns>
+        public static ObjectCodes GetObjectCode(string objectCode)
+        {
+            IEnumerable<ObjectCodes> objCode = from objectcode in objectCodes
+                                               where objectcode.Code == objectCode
+                                               select objectcode;
+            if (objCode.Count() > 0)
+                return objCode.First();
+            return null;
+        }
+
+        /// <summary>
+        /// Via deze methode kan de code van een defectcode opgehaald worden vanaf een andere pagina in de applicatie
+        /// </summary>
+        /// <param name="defectId">defectId is van het type int en bevat het Id van een defectId </param>
+        /// <returns></returns>
+        public static DefectCodes GetDefectCode(string defectCode)
+        {
+            IEnumerable<DefectCodes> defCode = from defectcode in defectCodes
+                                               where defectcode.Code == defectCode
+                                               select defectcode;
+            if (defCode.Count() > 0)
+                return defCode.First();
+            return null;
+        }
+        /// <summary>
+        /// De lijst van objectCodes wordt opgevuld met de lijst van ObjectoCodes die aan deze methode werd meegegeven
+        /// </summary>
+        /// <param name="inTeVoeren"></param>
+        public static void SetObjectCodes(List<ObjectCodes> inTeVoeren)
+        {
+            objectCodes = inTeVoeren;
+        }
+        /// <summary>
+        /// De lijst van defectcodes wordt opgevuld met de lijst van DefectCodes die aan deze methode werd meegegeven
+        /// Ook wordt de methode HaalCodeOmschrijvingenOp() aangeroepen
+        /// </summary>
+        /// <param name="inTeVoeren"></param>
+        public static async void SetDefectCodes(List<DefectCodes> inTeVoeren)
+        {
+            defectCodes = inTeVoeren;
+            await HaalCodeOmschrijvingenOp();
+        }
+
+        /// <summary>
+        /// Via deze methode kan er gecontroleerd worden of een opmerking al eens werd ingegeven door dezelfde/andere chauffeur
+        /// </summary>
+        /// <param name="opmerkingInvoer">De nieuwe opmerking van het type Comment</param>
+        /// <returns>Een boolean</returns>
+
+
+        #endregion
+
+        #region NavigationHelper registration
+
+        /// <summary>
+        /// This can be changed to a strongly typed view model.
+        /// </summary>
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
+
+        /// <summary>
+        /// NavigationHelper is used on each page to aid in navigation and 
+        /// process lifetime management
+        /// </summary>
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
+        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+        }
+
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// In deze methode worden de tekstvelden opgevuld met waarden uit de gekregen parameter 
+        /// </summary>
+        /// <param name="e"></param>
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            await GetphotoFolder();
+            await GetVideoFolder();
+            navigationHelper.OnNavigatedTo(e);
+            if (e.Parameter != null)
+            {
+                opmerking = e.Parameter as Comment;
+                if (opmerking != null)
+                    updateComment = true;
+            }
+            else
+            {
+                updateComment = false;
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Returns true if the file is moved, false if it isn't or an error has occured. With this bool we change the message 
+        /// displayed in "lblError".
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="folder"></param>
+        /// <returns></returns>
+        private async Task<bool> movePhotoVideo(StorageFile file, StorageFolder folder)
+        {
+            await file.MoveAsync(folder);
+            string status = file.MoveAsync(folder).Status.ToString();
+            while (status.Equals("Started"))
+            {
+                try
+                {
+                    status = file.MoveAsync(folder).Status.ToString();
+                }
+                catch(Exception e)
+                {
+                    goto BREAK;
+                }
+            }
+            BREAK:
+            if (status.Equals("Completed") || status.Equals("Error"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }            
+        }
+
+        /// <summary>
+        /// Checks if the folder "Photos" already exists in the AppData folder, and if it doesn't exsists creates it.
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetphotoFolder()
+        {
+            try
+            {
+                photoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
+            }
+            catch
+            { /*Can't create folder here because await is not allowed in the catch clause.*/ }
+
+            if (photoFolder == null) //Dus als doelfolder == null -> hier aanmaken
+                photoFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
+        }
+
+        /// <summary>
+        /// Checks if the folder "Videos" already exists in the AppData folder, and if it doesn't exsists creates it.
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetVideoFolder()
+        {
+            try
+            {
+                videoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
+            }
+            catch
+            { /*Can't create folder here because await is not allowed in the catch clause.*/ }
+
+            if (videoFolder == null) //Dus als doelfolder == null -> hier aanmaken
+                videoFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
         }
     }
 }

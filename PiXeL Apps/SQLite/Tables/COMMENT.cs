@@ -20,5 +20,7 @@ namespace PiXeL_Apps.SQLite.Tables
         public int Vehicle_Id { get; set; }
         public String Chauffeur { get; set; }
         public DateTime Datum { get; set; }
+        public int Duplicate { get; set; }
+        public int OriginalId { get; set; }
     }
 }

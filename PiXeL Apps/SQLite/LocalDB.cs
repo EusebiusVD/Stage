@@ -1353,7 +1353,9 @@ namespace PiXeL_Apps
                     Omschrijving = commentaar.Omschrijving,
                     Vehicle_Id = completeAuto.Id,
                     Chauffeur = commentaar.Chauffeur,
-                    Datum = commentaar.Datum
+                    Datum = commentaar.Datum,
+                    Duplicate = commentaar.Duplicate,
+                    OriginalId = commentaar.OriginalId
                 };
                 await db.InsertAsync(nieuwCommentaar);
                 Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.DefectCode, nieuwCommentaar.ObjectCode, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum);

@@ -158,35 +158,51 @@ namespace PiXeL_Apps.Common
             //setting the source folders
             StorageFolder photoFolder;
             StorageFolder videoFolder;
-
-            photoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
-            videoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
-
-            //Reading the files in the source folders
-            IReadOnlyList<StorageFile> photos = await photoFolder.GetFilesAsync();
-            IReadOnlyList<StorageFile> videos = await videoFolder.GetFilesAsync();
-
-            //Deleting the old photos
-            foreach (StorageFile photo in photos)
+            try
             {
-                DateTime now = DateTime.Now.AddDays(-1);
-                if (photo.DateCreated < now)
+                photoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Photos");
+                if (photoFolder != null)
                 {
-                    await photo.DeleteAsync();
+                    //Reading the files in the source folders
+                    IReadOnlyList<StorageFile> photos = await photoFolder.GetFilesAsync();
+                    //Deleting the old photos
+                    foreach (StorageFile photo in photos)
+                    {
+                        DateTime now = DateTime.Now.AddDays(-1);
+                        if (photo.DateCreated < now)
+                        {
+                            await photo.DeleteAsync();
+                        }
+                    }
                 }
             }
-
-            //Deleting the old videos
-            foreach (StorageFile video in videos)
+            catch (Exception e)
             {
-
-                if (video.DateCreated < DateTime.Now.AddHours(-24))
-                {
-                    await video.DeleteAsync();
-                }
+                Logging.paLogging.log.Warn(e.Message);
             }
 
+            try
+            {
+                videoFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(LocalDB.database.GetAutoId() + @"\Videos");
+                if (videoFolder != null)
+                {
+                    //Reading the files in the source folders
+                    IReadOnlyList<StorageFile> videos = await videoFolder.GetFilesAsync();
+                    //Deleting the old videos
+                    foreach (StorageFile video in videos)
+                    {
+
+                        if (video.DateCreated < DateTime.Now.AddHours(-24))
+                        {
+                            await video.DeleteAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logging.paLogging.log.Warn(e.Message);
+            }
         }
-
     }
 }
