@@ -106,7 +106,7 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
+        private async void BtnSynchroniseren_Click(object sender, RoutedEventArgs e)
         {
             btnSynchroniseren.IsEnabled = false;
             prSynchroniseren.IsActive = true;
@@ -182,8 +182,6 @@ namespace PiXeL_Apps
             btnSynchroniseren.IsEnabled = true;
             prSynchroniseren.IsActive = false;
         }
-
-        
     }
 
 }

@@ -37,12 +37,12 @@ namespace PiXeL_Apps.Common
 
             if (intTolerantieAankomend == null || int.TryParse(intTolerantieAankomend.ToString(), out tolerantieAankomend))
             {
-                tolerantieAankomend = 4000;
+                tolerantieAankomend = 200;
             }
 
             if (intTolerantieDringend == null || int.TryParse(intTolerantieDringend.ToString(), out tolerantieDringend))
             {
-                tolerantieDringend = 500;
+                tolerantieDringend = 50;
             }
         }
 

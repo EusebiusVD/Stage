@@ -10,7 +10,7 @@ namespace PiXeL_Apps.SQLite.Tables
     [Table("DSS_COMMENT")]
     public class COMMENT
     {
-        [PrimaryKey, Unique]
+        [PrimaryKey, Unique, AutoIncrement]
         public int Id { get; set; }
         public String Omschrijving { get; set; }
         public int ObjectCodeId { get; set; }

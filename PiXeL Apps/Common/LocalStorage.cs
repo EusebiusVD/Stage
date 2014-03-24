@@ -84,9 +84,14 @@ namespace PiXeL_Apps.Common
             }
             catch (Exception ex)
             {
-                paLogging.log.Error(String.Format("Gegevens voor {0} konden niet opgeslaan worden.\n{1}", sleutel, ex.Message));
+                paLogging.log.Error(String.Format("Gegevens voor {0} konden niet opgehaald worden.\n{1}", sleutel, ex.Message));
             }
             return waarde;
+        }
+
+        public bool checkKey(string key)
+        {
+            return localSettings.Containers.ContainsKey(key);
         }
     }
 }

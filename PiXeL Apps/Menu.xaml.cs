@@ -160,5 +160,12 @@ namespace PiXeL_Apps.UserControls
         }
 
         #endregion
+
+        private void btnOilsampling_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(Oilsampling));
+        }
+
+
     }
 }

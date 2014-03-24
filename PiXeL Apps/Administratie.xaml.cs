@@ -229,9 +229,32 @@ namespace PiXeL_Apps
 
                     lblFeedback.Foreground = new SolidColorBrush(Colors.White);
                     lblFeedback.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    var gebruikersTest = await LocalDB.database.ControleerGebruikers();
+                    if (gebruikersTest)
+                    {
+                        //File exists
+                        btnSynchroniseren.IsEnabled = false;
+                        prSynchroniseren.IsActive = true;
+                        lblFeedback.Foreground = new SolidColorBrush(Colors.White);
+                        lblFeedback.Text += "\nEven geduld. De gegevens worden op dit moment binnengehaald...";
+                        lblFeedback.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+                        await LocalDB.database.CreateDatabase(false);
+
+                        btnSynchroniseren.IsEnabled = true;
+                        prSynchroniseren.IsActive = false;
+                        lblFeedback.Foreground = new SolidColorBrush(Colors.White);
+                        lblFeedback.Text = "Gegevens zijn met succes binnengehaald!";
+                    }
+                    else
+                    {
+                        lblFeedback.Foreground = new SolidColorBrush(Colors.Yellow);
+                        lblFeedback.Text = "Er is iets fout gelopen. Controleer of u met het juiste netwerk verbonden bent";
+                        prSynchroniseren.IsActive = false;
+                    }
                     btnWijzigAuto.IsEnabled = true;
                     prSynchroniseren.IsActive = false;
-                    BtnSynchroniseren_Click(sender, e);
+                    //BtnSynchroniseren_Click(sender, e);
                 }
             }
             catch (NullReferenceException)
@@ -257,7 +280,7 @@ namespace PiXeL_Apps
                 btnSynchroniseren.IsEnabled = false;
                 prSynchroniseren.IsActive = true;
                 lblFeedback.Foreground = new SolidColorBrush(Colors.White);
-                lblFeedback.Text += "\nEven geduld. De gegevens worden op dit moment binnengehaald...";
+                lblFeedback.Text = "Even geduld. De gegevens worden op dit moment binnengehaald...";
                 lblFeedback.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
                 await LocalDB.database.CreateDatabase(true);

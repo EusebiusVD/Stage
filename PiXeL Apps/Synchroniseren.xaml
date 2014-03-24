@@ -51,7 +51,7 @@
                       OffContent="USB" OnContent="Internet" Style="{StaticResource PAToggleSwitchTemplate}" />
         <TextBlock x:Name="lblUSBInternet" HorizontalAlignment="Left" Margin="233,184,0,0" Grid.Row="1" TextWrapping="Wrap" Text="(USB / Internet)" VerticalAlignment="Top" FontSize="25" FontStyle="Italic"/>
 
-        <Button x:Name="btnSynchroniseren" Margin="532,175,0,362" Grid.Row="1"  Width="280" Height="91" Click="BtnOpslaan_Click" FontFamily="Global User Interface">
+        <Button x:Name="btnSynchroniseren" Margin="532,175,0,362" Grid.Row="1"  Width="280" Height="91" Click="BtnSynchroniseren_Click" FontFamily="Global User Interface">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="75"/>

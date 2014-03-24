@@ -124,6 +124,7 @@
     <Compile Include="Classes\Fuel.cs" />
     <Compile Include="Classes\Brand.cs" />
     <Compile Include="Classes\DefectCodes.cs" />
+    <Compile Include="Classes\Oilsample.cs" />
     <Compile Include="Classes\Script.cs" />
     <Compile Include="Classes\Inspectie.cs" />
     <Compile Include="Classes\Transmission.cs" />
@@ -149,8 +150,14 @@
     </Compile>
     <Compile Include="Logging\paLogging.cs" />
     <Compile Include="Logging\paLogWriter.cs" />
+    <Compile Include="Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OilOdoInput.xaml.cs">
       <DependentUpon>OilOdoInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Oilsampling.xaml.cs">
+      <DependentUpon>Oilsampling.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProblemenTest.xaml.cs">
       <DependentUpon>ProblemenTest.xaml</DependentUpon>
@@ -161,6 +168,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SQLite\LocalDB.cs" />
+    <Compile Include="SQLite\Tables\OILSAMPLE.cs" />
     <Compile Include="Synchroniseren.xaml.cs">
       <DependentUpon>Synchroniseren.xaml</DependentUpon>
     </Compile>
@@ -192,9 +200,6 @@
     </Compile>
     <Compile Include="Tabs.xaml.cs">
       <DependentUpon>Tabs.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Menu.xaml.cs">
-      <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\VisueleAuto.xaml.cs">
       <DependentUpon>VisueleAuto.xaml</DependentUpon>
@@ -311,9 +316,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="OilOdoInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Oilsampling.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Synchroniseren.xaml">
       <SubType>Designer</SubType>
@@ -336,10 +349,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tabs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Width="350" Height="1920">
 
-    <StackPanel x:Name="menu" Orientation="Vertical"  Background="#FF277685" HorizontalAlignment="Left" Margin="-303,0,0,0">
+    <StackPanel x:Name="menu" Orientation="Vertical"  Background="#3F3F3F" HorizontalAlignment="Left" Margin="-303,0,0,0">
         <StackPanel.RenderTransform>
             <CompositeTransform></CompositeTransform>
         </StackPanel.RenderTransform>
@@ -52,6 +52,18 @@
                 <TextBlock x:Name="lblOpmerkingen" Text="Rijberichten" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
             </Grid>
         </Button>
+
+        <Button x:Name="btnOilsampling" Height="50" Width="289" Click="btnOilsampling_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="180"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lblOilsamplingIcon" Text="&#x2941;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
+                <TextBlock x:Name="lblOilsampling" Text="Oliestaalname" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+            </Grid>
+        </Button>
+
         <TextBlock x:Name="lblGegevensverwerking" Margin="37,50,26,0" Height="30" Width="240"
     		Text="Gegevensverwerking"  FontSize="24" Foreground="White" />
         <Line x:Name="lineGegevensverwerking" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />

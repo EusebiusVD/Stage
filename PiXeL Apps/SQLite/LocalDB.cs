@@ -171,7 +171,10 @@ namespace PiXeL_Apps
                 await db.CreateTableAsync<CATEGORY>(); //Tabel CATEGORIE aanmaken
 
                 await db.DropTableAsync<OBJECT_CODES>(); //Tabel OBJECT_CODES verwijderen
-                await db.CreateTableAsync<OBJECT_CODES>(); //TAbel OBJECT_CODES aanmaken
+                await db.CreateTableAsync<OBJECT_CODES>(); //Tabel OBJECT_CODES aanmaken
+
+                await db.DropTableAsync<OILSAMPLE>(); //Tabel OILSAMPLE verwijderen
+                await db.CreateTableAsync<OILSAMPLE>(); //Tabel OILSAMPLE aanmaken
 
                 #endregion
 
@@ -424,7 +427,7 @@ namespace PiXeL_Apps
 
                 #region Inspecties aanmaken & toevoegen
 
-                if (toegewezenAuto)
+                if (!toegewezenAuto)
                 {
                     try
                     {
@@ -1677,9 +1680,46 @@ namespace PiXeL_Apps
 
         public async Task<int> getAantalCommentaren()
         {
-            return  aantalCommentaren;
+            return aantalCommentaren;
+        }
+        #endregion
+
+
+        /// <summary>
+        /// Adding an oilsample
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> AddOilsample(Oilsample oilsample)
+        {
+            try
+            {
+                OILSAMPLE newOilsample = new OILSAMPLE
+                {
+                    Username = oilsample.Username,
+                    Vehicle_Id = oilsample.Vehicle_Id,
+                    Date = oilsample.Date,
+                    Odo = oilsample.Odo,
+                    Oillevel = oilsample.Oillevel,
+                    Oiltaken = oilsample.Oiltaken,
+                    Oilfilled = oilsample.Oilfilled,
+                    Reason = oilsample.Reason,
+                    Remarks = oilsample.Remarks
+                };
+                db.InsertAsync(newOilsample);
+                
+                return true;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                paLogging.log.Error(String.Format("SQLite fout bij het wegschrijven van oilsample {0} ({1} - {2}: {3}", oilsample.Id, oilsample.Username, oilsample.Vehicle_Id, sqlEx.Message));
+                return false;
+            }
+            catch (Exception e)
+            {
+                paLogging.log.Error(String.Format("Onbekende fout bij het wegschrijven van oilsample {0} ({1} - {2}: {3}", oilsample.Id, oilsample.Username, oilsample.Vehicle_Id, e.Message));
+                return false;
+            }
         }
 
-        #endregion
     }
 }
