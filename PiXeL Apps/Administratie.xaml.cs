@@ -424,10 +424,13 @@ namespace PiXeL_Apps
                 foreach (Comment opmerking in opmerkingen)
                 {
                     lijstStringGegevens.Add("Chauffeur: " + opmerking.Chauffeur +
-                        ", Aangemaakt op: " + opmerking.Datum.ToString("dd/MM/yyyy HH:mm") +
-                        ", Objectcode: " + opmerking.ObjectCode +
-                        ", Defectcode: " + opmerking.DefectCode +
-                        ", Omschrijving: " + opmerking.Omschrijving);
+                    ", OpmperkingID: " + opmerking.Id.ToString() +
+                    ", Aangemaakt op: " + opmerking.Datum.ToString("dd/MM/yyyy HH:mm") +
+                    ", Objectcode: " + opmerking.ObjectCode +
+                    ", Defectcode: " + opmerking.DefectCode +
+                    ", Omschrijving: " + opmerking.Omschrijving +
+                    ", Duplicate: " + opmerking.Duplicate +
+                    ", Origineel: " + opmerking.OriginalId);
                 }
 
                 ArrayOfString aosGegevens = new ArrayOfString(); //Een ArrayOfString is nodig voor de web service

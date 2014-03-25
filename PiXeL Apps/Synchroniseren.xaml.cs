@@ -37,14 +37,14 @@ namespace PiXeL_Apps
         {
             get { return this.navigationHelper; }
         }
-      
+
         public Synchroniseren()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-        
+
             //Event voor het kijken naar internetconnectie
             NetworkInformation.NetworkStatusChanged += VeranderingConnectiviteit;
             VeranderToggle();
@@ -130,7 +130,7 @@ namespace PiXeL_Apps
                         lblBoodschap.Text = "Er is iets fout gelopen. Controleer of u een opslagmedium ingestoken heeft...";
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     lblBoodschap.Foreground = new SolidColorBrush(Colors.Yellow);
                     lblBoodschap.Text = "Er is iets fout gelopen. Controleer of u een opslagmedium ingestoken heeft...";
@@ -152,7 +152,9 @@ namespace PiXeL_Apps
                         ", Aangemaakt op: " + opmerking.Datum.ToString("dd/MM/yyyy HH:mm") +
                         ", Objectcode: " + opmerking.ObjectCode +
                         ", Defectcode: " + opmerking.DefectCode +
-                        ", Omschrijving: " + opmerking.Omschrijving);
+                        ", Omschrijving: " + opmerking.Omschrijving +
+                        ", Duplicate: " + opmerking.Duplicate +
+                        ", Origineel: " + opmerking.OriginalId);
                 }
 
                 ArrayOfString aosGegevens = new ArrayOfString(); //Een ArrayOfString is nodig voor de web service
@@ -176,12 +178,20 @@ namespace PiXeL_Apps
                 {
                     lblBoodschap.Text = "Er is iets fout gelopen. Controleer of u met het juiste netwerk verbonden bent...";
                 }
- 
+
             }
 
             btnSynchroniseren.IsEnabled = true;
             prSynchroniseren.IsActive = false;
         }
-    }
+        /// <summary>
+        /// Does nothing, error when releasing app if this method doesn't exists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+    }
 }

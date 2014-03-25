@@ -1,13 +1,17 @@
 ﻿using PiXeL_Apps.Classes;
 using PiXeL_Apps.Common;
+using PiXeL_Apps.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -184,24 +188,21 @@ namespace PiXeL_Apps
 
                     remarks = txtRemark.Text;
 
-                    Oilsample oilsample = new Oilsample(user_id, vehicle_id, dateToday, odometer, oillevel, oiltaken, oilfilled, reason, remarks);
+                    Oilsample oilsample = new Oilsample(user_id, vehicle_id, dateToday, odometer, Math.Round(oillevel,3), oiltaken, oilfilled, reason, remarks);
 
                     //bool passed = LocalDB.database.AddOilsample(oilsample).Result;
 
-                    if (LocalDB.database.AddOilsample(oilsample).Result)
+                    if (LocalDB.database.AddOilsample(oilsample).Result && await ToonOkAnnuleer("Het oliestaal werd succesvol opgeslagen", "Oliestaal opgeslagen"))
                     {
-                        lblError.Text = "Oliestaal opgeslagen!";
-                    }
-                    else
-                    {
-                        lblError.Text = "Probeer het opnieuw";
+                        this.Frame.Navigate(typeof(Hoofdscherm));
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                //Log en show warning
+                ToonOkAnnuleer("Er is iets misgelopen, probeer het opnieuw", "Oeps");
+                paLogging.log.Info(ex.Message);
             } 
         }
 
@@ -210,5 +211,15 @@ namespace PiXeL_Apps
             oliepeil = slOillevel.Value * 100;
         }
 
+        public async Task<bool> ToonOkAnnuleer(string bericht, string titel, string okTekst = "OK")
+        {
+            MessageDialog okAnnuleer = new MessageDialog(bericht, titel);
+            okAnnuleer.Commands.Add(new UICommand(okTekst));
+            var antwoord = await okAnnuleer.ShowAsync();
+            if (antwoord.Label.Equals(okTekst))
+                return true;
+            else
+                return false;
+        }
     }
 }

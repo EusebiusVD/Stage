@@ -52,8 +52,16 @@
         <TextBlock x:Name="lblReasonOilSample" HorizontalAlignment="Left" Margin="88,398,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Reden van staalname" VerticalAlignment="Top" FontSize="18"/>
         <ComboBox x:Name="cbbReasonOilSample" HorizontalAlignment="Left" Margin="88,425,0,0" Grid.Row="1" VerticalAlignment="Top" Width="246"/>
         <TextBox x:Name="txtRemark" HorizontalAlignment="Left" Margin="453,425,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="415" Height="151"/>
-        <Button x:Name="btnSave" Content="Opslaan" Width="210" Height="66" HorizontalAlignment="Right" Margin="0,0,47,61" Grid.Row="1" VerticalAlignment="Bottom" Click="btnSave_Click"/>
-        <TextBlock Text="&#xE105;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" HorizontalAlignment="Right" Margin="0,0,124,75" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+        <Button x:Name="btnSave" Width="242" Height="66" HorizontalAlignment="Right" Margin="0,0,47,49" VerticalAlignment="Bottom" Click="btnSave_Click" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="180"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lblOpslaanIcoon" Text="&#xE105;" FontSize="50" FontFamily="Segoe UI Symbol" Margin="23,-7,24,-15" Height="69" VerticalAlignment="Bottom" RenderTransformOrigin="5.533,0.438" />
+                <TextBlock x:Name="lblOpslaan" Text="Opslaan" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" Margin="0,10,99,7" Grid.Column="1" />
+            </Grid>
+        </Button>
         <TextBlock x:Name="lblRemark" HorizontalAlignment="Left" Margin="453,398,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Opmerking" VerticalAlignment="Top" FontSize="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="199,226,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Minimum" VerticalAlignment="Top" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="712,226,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Maximum" VerticalAlignment="Top" FontSize="14"/>

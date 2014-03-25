@@ -1634,7 +1634,9 @@ namespace PiXeL_Apps
                     ", Aangemaakt op: " + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
                     ", Objectcode: " + commentaar.ObjectCode +
                     ", Defectcode: " + commentaar.DefectCode +
-                    ", Omschrijving: " + commentaar.Omschrijving);
+                    ", Omschrijving: " + commentaar.Omschrijving +
+                    ", Duplicate: " + commentaar.Duplicate +
+                    ", Origineel: " + commentaar.OriginalId);
             }
 
             if (csvLijnen.Count() == 0) //Als er geen commentaren zijn...
