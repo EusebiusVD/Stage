@@ -1358,10 +1358,12 @@ namespace PiXeL_Apps
                     Chauffeur = commentaar.Chauffeur,
                     Datum = commentaar.Datum,
                     Duplicate = commentaar.Duplicate,
-                    OriginalId = commentaar.OriginalId
+                    OriginalId = commentaar.OriginalId,
+                    Position = commentaar.Position,
+                    Rating = commentaar.Rating
                 };
                 await db.InsertAsync(nieuwCommentaar);
-                Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.DefectCode, nieuwCommentaar.ObjectCode, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum);
+                Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.DefectCode, nieuwCommentaar.ObjectCode, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum, nieuwCommentaar.Duplicate, nieuwCommentaar.OriginalId, nieuwCommentaar.Position, nieuwCommentaar.Rating);
                 aantalCommentaren++;
                 return opmerking;
             }
@@ -1398,7 +1400,9 @@ namespace PiXeL_Apps
                     Omschrijving = commentaar.Omschrijving,
                     Vehicle_Id = commentaar.Vehicle_Id,
                     Chauffeur = commentaar.Chauffeur,
-                    Datum = commentaar.Datum
+                    Datum = commentaar.Datum,
+                    Duplicate = commentaar.Duplicate,
+                    OriginalId = commentaar.OriginalId
                 };
                 await db.UpdateAsync(updateCommentaar);
                 return true;
@@ -1449,7 +1453,7 @@ namespace PiXeL_Apps
                         int hulp = 0;
                         foreach (COMMENT opmerking in opmerkingen)
                         {
-                            commentaren.Add(new Comment(opmerking.Id, opmerking.Omschrijving, opmerking.ObjectCodeId, opmerking.DefectCodeId, opmerking.Vehicle_Id, opmerking.DefectCode, opmerking.ObjectCode, opmerking.Chauffeur, opmerking.Datum));
+                            commentaren.Add(new Comment(opmerking.Id, opmerking.Omschrijving, opmerking.ObjectCodeId, opmerking.DefectCodeId, opmerking.Vehicle_Id, opmerking.DefectCode, opmerking.ObjectCode, opmerking.Chauffeur, opmerking.Datum, opmerking.Duplicate, opmerking.OriginalId, opmerking.Position, opmerking.Rating));
                             
                             if (hulp < opmerking.Id)
                             {
@@ -1626,7 +1630,7 @@ namespace PiXeL_Apps
         {
             List<Comment> alleCommentaren = await OverzichtOpmerkingen.HaalCommentsOp();
             List<string> csvLijnen = new List<string>();
-            bool csvGeschreven = false;
+            //bool csvGeschreven = false;
             foreach (Comment commentaar in alleCommentaren)
             {
                 csvLijnen.Add("Chauffeur: " + commentaar.Chauffeur +
@@ -1634,6 +1638,8 @@ namespace PiXeL_Apps
                     ", Aangemaakt op: " + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
                     ", Objectcode: " + commentaar.ObjectCode +
                     ", Defectcode: " + commentaar.DefectCode +
+                    ", Positie: " + commentaar.Position +
+                    ", Rating: " + commentaar.Rating +
                     ", Omschrijving: " + commentaar.Omschrijving +
                     ", Duplicate: " + commentaar.Duplicate +
                     ", Origineel: " + commentaar.OriginalId);

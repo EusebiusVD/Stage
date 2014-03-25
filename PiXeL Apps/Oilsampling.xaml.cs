@@ -61,12 +61,16 @@ namespace PiXeL_Apps
             ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
+            //Populate cbbOilUnit
             cbbOilUnit.Items.Add("CC");
             cbbOilUnit.Items.Add("Gram");
             cbbOilUnit.SelectedItem = "CC";
 
+            //Populate cbbReasonOilSample
+            cbbReasonOilSample.PlaceholderText = "Geef een reden op";
             cbbReasonOilSample.Items.Add("Voor top-up");
             cbbReasonOilSample.Items.Add("Na top-up");
+            cbbReasonOilSample.Items.Add("Script");
             cbbReasonOilSample.Items.Add("Inspectie (Oliewissel)");
             cbbReasonOilSample.Items.Add("Andere");
 

@@ -22,5 +22,7 @@ namespace PiXeL_Apps.SQLite.Tables
         public DateTime Datum { get; set; }
         public int Duplicate { get; set; }
         public int OriginalId { get; set; }
+        public String Position { get; set; }
+        public String Rating { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace PiXeL_Apps.Classes
         public DateTime Datum { get; set; }
         public int Duplicate { get; set; }
         public int OriginalId { get; set; }
+        public string Position { get; set; }
+        public string Rating { get; set; }
 
         public Comment() { }
         public Comment(int id, string omschrijving)
@@ -67,7 +69,7 @@ namespace PiXeL_Apps.Classes
             this.Chauffeur = Chauffeur;
             this.Datum = Datum;
         }
-        public Comment(int Id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id, string DefectCode, string ObjectCode, string Chauffeur, DateTime Datum, int Duplicate, int OriginalId)
+        public Comment(int Id, string Omschrijving, int ObjectCodeId, int DefectCodeId, int Vehicle_Id, string DefectCode, string ObjectCode, string Chauffeur, DateTime Datum, int Duplicate, int OriginalId, string Position, string Rating)
         {
             this.Id = Id;
             this.Omschrijving = Omschrijving;
@@ -80,6 +82,8 @@ namespace PiXeL_Apps.Classes
             this.Datum = Datum;
             this.Duplicate = Duplicate;
             this.OriginalId = OriginalId;
+            this.Position = Position;
+            this.Rating = Rating;
         }
 
         public COMMENT GetCOMMENT()

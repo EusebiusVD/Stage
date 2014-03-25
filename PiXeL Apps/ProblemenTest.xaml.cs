@@ -107,6 +107,34 @@ namespace PiXeL_Apps
             //Pagina grid linken aan twee events die lijsteren naar gestures
             paginaGrid.ManipulationDelta += PaginaGrid_ManipulationDelta;
             paginaGrid.ManipulationStarted += PaginaGrid_ManipulationStarted;
+
+            //Populate cbbPosition
+            cbbPosition.PlaceholderText = "Selecteer een positie";
+            cbbPosition.Items.Add("Left Front");
+            cbbPosition.Items.Add("Front");
+            cbbPosition.Items.Add("Right Front");
+            cbbPosition.Items.Add("Left");
+            cbbPosition.Items.Add("Right");
+            cbbPosition.Items.Add("Left Rear");
+            cbbPosition.Items.Add("Rear");
+            cbbPosition.Items.Add("Right Rear");
+            cbbPosition.Items.Add("Outside");
+            cbbPosition.Items.Add("Inside");
+            cbbPosition.Items.Add("Underside");
+
+            //Populate cbbRating
+            cbbRating.PlaceholderText = "Selecteer een rating";
+            cbbRating.Items.Add("0  Breakdown");
+            cbbRating.Items.Add("1  Not Acceptable - Condition considered a production reject");
+            cbbRating.Items.Add("2  Not Acceptable - Condition noted by all customers");
+            cbbRating.Items.Add("3  Poor - Condition noted by all customers");
+            cbbRating.Items.Add("4  Customer Complaint - Objectionable to the average customer");
+            cbbRating.Items.Add("5  Borderline - Improvement desired by the average customer");
+            cbbRating.Items.Add("6  Acceptable - Medium condition noted by a critical customer");
+            cbbRating.Items.Add("7  Fair - Slight condition noted by a critical customer");
+            cbbRating.Items.Add("8  Good - Very slight condition noted by only the trained observer");
+            cbbRating.Items.Add("9  Very Good - Trace condition noted by only the trained observer");
+            cbbRating.Items.Add("10  Excellent - Condition not perceptible to even a trained observer");
         }
 
         /// <summary>
@@ -537,8 +565,8 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
-            if (nieuwCommentaar.DefectCodeId < 0 || nieuwCommentaar.ObjectCodeId < 0)
-                lblError.Text = "U moet een object- en defectcode ingeven";
+            if (nieuwCommentaar.DefectCodeId < 0 || nieuwCommentaar.ObjectCodeId < 0 || cbbPosition.SelectedItem == null || cbbRating.SelectedItem == null)
+                lblError.Text = "U moet een object- en defectcode, een positie en een rating ingeven";
             else
             {
                 //  filterOpmerking = (List<String>)Common.LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");
@@ -552,6 +580,8 @@ namespace PiXeL_Apps
                     nieuwCommentaar.Vehicle_Id = opmerking.Vehicle_Id;
                     nieuwCommentaar.Chauffeur = gebruiker.Username;
                     nieuwCommentaar.Datum = DateTime.Now;
+                    nieuwCommentaar.Position = opmerking.Position;
+                    nieuwCommentaar.Rating = opmerking.Rating;
                     CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
                     
                     for (int i = 0; i < Photos.Count(); i++)
@@ -588,6 +618,8 @@ namespace PiXeL_Apps
                     nieuwCommentaar.Omschrijving = txtProblem.Text;
                     nieuwCommentaar.Chauffeur = gebruiker.Username;
                     nieuwCommentaar.Datum = DateTime.Now;
+                    nieuwCommentaar.Position = cbbPosition.SelectedItem.ToString();
+                    nieuwCommentaar.Rating = cbbRating.SelectedItem.ToString();
 
                     CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
 

@@ -152,6 +152,8 @@ namespace PiXeL_Apps
                         ", Aangemaakt op: " + opmerking.Datum.ToString("dd/MM/yyyy HH:mm") +
                         ", Objectcode: " + opmerking.ObjectCode +
                         ", Defectcode: " + opmerking.DefectCode +
+                        ", Positie: " + opmerking.Position +
+                        ", Rating: " + opmerking.Rating +
                         ", Omschrijving: " + opmerking.Omschrijving +
                         ", Duplicate: " + opmerking.Duplicate +
                         ", Origineel: " + opmerking.OriginalId);
