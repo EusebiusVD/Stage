@@ -204,6 +204,8 @@ namespace PiXeL_Apps
                 }
 
                 txtProblem.Text = opmerking.Omschrijving;
+                cbbPosition.SelectedItem = opmerking.Position;
+                cbbRating.SelectedItem = opmerking.Rating;
             }
         }
 
@@ -795,7 +797,9 @@ namespace PiXeL_Apps
             IEnumerable<Comment> dubbeleOpmerkingen =
                 from evtOpmerking in opmerkingen
                 where (evtOpmerking.ObjectCode.Equals(nieuwCommentaar.ObjectCode) &&
-                       evtOpmerking.DefectCode.Equals(nieuwCommentaar.DefectCode))
+                       evtOpmerking.DefectCode.Equals(nieuwCommentaar.DefectCode) &&
+                       evtOpmerking.Position.Equals(nieuwCommentaar.Position) &&
+                       evtOpmerking.Duplicate == 0)
                 select evtOpmerking;
 
             List<Comment> dubbeleOpmerkingenlijst = dubbeleOpmerkingen.ToList<Comment>();
@@ -807,9 +811,9 @@ namespace PiXeL_Apps
             }
             else
             {
-                //foreach (Comment dubbele in dubbeleOpmerkingenlijst)
-                //{
-                    Comment dubbele = dubbeleOpmerkingenlijst.Last<Comment>();
+                foreach (Comment dubbele in dubbeleOpmerkingenlijst)
+                {
+                    //Comment dubbele = dubbeleOpmerkingenlijst.Last<Comment>();
                     string bericht;
                     if (dubbele.Chauffeur == nieuwCommentaar.Chauffeur)
                         bericht = String.Format("U heeft eerder al een rijbericht aangemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {0}, Defectcode: {1}\nOmschrijving: {2}.",
@@ -838,7 +842,7 @@ namespace PiXeL_Apps
                         nieuwCommentaar.OriginalId = 0;
                         await CommentaarToevoegen(nieuwCommentaar);
                     }
-                //}
+                }
             }
             if (!doorgaanMetBewerken)
                 this.Frame.Navigate(typeof(OverzichtOpmerkingen));

@@ -61,7 +61,10 @@
             <TextBlock x:Name="lblDefectCategorie" HorizontalAlignment="Left" Margin="410,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Defect categorie" VerticalAlignment="Top" FontSize="18"/>
             <ComboBox x:Name="cbbDefectCategorie" HorizontalAlignment="Left" Margin="411,37,0,0" VerticalAlignment="Top" Width="311" Height="35" SelectionChanged="CbbDefectCategorie_SelectionChanged" Grid.Row="1" TabIndex="1" />
             <ComboBox x:Name="cbbObjectCategorie" HorizontalAlignment="Left" Margin="20,37,0,0" VerticalAlignment="Top" Width="311" Height="35" SelectionChanged="CbbObjectCategorie_SelectionChanged" Grid.Row="1" TabIndex="2" />
-
+            <TextBlock x:Name="lblPosition" HorizontalAlignment="Left" Margin="21,267,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Position" VerticalAlignment="Top" FontSize="18" FontFamily="Global User Interface"/>
+            <TextBlock x:Name="lblRating" HorizontalAlignment="Left" Margin="410,273,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Rating" VerticalAlignment="Top" FontSize="18" FontFamily="Global User Interface"/>
+            <ComboBox x:Name="cbbPosition" HorizontalAlignment="Left" Margin="21,295,0,0" Grid.Row="1" VerticalAlignment="Top" Width="310"/>
+            <ComboBox x:Name="cbbRating"  HorizontalAlignment="Left" Margin="410,295,0,0" Grid.Row="1" VerticalAlignment="Top" Width="310"/>
             <TextBlock x:Name="lblOpmerking" FontSize="18" HorizontalAlignment="Left" Margin="21,343,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Notitie" VerticalAlignment="Top"/>
             <TextBox x:Name="txtProblem" HorizontalAlignment="Left" Margin="20,379,0,0" Grid.Row="1" TextWrapping="Wrap" InputScope="AlphanumericFullWidth" VerticalAlignment="Top" Height="196" Width="701" TabIndex="3" />
             <!--<Button x:Name="btnMicrofoon" HorizontalAlignment="Left" Margin="1129,319,0,0" Grid.Row="1" VerticalAlignment="Top" Height="131" Width="216" Click="BtnMicrofoon_Click" FontFamily="Global User Interface">
@@ -134,10 +137,6 @@
                     <TextBlock x:Name="lblMaakVideo" Text="Maak Video" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
                 </Grid>
             </Button>
-            <TextBlock x:Name="lblPosition" HorizontalAlignment="Left" Margin="21,267,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Position" VerticalAlignment="Top" FontSize="18" FontFamily="Global User Interface"/>
-            <TextBlock x:Name="lblRating" HorizontalAlignment="Left" Margin="410,273,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Rating" VerticalAlignment="Top" FontSize="18" FontFamily="Global User Interface"/>
-            <ComboBox x:Name="cbbPosition" HorizontalAlignment="Left" Margin="21,295,0,0" Grid.Row="1" VerticalAlignment="Top" Width="310"/>
-            <ComboBox x:Name="cbbRating"  HorizontalAlignment="Left" Margin="410,295,0,0" Grid.Row="1" VerticalAlignment="Top" Width="310"/>
         </Grid>
     </Grid>
 </Page>

@@ -87,6 +87,7 @@
     <Content Include="bestanden\10919\TestBandingspanningGewichten.pdf" />
     <Content Include="bestanden\10919\TestVoorschriften.pdf" />
     <Content Include="bestanden\10919\Wagenmap.pdf" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

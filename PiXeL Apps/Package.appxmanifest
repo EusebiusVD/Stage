@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="13a777d1-2f7e-49e1-8c67-13b3672cab6a" Publisher="CN=Steven" Version="1.0.0.6" />
+  <Identity Name="13a777d1-2f7e-49e1-8c67-13b3672cab6a" Publisher="CN=Steven" Version="1.0.0.8" />
   <Properties>
     <DisplayName>PiXeL Apps</DisplayName>
     <PublisherDisplayName>Steven</PublisherDisplayName>
@@ -44,6 +44,7 @@
         <Extension Category="windows.fileTypeAssociation">
           <FileTypeAssociation Name="allow_video">
             <DisplayName>Video</DisplayName>
+            <EditFlags AlwaysUnsafe="true" />
             <SupportedFileTypes>
               <FileType ContentType="video/wmv">.wmv</FileType>
               <FileType ContentType="video/mp4">.mp4</FileType>
