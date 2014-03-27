@@ -567,8 +567,8 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
-            if (nieuwCommentaar.DefectCodeId < 0 || nieuwCommentaar.ObjectCodeId < 0 || cbbPosition.SelectedItem == null || cbbRating.SelectedItem == null)
-                lblError.Text = "U moet een object- en defectcode, een positie en een rating ingeven";
+            if (nieuwCommentaar.DefectCodeId < 0 || nieuwCommentaar.ObjectCodeId < 0)
+                lblError.Text = "U moet een object- en defectcode";
             else
             {
                 //  filterOpmerking = (List<String>)Common.LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");
