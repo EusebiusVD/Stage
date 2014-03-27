@@ -70,5 +70,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="598,226,0,0" Grid.Row="1" TextWrapping="Wrap" Text="3/4" VerticalAlignment="Top" FontSize="14"/>
         <TextBlock x:Name="lblError" HorizontalAlignment="Left" Margin="957,437,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="359" FontSize="18" Foreground="{StaticResource DefaultTextErrorColor}"/>
         <TextBlock x:Name="lblUnit" HorizontalAlignment="Left" Margin="479,273,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Eenheid" VerticalAlignment="Top" FontSize="18"/>
+        <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
+        </StackPanel>
     </Grid>
 </Page>

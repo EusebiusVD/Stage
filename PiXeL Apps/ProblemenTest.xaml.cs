@@ -865,6 +865,10 @@ namespace PiXeL_Apps
             {
                 Photos.Add(foto);
                 countPhoto++;
+                if (countPhoto == 1)
+                    lblPhotosMade.Text = countPhoto + " foto gemaakt";
+                else
+                    lblPhotosMade.Text = countPhoto + " foto's gemaakt";
                 /*int messageID;
                 if (OverzichtOpmerkingen.getSelectedIndex() == 0)
                 {
@@ -974,6 +978,10 @@ namespace PiXeL_Apps
             {
                 Videos.Add(video);
                 countVideo++;
+                if (countVideo == 1)
+                    lblVideosMade.Text = countVideo + " video gemaakt";
+                else
+                    lblVideosMade.Text = countVideo + " video's gemaakt";
                 /* int messageID;
                  if (OverzichtOpmerkingen.getSelectedIndex() == 0)
                  {

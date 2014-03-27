@@ -137,6 +137,8 @@
                     <TextBlock x:Name="lblMaakVideo" Text="Maak Video" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
                 </Grid>
             </Button>
+            <TextBlock x:Name="lblPhotosMade" HorizontalAlignment="Left" FontSize="14" FontFamily="Global User Interface" Margin="774,298,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <TextBlock x:Name="lblVideosMade" HorizontalAlignment="Left" FontSize="14" FontFamily="Global User Interface" Margin="774,323,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Page>

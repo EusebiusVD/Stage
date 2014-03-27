@@ -32,6 +32,7 @@ namespace PiXeL_Apps
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private UserControls.Menu ucMenu;
         double oliepeil;
 
         /// <summary>
@@ -60,6 +61,10 @@ namespace PiXeL_Apps
             this.navigationHelper.SaveState += navigationHelper_SaveState;
             ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            //Add dynamic menu
+            ucMenu = new UserControls.Menu(false);
+            menuPanel.Children.Add(ucMenu);
 
             //Populate cbbOilUnit
             cbbOilUnit.Items.Add("CC");
