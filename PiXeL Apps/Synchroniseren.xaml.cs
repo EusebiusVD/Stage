@@ -110,6 +110,7 @@ namespace PiXeL_Apps
         {
             btnSynchroniseren.IsEnabled = false;
             prSynchroniseren.IsActive = true;
+            lblBoodschap.Foreground = new SolidColorBrush(Colors.White);
             lblBoodschap.Text = "Even geduld. Gegevens worden op dit moment verstuurd...";
             lblBoodschap.Visibility = Windows.UI.Xaml.Visibility.Visible;
 

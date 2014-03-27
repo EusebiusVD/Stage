@@ -143,6 +143,7 @@ namespace PiXeL_Apps
             int oiltaken;
             int oilfilled;
             double oillevel;
+            string oilunit;
 
             if (await LocalDB.database.UpdateOliepeil(oliepeil.ToString("#.###")))
             {
@@ -176,8 +177,6 @@ namespace PiXeL_Apps
                 else
                     reason = "";
 
-                string remark = txtRemark.Text;
-
                 if (odometer == 0 || reason.Equals("") || (oiltaken == 0 && oilfilled == 0))
                 {
                     lblError.Text = "Niet alle gegevens zijn (correct) ingevuld";
@@ -191,8 +190,9 @@ namespace PiXeL_Apps
                     string user_id = user.Username;
 
                     remarks = txtRemark.Text;
+                    oilunit = cbbOilUnit.SelectedValue.ToString();
 
-                    Oilsample oilsample = new Oilsample(user_id, vehicle_id, dateToday, odometer, Math.Round(oillevel,3), oiltaken, oilfilled, reason, remarks);
+                    Oilsample oilsample = new Oilsample(user_id, vehicle_id, dateToday, odometer, Math.Round(oillevel,3), oiltaken, oilfilled, oilunit, reason, remarks);
 
                     //bool passed = LocalDB.database.AddOilsample(oilsample).Result;
 

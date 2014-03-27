@@ -1710,6 +1710,7 @@ namespace PiXeL_Apps
                     Oillevel = oilsample.Oillevel,
                     Oiltaken = oilsample.Oiltaken,
                     Oilfilled = oilsample.Oilfilled,
+                    OilUnit = oilsample.OilUnit,
                     Reason = oilsample.Reason,
                     Remarks = oilsample.Remarks
                 };

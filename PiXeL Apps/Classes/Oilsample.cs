@@ -17,12 +17,13 @@ namespace PiXeL_Apps.Classes
         public double Oillevel { get; set; }
         public int Oiltaken { get; set; }
         public int Oilfilled { get; set; }
+        public String OilUnit { get; set; }
         public String Reason { get; set; }
         public String Remarks { get; set; }
 
         public Oilsample() { }
 
-        public Oilsample(string username, int vehicle_id, DateTime date, int odo, double oillevel, int oiltaken, int oilfilled, string reason, string remarks)
+        public Oilsample(string username, int vehicle_id, DateTime date, int odo, double oillevel, int oiltaken, int oilfilled, string oilunit, string reason, string remarks)
         {
             Username = username;
             Vehicle_Id = vehicle_id;
@@ -30,6 +31,7 @@ namespace PiXeL_Apps.Classes
             Odo = odo;
             Oillevel = oillevel;
             Oiltaken = oiltaken;
+            OilUnit = oilunit;
             Oilfilled = oilfilled;
             Reason = reason;
             Remarks = remarks;

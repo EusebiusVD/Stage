@@ -20,6 +20,7 @@ namespace PiXeL_Apps.SQLite.Tables
         public double Oillevel { get; set; }
         public int Oiltaken { get; set; }
         public int Oilfilled { get; set; }
+        public String OilUnit { get; set; }
         public String Reason { get; set; }
         public String Remarks { get; set; }
     }
