@@ -33,7 +33,6 @@ namespace PiXeL_Apps
     public sealed partial class ProblemenTest : Page
     {
         #region Initialisatie
-
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -186,8 +185,8 @@ namespace PiXeL_Apps
             if (opmerking != null)
             {
                 IEnumerable<ObjectCodes> objCode = from objectcode in objectCodes
-                                              where objectcode.Code.Equals(opmerking.ObjectCode)
-                                              select objectcode;
+                                                   where objectcode.Code.Equals(opmerking.ObjectCode)
+                                                   select objectcode;
                 if (objCode.Count() > 0)
                 {
                     txtZoekObjectCode.Text = objCode.First().Code;
@@ -195,8 +194,8 @@ namespace PiXeL_Apps
                 }
 
                 IEnumerable<DefectCodes> defCode = from defectcode in defectCodes
-                                              where defectcode.Code.Equals(opmerking.DefectCode)
-                                              select defectcode;
+                                                   where defectcode.Code.Equals(opmerking.DefectCode)
+                                                   select defectcode;
                 if (defCode.Count() > 0)
                 {
                     txtZoekDefectCode.Text = defCode.First().Code;
@@ -208,12 +207,9 @@ namespace PiXeL_Apps
                 cbbRating.SelectedItem = opmerking.Rating;
             }
         }
-
-
         #endregion
 
         #region Code-gerelateerd
-
         /// <summary>
         /// Alle object en defectcodes worden opgehaald door uit de database en gebonden aan hun text/comboboxen
         /// </summary>
@@ -367,11 +363,9 @@ namespace PiXeL_Apps
             }
             return index;
         }
-
         #endregion
 
         #region AutoCompleteBoxen Events
-
         /// Met dit Click event wordt als de tekst in het zoekveld voor objecten veranderd, wordt gekeken of de reeds ingegeve tekst overeenkomt
         /// met een reeds bestaande objectcode. Deze wordt getoond.
         /// </summary>
@@ -554,7 +548,6 @@ namespace PiXeL_Apps
             lblObjectCodeStatus.Visibility = Windows.UI.Xaml.Visibility.Visible;
             lblDefectCodeStatus.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
-
         #endregion
 
         #region Button clicks
