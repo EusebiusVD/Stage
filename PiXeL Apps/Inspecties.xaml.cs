@@ -23,7 +23,7 @@ using WinRTXamlToolkit.Controls.Extensions;
 
 namespace PiXeL_Apps
 {
-    public sealed partial class VerschillendeInspecties : Page
+    public sealed partial class Inspecties : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -48,7 +48,7 @@ namespace PiXeL_Apps
         /// <summary>
         /// This constructor add the menu to the screen, registers GPS updates and the swype commands for the menu
         /// </summary>
-        public VerschillendeInspecties()
+        public Inspecties()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);

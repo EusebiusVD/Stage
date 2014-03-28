@@ -131,9 +131,9 @@ namespace PiXeL_Apps.Common
         /// Het wijzigen van de dringende kilometer tollerantie
         /// </summary>
         /// <param name="tollerantie">De in te stellen tollerantie integer</param>
-        public void SetTolerantieDringend(int tollerantie)
+        public void SetTolerantieDringend(int tolerantie)
         {
-            this.tolerantieDringend = tollerantie;
+            this.tolerantieDringend = tolerantie;
         }
 
         /// <summary>
@@ -148,9 +148,9 @@ namespace PiXeL_Apps.Common
         /// Wijzigen van de aankomende kilometer tollerantie
         /// </summary>
         /// <param name="tollerantie">De in te stellen tollerantie integer</param>
-        public void SetTolerantieAankomend(int tollerantie)
+        public void SetTolerantieAankomend(int tolerantie)
         {
-            this.tolerantieAankomend = tollerantie;
+            this.tolerantieAankomend = tolerantie;
         }
 
         #endregion

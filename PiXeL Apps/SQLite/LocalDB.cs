@@ -454,7 +454,7 @@ namespace PiXeL_Apps
                                 inspectieScherm.Add(inspectie);
                             }
                             await db.InsertAllAsync(inspecties);
-                            VerschillendeInspecties.HaalInspectiesOp(inspectieScherm);
+                            Inspecties.HaalInspectiesOp(inspectieScherm);
                         }
                         catch (InvalidCastException)
                         {

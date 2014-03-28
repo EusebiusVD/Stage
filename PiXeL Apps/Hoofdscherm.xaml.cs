@@ -126,7 +126,7 @@ namespace PiXeL_Apps
         /// <param name="e"></param>
         private void BtnStartRit_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(VerschillendeInspecties), geselecteerdeIndex + 1);
+            this.Frame.Navigate(typeof(Inspecties), geselecteerdeIndex + 1);
         }
         /// <summary>
         /// Writes the mileage and oil level reservoir

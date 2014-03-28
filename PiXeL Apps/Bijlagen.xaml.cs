@@ -58,7 +58,7 @@ namespace PiXeL_Apps
         /// </summary>
         private void StartVoorbereidingen()
         {
-            VerschillendeInspecties.HaalInspectiesOp(new List<Inspectie>());
+            Inspecties.HaalInspectiesOp(new List<Inspectie>());
             ProblemenTest.HaalCodesOp();
         }
 
