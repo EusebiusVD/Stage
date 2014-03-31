@@ -109,6 +109,7 @@ namespace PiXeL_Apps
 
             //Populate cbbPosition
             cbbPosition.PlaceholderText = "Selecteer een positie";
+            cbbPosition.Items.Add("N/A");
             cbbPosition.Items.Add("Left Front");
             cbbPosition.Items.Add("Front");
             cbbPosition.Items.Add("Right Front");
@@ -120,9 +121,11 @@ namespace PiXeL_Apps
             cbbPosition.Items.Add("Outside");
             cbbPosition.Items.Add("Inside");
             cbbPosition.Items.Add("Underside");
+            cbbPosition.SelectedItem = "N/A";
 
             //Populate cbbRating
             cbbRating.PlaceholderText = "Selecteer een rating";
+            cbbRating.Items.Add("N/A");
             cbbRating.Items.Add("0  Breakdown");
             cbbRating.Items.Add("1  Not Acceptable - Condition considered a production reject");
             cbbRating.Items.Add("2  Not Acceptable - Condition noted by all customers");
@@ -134,6 +137,7 @@ namespace PiXeL_Apps
             cbbRating.Items.Add("8  Good - Very slight condition noted by only the trained observer");
             cbbRating.Items.Add("9  Very Good - Trace condition noted by only the trained observer");
             cbbRating.Items.Add("10  Excellent - Condition not perceptible to even a trained observer");
+            cbbRating.SelectedItem = "N/A";
         }
 
         /// <summary>
@@ -561,7 +565,7 @@ namespace PiXeL_Apps
         private async void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
             if (nieuwCommentaar.DefectCodeId < 0 || nieuwCommentaar.ObjectCodeId < 0)
-                lblError.Text = "U moet een object- en defectcode";
+                lblError.Text = "U moet een object- en defectcode ingeven";
             else
             {
                 //  filterOpmerking = (List<String>)Common.LocalStorage.localStorage.LaadGegevens("rapporteerDubbeleOpmerking");
@@ -575,8 +579,8 @@ namespace PiXeL_Apps
                     nieuwCommentaar.Vehicle_Id = opmerking.Vehicle_Id;
                     nieuwCommentaar.Chauffeur = gebruiker.Username;
                     nieuwCommentaar.Datum = DateTime.Now;
-                    nieuwCommentaar.Position = opmerking.Position;
-                    nieuwCommentaar.Rating = opmerking.Rating;
+                    nieuwCommentaar.Position = cbbPosition.SelectedValue.ToString();
+                    nieuwCommentaar.Rating = cbbRating.SelectedValue.ToString();
                     CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
                     
                     for (int i = 0; i < Photos.Count(); i++)
@@ -808,32 +812,70 @@ namespace PiXeL_Apps
                 {
                     //Comment dubbele = dubbeleOpmerkingenlijst.Last<Comment>();
                     string bericht;
-                    if (dubbele.Chauffeur == nieuwCommentaar.Chauffeur)
-                        bericht = String.Format("U heeft eerder al een rijbericht aangemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {0}, Defectcode: {1}\nOmschrijving: {2}.",
-                                                                            dubbele.ObjectCode, dubbele.DefectCode, dubbele.Omschrijving);
-                    else
-                        bericht = String.Format("Chauffeur {0} heeft eerder een rijbericht gemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {1}, Defectcode: {2}\nOmschrijving: {3}.",
-                                                                            dubbele.Chauffeur, dubbele.ObjectCode, dubbele.DefectCode, dubbele.Omschrijving);
+                    if (dubbeleOpmerkingenlijst.Last().Equals(dubbele) || dubbeleOpmerkingenlijst.Count == 1)
+                    {
+                        if (dubbele.Chauffeur == nieuwCommentaar.Chauffeur)
+                            bericht = String.Format("U heeft eerder al een rijbericht aangemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {0}, Defectcode: {1}, Positie: {2}\nOmschrijving: {3}.",
+                                                                                dubbele.ObjectCode, dubbele.DefectCode, dubbele.Position, dubbele.Omschrijving);
+                        else
+                            bericht = String.Format("Chauffeur {0} heeft eerder een rijbericht gemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {1}, Defectcode: {2}, Positie: {3}\nOmschrijving: {4}.",
+                                                                                dubbele.Chauffeur, dubbele.ObjectCode, dubbele.DefectCode, dubbele.Position, dubbele.Omschrijving);
 
-                    //Melding weergeven indien er dubbele commentaren gevonden zijn
-                    MessageDialog okAnnuleer = new MessageDialog(bericht, "Dubbele rijberichten");
-                    okAnnuleer.Commands.Add(new UICommand("Samenvoegen"));
-                    okAnnuleer.Commands.Add(new UICommand("Opslaan als nieuw rijbericht"));
-                    //okAnnuleer.Commands.Add(new UICommand("Annuleren"));
-                    var resultaat = await okAnnuleer.ShowAsync();
-                    if (resultaat.Label.Equals("Samenvoegen"))
-                    {
-                        nieuwCommentaar.Duplicate += 1;
-                        nieuwCommentaar.OriginalId = dubbele.Id;
-                        await CommentaarToevoegen(nieuwCommentaar);
-                        //dubbele.Omschrijving += String.Format("{0}Toevoeging chauffeur {1}: {2}.", Environment.NewLine, nieuwCommentaar.Chauffeur, nieuwCommentaar.Omschrijving);
-                        //await CommentaarAanpassen(dubbele);
+                        //Melding weergeven indien er dubbele commentaren gevonden zijn
+                        MessageDialog okAnnuleer = new MessageDialog(bericht, "Dubbele rijberichten");
+                        okAnnuleer.Commands.Add(new UICommand("Samenvoegen"));
+                        okAnnuleer.Commands.Add(new UICommand("Opslaan als nieuw rijbericht"));
+                        var resultaat = await okAnnuleer.ShowAsync();
+                        if (resultaat.Label.Equals("Samenvoegen"))
+                        {
+                            nieuwCommentaar.Duplicate += 1;
+                            nieuwCommentaar.OriginalId = dubbele.Id;
+                            await CommentaarToevoegen(nieuwCommentaar);
+                            //dubbele.Omschrijving += String.Format("{0}Toevoeging chauffeur {1}: {2}.", Environment.NewLine, nieuwCommentaar.Chauffeur, nieuwCommentaar.Omschrijving);
+                            //await CommentaarAanpassen(dubbele);
+                        }
+                        else if (resultaat.Label.Equals("Opslaan als nieuw rijbericht"))
+                        {
+                            nieuwCommentaar.Duplicate = 0;
+                            nieuwCommentaar.OriginalId = 0;
+                            await CommentaarToevoegen(nieuwCommentaar);
+                        }
                     }
-                    else if (resultaat.Label.Equals("Opslaan als nieuw rijbericht"))
+                    else
                     {
-                        nieuwCommentaar.Duplicate = 0;
-                        nieuwCommentaar.OriginalId = 0;
-                        await CommentaarToevoegen(nieuwCommentaar);
+                        if (dubbele.Chauffeur == nieuwCommentaar.Chauffeur)
+                            bericht = String.Format("U heeft eerder al een rijbericht aangemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {0}, Defectcode: {1}, Positie: {2}\nOmschrijving: {3}.",
+                                                                                dubbele.ObjectCode, dubbele.DefectCode, dubbele.Position, dubbele.Omschrijving);
+                        else
+                            bericht = String.Format("Chauffeur {0} heeft eerder een rijbericht gemaakt voor dit onderdeel. Wilt u deze rijberichten samenvoegen?\nObjectcode: {1}, Defectcode: {2}, Positie: {3}\nOmschrijving: {4}.",
+                                                                                dubbele.Chauffeur, dubbele.ObjectCode, dubbele.DefectCode, dubbele.Position, dubbele.Omschrijving);
+
+                        //Melding weergeven indien er dubbele commentaren gevonden zijn
+                        MessageDialog okAnnuleer = new MessageDialog(bericht, "Dubbele rijberichten");
+                        okAnnuleer.Commands.Add(new UICommand("Samenvoegen"));
+                        okAnnuleer.Commands.Add(new UICommand("Opslaan als nieuw rijbericht"));
+                        okAnnuleer.Commands.Add(new UICommand("Volgende tonen"));
+                        var resultaat = await okAnnuleer.ShowAsync();
+                        if (resultaat.Label.Equals("Samenvoegen"))
+                        {
+                            nieuwCommentaar.Duplicate += 1;
+                            nieuwCommentaar.OriginalId = dubbele.Id;
+                            await CommentaarToevoegen(nieuwCommentaar);
+                            break;
+                            //dubbele.Omschrijving += String.Format("{0}Toevoeging chauffeur {1}: {2}.", Environment.NewLine, nieuwCommentaar.Chauffeur, nieuwCommentaar.Omschrijving);
+                            //await CommentaarAanpassen(dubbele);
+                        }
+                        else if (resultaat.Label.Equals("Opslaan als nieuw rijbericht"))
+                        {
+                            nieuwCommentaar.Duplicate = 0;
+                            nieuwCommentaar.OriginalId = 0;
+                            await CommentaarToevoegen(nieuwCommentaar);
+                            break;
+                        }
+                        else if (resultaat.Label.Equals("Volgende tonen"))
+                        {
+                            continue;
+                        }
                     }
                 }
             }
@@ -862,96 +904,6 @@ namespace PiXeL_Apps
                     lblPhotosMade.Text = countPhoto + " foto gemaakt";
                 else
                     lblPhotosMade.Text = countPhoto + " foto's gemaakt";
-                /*int messageID;
-                if (OverzichtOpmerkingen.getSelectedIndex() == 0)
-                {
-                    messageID = OverzichtOpmerkingen.getSelectedIndex();
-                }
-                else
-                {
-                    messageID = await LocalDB.database.getAantalCommentaren();
-                }
-                CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
-                User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
-                // if-structure doesn't work entirely
-                if (photoFolder.GetFileAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + ".png").Equals(true))
-                {
-                    await foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png");
-                    photoCounter++;
-                    var fileStream = await foto.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    AsyncStatus renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png").Status;
-                    
-                        try
-                        {
-                            renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HH:mm:ss.ff") + "_" + gebruiker.Username + "(" + photoCounter + ").png").Status;
-                        }
-                        catch(Exception ex)
-                        {
-                            lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                            lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
-                            btnMaakFoto.IsEnabled = true;
-                            goto BREAK;
-                        }                        
-
-                    BREAK:
-                    bool completed = await movePhotoVideo(foto, photoFolder);
-                    if (completed)
-                    {
-                        lblError.Foreground = new SolidColorBrush(Colors.White);
-                        lblError.Text = "De foto is succesvol opgeslagen!";
-                        btnMaakFoto.IsEnabled = true;
-                    }
-                    else
-                    {
-                        lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                        lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
-                        btnMaakFoto.IsEnabled = true;
-                    }
-                }
-                else
-                {
-                    await foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
-                    photoCounter = 0;
-                    var fileStream = await foto.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    AsyncStatus renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
-                    while (renamed.Equals("Started"))
-                    {
-                        try
-                        {
-                            renamed = foto.RenameAsync(ca.Number + "_" + messageID + "_" + foto.DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png").Status;
-                        }
-                        catch(Exception ex)
-                        {
-                            lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                            lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
-                            btnMaakFoto.IsEnabled = true;
-                            goto BREAK;
-                        }
-                    }
-                    BREAK:
-                    try
-                    {
-                        bool completed = await movePhotoVideo(foto, photoFolder);
-                            if (completed)
-                            {   
-                                lblError.Foreground = new SolidColorBrush(Colors.White);
-                                lblError.Text = "De foto is succesvol opgeslagen!";
-                                btnMaakFoto.IsEnabled = true;
-                            }
-                            else
-                            {
-                                lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                                lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
-                                btnMaakFoto.IsEnabled = true;
-                            }
-                    }
-                    catch
-                    {
-                        lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                        lblError.Text = "Er is een proleem opgetreden bij het opslaan van de foto, probeer het opnieuw";
-                        btnMaakFoto.IsEnabled = true;
-                    }                                              
-                }*/
             }
         }
 
@@ -975,64 +927,6 @@ namespace PiXeL_Apps
                     lblVideosMade.Text = countVideo + " video gemaakt";
                 else
                     lblVideosMade.Text = countVideo + " video's gemaakt";
-                /* int messageID;
-                 if (OverzichtOpmerkingen.getSelectedIndex() == 0)
-                 {
-                     messageID = OverzichtOpmerkingen.getSelectedIndex();
-                 }
-                 else
-                 {
-                     messageID = await LocalDB.database.getAantalCommentaren();
-                 }
-                 User gebruiker = LocalDB.database.GetIngelogdeGebruiker();
-                 CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
-                 // if-structuur werkt niet, als er te snel foto's genomen worden doet hij het nog altijd
-                 if (videoFolder.GetFileAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4").Equals(true))
-                 {
-                     await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4");
-                     videoCounter++;
-                     var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                     AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
-                     while (renamed.Equals("Started"))
-                     {
-                         renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + "(" + videoCounter + ").mp4").Status;
-                     }
-                     btnMaakVideo.IsEnabled = true;
-                     bool completed = await movePhotoVideo(video, videoFolder);
-                     if (completed)
-                     {
-                         lblError.Foreground = new SolidColorBrush(Colors.White);
-                         lblError.Text = "De video is succesvol opgeslagen!";
-                     }
-                     else
-                     {
-                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
-                     }
-                 }
-                 else
-                 {
-                     await video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".mp4");
-                     videoCounter = 0;
-                     var fileStream = await video.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                     AsyncStatus renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
-                     while (renamed.Equals("Started"))
-                     {
-                         renamed = video.RenameAsync(ca.Number + "_" + messageID + "_" + video.DateCreated.ToString("ddMMyyyy-HHmmss") + "_" + gebruiker.Username + ".png").Status;
-                     }
-                     btnMaakVideo.IsEnabled = true;
-                     bool completed = await movePhotoVideo(video, videoFolder);
-                     if (completed)
-                     {
-                         lblError.Foreground = new SolidColorBrush(Colors.White);
-                         lblError.Text = "De video is succesvol opgeslagen!";
-                     }
-                     else
-                     {
-                         lblError.Foreground = (SolidColorBrush)Application.Current.Resources["DefaultTextErrorColor"];
-                         lblError.Text = "Er is een proleem opgetreden bij het opslaan van de video, probeer het opnieuw";
-                     }
-                 }*/
             }
         }
 

@@ -207,6 +207,9 @@
     <Compile Include="UserControls\Wagenmap.xaml.cs">
       <DependentUpon>Wagenmap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Whoopsie.xaml.cs">
+      <DependentUpon>Whoopsie.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -357,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Wagenmap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Whoopsie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

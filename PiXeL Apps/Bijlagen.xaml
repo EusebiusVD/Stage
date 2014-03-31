@@ -34,7 +34,7 @@
                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
             </GridView>
             <TextBlock x:Name="lblOpmerkingen" FontSize="18" HorizontalAlignment="Left" Margin="66,218,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="75" Width="342" Grid.Column="1" />
-            <Button Content="Admin" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,30" Click="Button_Click"/>
+            <Button x:Name="btnAdmin" Content="Admin" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,30" Click="Button_Click" Visibility="Collapsed"/>
 
         </Grid>
 

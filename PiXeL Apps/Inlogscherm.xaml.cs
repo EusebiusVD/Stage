@@ -85,8 +85,11 @@ namespace PiXeL_Apps
                 {
                     if (user.Admin)
                     {
-                        //Administrator
-                        this.Frame.Navigate(typeof(Administratie), user);
+                        if (user.Username.Equals("PXL123"))
+                            //Administrator
+                            this.Frame.Navigate(typeof(Administratie), user);
+                        else
+                            this.Frame.Navigate(typeof(Whoopsie));
                     }
                     else
                     {
