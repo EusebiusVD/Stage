@@ -22,7 +22,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>ARM</PlatformTarget>
@@ -142,12 +142,16 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\GpsSupport.cs" />
     <Compile Include="Common\DataTemplateKiezer.cs" />
+    <Compile Include="Feedback.xaml.cs">
+      <DependentUpon>Feedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Hoofdscherm.xaml.cs">
       <DependentUpon>Hoofdscherm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inlogscherm.xaml.cs">
       <DependentUpon>Inlogscherm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logging\Feedback.cs" />
     <Compile Include="Logging\paLogging.cs" />
     <Compile Include="Logging\paLogWriter.cs" />
     <Compile Include="UserControls\Menu.xaml.cs">
@@ -310,6 +314,10 @@
     <Page Include="Bijlagen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Feedback.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Hoofdscherm.xaml">
       <SubType>Designer</SubType>

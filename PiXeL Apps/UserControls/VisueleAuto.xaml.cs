@@ -70,13 +70,13 @@ namespace PiXeL_Apps.UserControls
                String rechtsVoor = lijstGewichten.ElementAt(6);
                String linksAchter = lijstGewichten.ElementAt(7);
                String rechtsAchter = lijstGewichten.ElementAt(8);
-               lblBandenSpanningVoor.Text = "L: " + linksVoor + " bar, R: " + rechtsVoor + " bar";
-               lblBandenSpanningAchter.Text = "L: " + linksAchter + " bar, R: " + rechtsAchter + " bar";
+               //lblBandenSpanningVoor.Text = "L: " + linksVoor + " bar, R: " + rechtsVoor + " bar";
+               //lblBandenSpanningAchter.Text = "L: " + linksAchter + " bar, R: " + rechtsAchter + " bar";
             }
             else
             {
-                lblBandenSpanningAchter.Text = "N/A";
-                lblBandenSpanningVoor.Text = "N/A";
+                //lblBandenSpanningAchter.Text = "N/A";
+                //lblBandenSpanningVoor.Text = "N/A";
             }
         }
         /// <summary>

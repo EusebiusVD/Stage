@@ -18,7 +18,7 @@ namespace PiXeL_Apps.Common
         public async static Task copyVideosToUSB()
         {
             //Deleting the old photos and videos
-            await deleteOldMedia();
+            //await deleteOldMedia();
 
             //Setting the source folder
             StorageFolder sourceFolder;
@@ -60,7 +60,7 @@ namespace PiXeL_Apps.Common
         public async static Task copyVideosViaNetwork()
         {
             //Deleting the old photos and videos
-            await deleteOldMedia();
+            //await deleteOldMedia();
 
             //Setting the source folder
             StorageFolder sourceFolder;
@@ -87,7 +87,7 @@ namespace PiXeL_Apps.Common
         public async static Task copyPhotosToUSB()
         {
             //Deleting the old photos and videos
-            await deleteOldMedia();
+            //await deleteOldMedia();
 
             //Setting the source folder
             StorageFolder sourceFolder;
@@ -129,7 +129,7 @@ namespace PiXeL_Apps.Common
         public async static Task copyPhotosViaNetwork()
         {
             //Deleting the old photos and videos
-            await deleteOldMedia();
+            //await deleteOldMedia();
 
             //Setting the source folder
             StorageFolder sourceFolder;
@@ -153,7 +153,7 @@ namespace PiXeL_Apps.Common
         /// Deletes old photos and videos to clean up diskspace/less data to synchronize
         /// </summary>
         /// <returns></returns>
-        public async static Task deleteOldMedia()
+       /*public async static Task deleteOldMedia()
         {
             //setting the source folders
             StorageFolder photoFolder;
@@ -203,6 +203,6 @@ namespace PiXeL_Apps.Common
             {
                 Logging.paLogging.log.Warn(e.Message);
             }
-        }
+        }*/
     }
 }

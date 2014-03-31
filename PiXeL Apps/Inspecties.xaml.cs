@@ -54,7 +54,7 @@ namespace PiXeL_Apps
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += NavigationHelper_LoadState;
             this.navigationHelper.SaveState += NavigationHelper_SaveState;
-            this.Loaded += VerschillendeTestenPage_Loaded;
+            this.Loaded += Inspecties_Loaded;
             GpsSupport.gpsSupport.LocatieUpdate += LocatieUpdate;
 
             //Dynamisch menu (usercontrol inladen)
@@ -116,7 +116,7 @@ namespace PiXeL_Apps
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void VerschillendeTestenPage_Loaded(object sender, RoutedEventArgs e)
+        void Inspecties_Loaded(object sender, RoutedEventArgs e)
         {
             gvwInspecties.HorizontalContentAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
             gvwInspecties.ItemsSource = inspecties;

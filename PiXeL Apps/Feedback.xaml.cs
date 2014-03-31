@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -21,12 +22,12 @@ namespace PiXeL_Apps
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class Whoopsie : Page
+    public sealed partial class Feedback : Page
     {
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        
+
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
@@ -45,13 +46,14 @@ namespace PiXeL_Apps
         }
 
 
-        public Whoopsie()
+        public Feedback()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-            lblMessage.Text = "Omdat de applicatie nog in testfase is, is het administratiegedeelte voorlopig niet beschikbaar.\nBedankt voor het begrip";
+
+            lblFeedback.Text = "In onderstaand tekstvak kan u feedback geven over deze applicatie, duw op de knop om de feedback op te slaan";
         }
 
         /// <summary>
@@ -104,9 +106,19 @@ namespace PiXeL_Apps
 
         #endregion
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void btnFeedback_Click(object sender, RoutedEventArgs e)
         {
-            Frame.GoBack();
+            lblError.Text = "";
+            string text = txtFeedback.Text.Trim();
+            if (!text.Equals(""))
+            {
+                Logging.Feedback.writeFeedback(text);
+                Frame.GoBack();
+            }
+            else
+            {
+                lblError.Text = "Gelieve eerst tekst in te voeren in het tekstveld hierboven";
+            }
         }
     }
 }

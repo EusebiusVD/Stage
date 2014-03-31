@@ -15,7 +15,7 @@
         <Grid Margin="10,20,10,0">
             <!--<Popup x:Name="invoerPopup" IsOpen="True" Width="960" Height="458">-->
             <!-- <StackPanel Background="{StaticResource DefaultBackgroundColor}" Margin="0,0,0,0"> -->
-            <TextBlock x:Name="lblInvoerVereist" Text="Er dienen een paar gegevens ingevoerd te worden" FontSize="30" HorizontalAlignment="Center" Margin="368,64,313,0" Height="42" VerticalAlignment="Top" TextWrapping="Wrap" />
+            <TextBlock x:Name="lblInvoerVereist" Text="Ingave km en/of oliepeil" FontSize="30" HorizontalAlignment="Center" Margin="368,64,313,0" Height="42" VerticalAlignment="Top" TextWrapping="Wrap" />
             <TextBox x:Name="txtKilometerstand" PlaceholderText="Kilometerstand..." HorizontalAlignment="Left" Width="794" Height="30" Margin="276,434,0,281" />
 
             <TextBlock x:Name="lblError" TextWrapping="Wrap" Text="Gelieve geldige gegevens in te geven!" FontSize="22" Foreground="#FFFFE74E" Visibility="Collapsed" HorizontalAlignment="Center" FontStyle="Italic" Margin="0,10,0,0"/>

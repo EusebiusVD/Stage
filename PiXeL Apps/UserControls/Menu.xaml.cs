@@ -166,6 +166,11 @@ namespace PiXeL_Apps.UserControls
             ((Frame)Window.Current.Content).Navigate(typeof(Oilsampling));
         }
 
+        private void btnFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(Feedback));
+        }
+
 
     }
 }

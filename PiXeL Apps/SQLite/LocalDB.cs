@@ -924,6 +924,7 @@ namespace PiXeL_Apps
         {
             try
             {
+                List<String> a = (await webService.LeesExcelAsync()).Body.LeesExcelResult.ToList();
                 return (await webService.LeesExcelAsync()).Body.LeesExcelResult.ToList();
             }
             catch (Exception e)
