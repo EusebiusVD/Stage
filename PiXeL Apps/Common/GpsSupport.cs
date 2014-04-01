@@ -22,7 +22,7 @@ namespace PiXeL_Apps.Common
         private Geolocator geoLocator = new Geolocator(); //Built-in library voor geolocatie
         private int metersGereden = 0;
         private int cycli = 0;
-        private uint metersVoorLocatieUpdate = 500;
+        private uint metersVoorLocatieUpdate = 1;
         private int tolerantieAankomend;
         private int tolerantieDringend;
 

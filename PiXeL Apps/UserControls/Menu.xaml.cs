@@ -171,6 +171,11 @@ namespace PiXeL_Apps.UserControls
             ((Frame)Window.Current.Content).Navigate(typeof(Feedback));
         }
 
+        private void btnInspecties_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(Inspecties));
+        }
+
 
     }
 }

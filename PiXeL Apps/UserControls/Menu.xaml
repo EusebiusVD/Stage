@@ -63,6 +63,16 @@
                 <TextBlock x:Name="lblOilsampling" Text="Oliestaalname" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
             </Grid>
         </Button>
+        <Button x:Name="btnInspecties" Height="50" Width="289" Click="btnInspecties_Click" FontFamily="Global User Interface" Margin="7,7,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="180"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lblInspectiesIcon" Text="🔧" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
+                <TextBlock x:Name="lbInspecties" Text="Inspecties" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+            </Grid>
+        </Button>
 
         <TextBlock x:Name="lblGegevensverwerking" Margin="37,50,26,0" Height="30" Width="240"
     		Text="Gegevensverwerking"  FontSize="24" Foreground="White" />

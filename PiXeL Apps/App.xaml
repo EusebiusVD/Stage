@@ -536,7 +536,7 @@
         <!-- _______________________GRIDVIEW DATA TEMPLATES OVERSCHRIJVEN -->
         <!-- <Run /> in TextBlock wordt gebruikt omdat StringFormat nog niet wordt ondersteund bij Bind="{... StringFormat("{0}") ...} -->
         <DataTemplate x:Key="voltooideInspectieTemplate">
-            <StackPanel Width="300" HorizontalAlignment="Center" Orientation="Vertical" Background="Black">
+            <StackPanel Width="300" HorizontalAlignment="Center" Orientation="Vertical" Background="Green">
                 <StackPanel Width="300" Height="90" Orientation="Vertical">
                     <TextBlock Name="txtActiviteitTitel" HorizontalAlignment="Center" Width="300"
                                FontSize="20" TextWrapping="WrapWholeWords" FontFamily="Global User Interface"
@@ -632,7 +632,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="attentieInspectieTemplate">
-            <StackPanel Width="300" HorizontalAlignment="Center" Orientation="Vertical" Background="DarkBlue">
+            <StackPanel Width="300" HorizontalAlignment="Center" Orientation="Vertical" Background="DarkOrange">
                 <StackPanel Width="300" Height="90" Orientation="Vertical">
                     <TextBlock Name="txtActiviteitTitel" HorizontalAlignment="Center" Width="300"
                                FontSize="20" TextWrapping="WrapWholeWords" FontFamily="Global User Interface"

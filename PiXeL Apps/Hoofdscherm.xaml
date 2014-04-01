@@ -23,11 +23,8 @@
                   SelectionChanged="GvwScripten_SelectieVeranderd" />
             <StackPanel Name="menuPanel" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
             </StackPanel>
-
-
-
             <Button x:Name="btnStartRit" Click="BtnStartRit_Click" FontFamily="Global User Interface" 
-                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="593" Height="87">
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="593" Height="87" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="125"/>

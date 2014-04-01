@@ -156,11 +156,13 @@ namespace PiXeL_Apps
             bool eerderGewijzigd = gewijzigdeInspecties.Contains(geklikteInspectie);
             if (eerderGewijzigd)
                 gewijzigdeInspecties.Remove(geklikteInspectie);
-
             geklikteInspectie.Status = !geklikteInspectie.Status;
             inspecties.RemoveAt(inspectieIndex);
             inspecties.Insert(inspectieIndex, geklikteInspectie);
-            gvwInspecties.ScrollIntoView(geklikteInspectie, ScrollIntoViewAlignment.Leading);
+            if (inspectieIndex + 1 % 9 == 0)
+            {
+                gvwInspecties.ScrollIntoView(geklikteInspectie, ScrollIntoViewAlignment.Leading);
+            }
 
             try
             {
@@ -176,7 +178,10 @@ namespace PiXeL_Apps
                 paLogging.log.Error(String.Format("Inspectie '{0}' kon niet aan- of afgevinkt worden.", geklikteInspectie.Activity));
             }
 
-            gvwInspecties.ScrollIntoView(geklikteInspectie, ScrollIntoViewAlignment.Leading); //terug scrollen naar huidige positie
+            if (inspectieIndex % 9 == 0)
+            {
+                gvwInspecties.ScrollIntoView(geklikteInspectie, ScrollIntoViewAlignment.Leading);
+            } //terug scrollen naar huidige positie
 
             if (!eerderGewijzigd)
                 gewijzigdeInspecties.Add(geklikteInspectie);
