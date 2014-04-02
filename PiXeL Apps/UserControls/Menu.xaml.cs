@@ -26,9 +26,10 @@ namespace PiXeL_Apps.UserControls
         private Point beginPunt;
 
         /// <summary>
-        /// In deze constructor wordt het menu wordt aangemaakt 
+        /// This constructor makes the menu.
+        /// In deze constructor wordt het menu wordt aangemaakt.
         /// </summary>
-        /// <param name="statisch">boolean die aangeeft of het menu statisch is of niet</param>
+        /// <param name="statisch">bool which indicates if the menu is static.</param>
         public Menu(bool statisch)
         {
             this.InitializeComponent();
@@ -36,7 +37,7 @@ namespace PiXeL_Apps.UserControls
             {
                 btnHideShow.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 btnHideShow.IsEnabled = false;
-                menu.Margin = new Thickness(0);
+                menuGrid.Margin = new Thickness(0);
             }
 
             try
@@ -46,7 +47,8 @@ namespace PiXeL_Apps.UserControls
             catch (Exception) { }
         }
         /// <summary>
-        /// Haalt de gebruikernaam en autonumer op en toont deze op het menu
+        /// Gets the username and carnumber to show in the menu.
+        /// Haalt de gebruikernaam en autonummer op en toont deze op het menu.
         /// </summary>
         private async void ToonGebruikerWagen()
         {
@@ -58,13 +60,14 @@ namespace PiXeL_Apps.UserControls
         }
 
         /// <summary>
+        /// Starts a new storyboard which slides out the menu grid to a positive (visible) margin or a negative (invisible) margin.
         /// Begint een nieuw storyboard dat het menu grid uitschuift of inschuift naar een positieve (zichtbaar) of negatieve (onzichtbaar) margin.
         /// </summary>
         public void BeginMenuAnimatie()
         {
             Storyboard storyboard = new Storyboard();
             TranslateTransform beweegTransformatie = new TranslateTransform();
-            menu.RenderTransform = beweegTransformatie;
+            menuGrid.RenderTransform = beweegTransformatie;
             DoubleAnimation verplaatsMenuAnimatie = new DoubleAnimation();
             verplaatsMenuAnimatie.Duration = new Duration(TimeSpan.FromSeconds(0.15));
             if (btnHideShow.Content.Equals(">"))
@@ -86,9 +89,9 @@ namespace PiXeL_Apps.UserControls
             storyboard.Begin();
         }
         /// <summary>
-        /// Als het menu open is dan wordt true teruggegeven anders false
+        /// If the menu is open it returns true, else it returns false.
         /// </summary>
-        /// <returns>Een boolean</returns>
+        /// <returns>bool</returns>
         public bool IsMenuOpen()
         {
             if (btnHideShow.Content.Equals("<"))
@@ -99,7 +102,7 @@ namespace PiXeL_Apps.UserControls
         #region Button clicks
 
         /// <summary>
-        /// Deze methode logt de gebruiker uit. Vervolgens gaat de gebruiker naar het inlogscherm
+        /// This method logs of the user. The user goes back to the Inlogscherm screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -109,8 +112,7 @@ namespace PiXeL_Apps.UserControls
         }
 
         /// <summary>
-        /// Deze methode toont het scherm met alle opmerkingen.
-        /// De gebruiker kan bovendien een opmerking aanmaken.
+        /// This method navigates to the OverzichtOpmerkingen screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -120,7 +122,7 @@ namespace PiXeL_Apps.UserControls
         }
 
         /// <summary>
-        /// Deze methode navigeert naar naar het tabscherm
+        /// This method navigates to the Tabs screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -130,7 +132,7 @@ namespace PiXeL_Apps.UserControls
         }
 
         /// <summary>
-        /// Deze methode navigeert naar naar het synchronisatiescherm
+        /// This method navigates to the Syncronisatie screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -140,7 +142,7 @@ namespace PiXeL_Apps.UserControls
         }
 
         /// <summary>
-        /// Deze knop start de animatie zonder activering door een swype gesture.
+        /// This button starts the menu animation without a swype action, when the button is clicked.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -150,7 +152,8 @@ namespace PiXeL_Apps.UserControls
         }
 
         /// <summary>
-        /// Deze methode navigeert naar naar het hoofdscherm
+        /// This method navigates to the Hoofdscherm screen;
+        /// This is the main screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -159,23 +162,36 @@ namespace PiXeL_Apps.UserControls
             ((Frame)Window.Current.Content).Navigate(typeof(Hoofdscherm));
         }
 
-        #endregion
-
+        /// <summary>
+        /// This method navigates to the Oilsampling screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOilsampling_Click(object sender, RoutedEventArgs e)
         {
             ((Frame)Window.Current.Content).Navigate(typeof(Oilsampling));
         }
 
+        /// <summary>
+        /// This method navigates to the Feedback screen.
+        /// This screen is made for us. Users can provide feedback during testing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFeedback_Click(object sender, RoutedEventArgs e)
         {
             ((Frame)Window.Current.Content).Navigate(typeof(Feedback));
         }
 
+        /// <summary>
+        /// This method navigates to the Inspecties screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnInspecties_Click(object sender, RoutedEventArgs e)
         {
             ((Frame)Window.Current.Content).Navigate(typeof(Inspecties));
         }
-
-
+        #endregion
     }
 }

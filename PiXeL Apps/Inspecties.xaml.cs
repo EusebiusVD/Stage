@@ -143,6 +143,7 @@ namespace PiXeL_Apps
         #region GridView Events
 
         /// <summary>
+        /// This method handles the click of an item in gvwInspections.
         /// Bij het klikken op een item in het grid wordt het item aangepast in de lijst met gewijzigde inspecties.
         /// Bovendien worden alle items in de geselecteerde items van het grid geüpdatet zodat deze aan- of afgevinkt worden.
         /// Er wordt bovendien terug naar de laatst geklikte positie gescrollen (geklikte grid tegen te linkerkant)
@@ -193,7 +194,8 @@ namespace PiXeL_Apps
         #region Button Clicks
 
         /// <summary>
-        /// Deze methode zorgt ervoor dat er naar het opmerkingenscherm genavigeerd kan worden
+        /// This method navigates to the ProblemenTest (Rijberichten) screen
+        /// Deze methode zorgt ervoor dat er naar het rijberichtenscherm genavigeerd kan worden
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -203,6 +205,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method navigates to the OverzichtOpmerkingen screen and calls the method GegevensOpslaan().
         /// Deze methode zorgt ervoor dat er naar het "overzicht opmerkingen" (OverzichtOpmerkingen) scherm genavigeerd kan worden
         /// Ook wordt de GegevensOpslaan() methode geladen
         /// </summary>
@@ -215,6 +218,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method navigates to the Hoofscherm screen and calls the method GegevensOpslaan().
         /// Deze methode zorgt ervoor dat er naar het hoofdscherm genavigeerd kan worden en roept de methode Gegevensopslaan() op
         /// </summary>
         /// <param name="sender"></param>
@@ -226,6 +230,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// When the backbutton is clicked it calls the method GegevensOpslaan() and navigates to the previous screen.
         /// Bij muisklik op de terug knop controleren of de gebruiker de gegevens wil opslaan
         /// </summary>
         /// <param name="sender"></param>
@@ -240,6 +245,7 @@ namespace PiXeL_Apps
         #region Dialogen
 
         /// <summary>
+        /// Shows a messagedialog.
         /// Toont een messagedialog met een aangepast bericht, titel, en knopteksten (ok en annuleer)
         /// </summary>
         /// <param name="bericht">Bericht van het type string, Inhoud van het bericht</param>
@@ -264,6 +270,7 @@ namespace PiXeL_Apps
         #region Toegangsmethoden
 
         /// <summary>
+        /// This method is called when the page is leaved. The user can choose to save his input, in which case they are written to the SQLite database
         /// Deze methode wordt opgeroepen bij het verlaten van de pagina.
         /// Als de testrijder ervoor kiest om zijn gegevens op te slaan zodat deze na een herstart gelezen kunnen worden, worden alle
         /// gewijzigde items naar de SQLite database weg geschreven.
@@ -278,6 +285,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method is called at the Inlogscherm screen after the user has logged in.
+        /// This loads all inspections in the background before this page is loaded.
         /// Deze methode wordt op voorhand (inlogscherm) opgeroepen nadat de gebruiker zijn correcte inloggegevens heeft ingevuld.
         /// Op deze manier kunnen alle inspecties op de achtergrond reeds geladen worden voor de pagina geladen is.
         /// </summary>
@@ -304,6 +313,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method listenes to updates of the geolocator.
+        /// The ItemTemplateSelector is reassigned to the gvwInspecties, which makes shure every item is assigned the right datatemplate.
         /// Methode die luistert naar updates van de Geolocator.
         /// De ItemTemplateSelector wordt opnieuw aan het gridview toegewezen wat ervoor zorgt dat elk item opnieuw een DataTemplate
         /// toegewezen krijgt naargelang de gereden kilometers.

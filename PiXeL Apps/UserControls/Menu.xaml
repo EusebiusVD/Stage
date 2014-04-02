@@ -7,110 +7,111 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Width="350" Height="1920">
-
-    <StackPanel x:Name="menu" Orientation="Vertical"  Background="#3F3F3F" HorizontalAlignment="Left" Margin="-303,0,0,0">
-        <StackPanel.RenderTransform>
-            <CompositeTransform></CompositeTransform>
-        </StackPanel.RenderTransform>
-        <Button x:Name="btnHideShow" Content="&gt;" FontSize="18" HorizontalAlignment="Right" Margin="0, 0, -47,0"
-    		Height="45" Width="45" Click="BtnHideShow_Click" FontFamily="Global User Interface" />
-        <TextBlock x:Name="lblGebruikerNmr" Margin="37,7,26,0" Height="28" Width="240"
+    <Grid x:Name="menuGrid" HorizontalAlignment="Left"  Margin="-303,0,0,0">
+        <Button x:Name="btnHideShow" Content="&gt;" FontSize="18" HorizontalAlignment="Right" Margin="0,0,-42,0"
+    		Height="45" Width="45" Click="BtnHideShow_Click" FontFamily="Global User Interface" VerticalAlignment="Top" />
+        <StackPanel x:Name="menu" Orientation="Vertical"  Background="#3F3F3F" HorizontalAlignment="Left">
+            <StackPanel.RenderTransform>
+                <CompositeTransform></CompositeTransform>
+            </StackPanel.RenderTransform>
+            <TextBlock x:Name="lblGebruikerNmr" Margin="37,7,26,0" Height="28" Width="240"
     		Text="Hallo, "  FontSize="24" Foreground="White" />
-        <TextBlock x:Name="lblWagen" Margin="37,7,26,0" Height="28" Width="240"
+            <TextBlock x:Name="lblWagen" Margin="37,7,26,0" Height="28" Width="240"
         	Text="Wagen: "  FontSize="24" Foreground="White" />
-        <Line x:Name="lineGebruikerNmr" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
-        <TextBlock x:Name="lblNavigatie" Margin="37,50,26,0" Height="28" Width="240"
+            <Line x:Name="lineGebruikerNmr" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
+            <TextBlock x:Name="lblNavigatie" Margin="37,25,26,0" Height="28" Width="240"
     		Text="Navigatie"  FontSize="24" Foreground="White" />
-        <Line x:Name="lineNavigatie" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
-        <Button x:Name="btnHome" Height="50" Width="289" Click="BtnHome_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblHomeIcoon" Text="&#xE10F;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
-                <TextBlock x:Name="lblHome" Text="Home" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
-            </Grid>
-        </Button>
-        <Button x:Name="btnTabs" Height="50" Width="289" Click="BtnTabs_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblTabsIcoon" Text="&#xE280;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
-                <TextBlock x:Name="lblTabs" Text="Tabs" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
-            </Grid>
-        </Button>
-        <Button x:Name="btnOpmerkingen" Height="50" Width="289" Click="BtnOpmerkingen_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblOpmerkingenIcoon" Text="&#xE1DE;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
-                <TextBlock x:Name="lblOpmerkingen" Text="Rijberichten" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
-            </Grid>
-        </Button>
+            <Line x:Name="lineNavigatie" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
+            <Button x:Name="btnHome" Height="50" Width="289" Click="BtnHome_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblHomeIcoon" Text="&#xE10F;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblHome" Text="Home" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnTabs" Height="50" Width="289" Click="BtnTabs_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblTabsIcoon" Text="&#xE280;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblTabs" Text="Tabs" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnOpmerkingen" Height="50" Width="289" Click="BtnOpmerkingen_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblOpmerkingenIcoon" Text="&#xE1DE;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblOpmerkingen" Text="Rijberichten" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
 
-        <Button x:Name="btnOilsampling" Height="50" Width="289" Click="btnOilsampling_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblOilsamplingIcon" Text="&#x2941;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
-                <TextBlock x:Name="lblOilsampling" Text="Oliestaalname" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
-            </Grid>
-        </Button>
-        <Button x:Name="btnInspecties" Height="50" Width="289" Click="btnInspecties_Click" FontFamily="Global User Interface" Margin="7,7,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblInspectiesIcon" Text="🔧" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
-                <TextBlock x:Name="lbInspecties" Text="Inspecties" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
-            </Grid>
-        </Button>
+            <Button x:Name="btnOilsampling" Height="50" Width="289" Click="btnOilsampling_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblOilsamplingIcon" Text="&#x2941;" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
+                    <TextBlock x:Name="lblOilsampling" Text="Oliestaalname" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnInspecties" Height="50" Width="289" Click="btnInspecties_Click" FontFamily="Global User Interface" Margin="7,7,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblInspectiesIcon" Text="🔧" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
+                    <TextBlock x:Name="lbInspecties" Text="Inspecties" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
 
-        <TextBlock x:Name="lblGegevensverwerking" Margin="37,50,26,0" Height="30" Width="240"
+            <TextBlock x:Name="lblGegevensverwerking" Margin="37,25,26,0" Height="30" Width="240"
     		Text="Gegevensverwerking"  FontSize="24" Foreground="White" />
-        <Line x:Name="lineGegevensverwerking" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
-        <Button x:Name="btnSynchroniseren" Height="50" Width="289" Click="BtnSynchroniseren_Click" FontFamily="Global User Interface" Margin="7,7,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblSynchroniserenIcoon" Text="&#xE117;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
-                <TextBlock x:Name="lblSynchroniseren" Text="Synchroniseren" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
-            </Grid>
-        </Button>
+            <Line x:Name="lineGegevensverwerking" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
+            <Button x:Name="btnSynchroniseren" Height="50" Width="289" Click="BtnSynchroniseren_Click" FontFamily="Global User Interface" Margin="7,7,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblSynchroniserenIcoon" Text="&#xE117;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblSynchroniseren" Text="Synchroniseren" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
 
-        <TextBlock x:Name="lblGebruiker" Margin="37,50,26,0" Height="26" Width="240"
+            <TextBlock x:Name="lblGebruiker" Margin="37,25,26,0" Height="26" Width="240"
     		Text="Gebruiker"  FontSize="24" Foreground="White" />
-        <Line x:Name="lineAccount" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
+            <Line x:Name="lineAccount" Stroke="#FF6B97C9" X1="0" Y1="3" X2="100" Y2="3" StrokeThickness="3" />
 
-        <Button x:Name="btnUitloggen" Height="50" Width="289" Click="BtnUitloggen_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblUitloggenIcoon" Text="&#xE10F;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
-                <TextBlock x:Name="lblUitloggen" Text="Uitloggen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
-            </Grid>
-        </Button>
-        <Button x:Name="btnFeedback" Height="50" Width="289" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1" Click="btnFeedback_Click">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lblFeedbackIcon" Text="&#xE0D1;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-5,130,5" />
-                <TextBlock x:Name="lblFeedback" Text="Feedback" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
-            </Grid>
-        </Button>
-    </StackPanel>
+            <Button x:Name="btnUitloggen" Height="50" Width="289" Click="BtnUitloggen_Click" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblUitloggenIcoon" Text="&#xE10F;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" />
+                    <TextBlock x:Name="lblUitloggen" Text="Uitloggen" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnFeedback" Height="50" Width="289" FontFamily="Global User Interface" Margin="7,7,0,0" Grid.Row="1" Click="btnFeedback_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblFeedbackIcon" Text="&#xE0D1;" FontSize="20" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-5,130,5" />
+                    <TextBlock x:Name="lblFeedback" Text="Feedback" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontFamily="Global User Interface" />
+                </Grid>
+            </Button>
+        </StackPanel>
+    </Grid>
 </UserControl>
