@@ -38,6 +38,8 @@ namespace PiXeL_Apps
         private static IReadOnlyList<StorageFolder> storageFolders;
         private static string panel;
         private static int geselecteerdScript;
+        private Point beginPunt;
+        private UserControls.Menu ucMenu;
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
@@ -70,8 +72,12 @@ namespace PiXeL_Apps
             slOliepeil.Value = OilOdoInput.GetOliepeil() / 100;
 
             //Dynamisch menu (usercontrol) inladen
-            UserControls.Menu ucMenu = new UserControls.Menu(false);
+            ucMenu = new UserControls.Menu(false);
             menuPanel.Children.Add(ucMenu);
+
+            //Pagina grid linken aan twee events die lijsteren naar gestures
+            paginaGrid.ManipulationDelta += PaginaGrid_ManipulationDelta;
+            paginaGrid.ManipulationStarted += PaginaGrid_ManipulationStarted;
 
             try
             {
@@ -85,6 +91,46 @@ namespace PiXeL_Apps
             {
                 lblErrorVoorschriften.Text = "De pdf kon niet geladen worden, gelieven de tablet opnieuw op te starten indien mogenlijk";
                 lblErrorWagenmap.Text = "De pdf kon niet geladen worden, gelieven de tablet opnieuw op te starten indien mogenlijk";
+            }
+        }
+
+        /// <summary>
+        /// Get's called when a swype gesture starts.
+        /// The difference between ManipulationStarting and this method is that this function needs
+        /// the absolute starting point (X & Y).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void PaginaGrid_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            beginPunt = e.Position;
+        }
+
+        /// <summary>
+        /// Called during swyoe
+        /// Checks if the swype is done (e.IsInertial) and when it's done determines the end point.
+        /// there will be checked if the distance on the X-axis is far enough to start the menu animation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void PaginaGrid_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            if (e.IsInertial)
+            {
+                Point eindPunt = e.Position;
+                double afstand = eindPunt.X - beginPunt.X;
+                if (afstand >= 500)//500 is the threshold value, where you want to trigger the swipe right event
+                {
+                    e.Complete();
+                    if (!ucMenu.IsMenuOpen())
+                        ucMenu.BeginMenuAnimatie();
+                }
+                else if (afstand <= -500)
+                {
+                    e.Complete();
+                    if (ucMenu.IsMenuOpen())
+                        ucMenu.BeginMenuAnimatie();
+                }
             }
         }
         /// <summary>

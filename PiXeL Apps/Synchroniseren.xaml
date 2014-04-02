@@ -20,7 +20,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{StaticResource DefaultBackgroundColor}">
+    <Grid x:Name="paginaGrid" ManipulationMode="All" Background="{StaticResource DefaultBackgroundColor}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -64,5 +64,7 @@
 
         <ProgressRing x:Name="prSynchroniseren" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="50" Width="50" FontSize="20" Background="Transparent" Foreground="White" Margin="646,301,670,277" Grid.Row="1"/>
         <TextBlock x:Name="lblBoodschap" Text="Even geduld. Gegevens worden op dit moment verstuurd..." Margin="10,371,10,207" Grid.Row="1" FontSize="22" FontStyle="Italic" Foreground="#FFE8FF00" TextAlignment="Center" Visibility="Collapsed" />
+        <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
+        </StackPanel>
     </Grid>
 </Page>

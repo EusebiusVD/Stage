@@ -44,6 +44,8 @@ namespace PiXeL_Apps
             get { return this.navigationHelper; }
         }
         /// <summary>
+        /// In this constructor the method VulGridview is called.
+        /// The usercontrol for the dynamic menu is also called.
         /// In deze constructor wordt de methode VulGridview opgeroepen
         /// Ook wordt de usercontrol ingeladen voor het dynamisch menu
         /// </summary>
@@ -65,6 +67,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// Is called when a swype gesture starts.
+        ///The difference between ManipulationStarting and this method is that this function needs
+        /// the absolute starting point (X & Y).
         /// Wordt opgeroepen wanneer een swype gesture begint.
         /// In tegenstelling tot manipulationstarting wordt aan deze functie het absolute beginpunt (voor X en Y) meegegeven.
         /// </summary>
@@ -76,6 +81,9 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// Is called during swype.
+        /// There is a control if the swype has ended (e.IsEnertial). If is has ended, the end point is calculated and checked if the distance on the
+        /// X-axis is long enough to start the menu animation.
         /// Word opgeroepen tijdens het swypen.
         /// er wordt gecontroleerd of de swype beëindigd is of niet (e.IsInertial). Indien wel, dan wordt het eindpunt bepaald
         /// en wordt gekeken of de swype afstand op de X-as ver genoeg was om de menuanimatie te starten.
@@ -104,6 +112,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// In this method gvwOpmerkingen is filled with Rijberichten.
+        /// If there are any, the first one is selected.
         /// In deze methode wordt de gridview opgevuld met opmerkingen
         /// Als er opmerkingen aanwezig zijn dan wordt de eerste opmerking geselecteerd
         /// </summary>
@@ -126,6 +136,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method handles the passing of Rijberichten to other screens.
         /// Via deze methode kunnen we indien er opmerkingen aanwezig zijn, deze aan een andere pagina in de app doorgeven 
         /// </summary>
         /// <returns></returns>
@@ -146,6 +157,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method handles loading the rijberichten on another screen. 
         /// via deze methode kunnen de comments op een andere pagina worden opgehaald (BijlagenScherm), zodat deze op tijd klaar geladen zijn  
         /// Dit gebeurd enkel als de lijst opmerkingen leeg is en een voertuig geselecteerd is
         /// </summary>
@@ -160,6 +172,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method adds a rijbericht to the list from another page.
         /// Via deze methode kan er een opmerking toegevoegd worden aan de lijst vanaf een andere pagina
         /// </summary>
         /// <param name="comment">comment is van het type Comment en bevat een nieuwe opmerking</param>
@@ -173,6 +186,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method handles editing a rijbericht.
         /// Via deze methode kan een opmerking aangepast worden vanaf een andere pagina
         /// </summary>
         /// <param name="comment">comment is van het type Comment en bevat een nieuwe opmerking</param>
@@ -183,6 +197,7 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method deletes a rijbericht.
         /// Via deze methode kan een opmerking verwijderd worden vanaf een andere pagina
         /// </summary>
         public static void DeleteComment()
@@ -191,6 +206,7 @@ namespace PiXeL_Apps
         }
         
         /// <summary>
+        /// This method gets a list of defectcodes.
         /// Via deze methode kan een lijst met defectcodes opgehaald worden vanaf een andere pagina 
         /// </summary>
         /// <param name="defectcodes">defectcodes is van het type DefectCodes en bevat een lijst van defectcodes </param>
@@ -199,6 +215,7 @@ namespace PiXeL_Apps
             defectCodes = defectcodes;
         }
         /// <summary>
+        /// This method gets a list of objectcodes
         /// Via deze methode kan een lijst met objectcodes opgehaald worden vanaf een andere pagina 
         /// </summary>
         /// <param name="objectcodes">objectcodes is van het type ObjectCodes en bevat een lijst van objectcodes</param>
@@ -222,6 +239,7 @@ namespace PiXeL_Apps
         #endregion
 
         /// <summary>
+        /// This method handles the changing of the selectedindex.
         /// Via deze methode wordt de geselecteerdeIndex gewijzigd
         /// </summary>
         /// <param name="sender"></param>
@@ -232,6 +250,8 @@ namespace PiXeL_Apps
         }
 
         /// <summary>
+        /// This method navigates to the ProblemenTest screen when btnAanpassen is clicked.
+        /// The rijbericht is passed as a parameter, so users can edit it.
         /// Via deze methode wordt er genavigeerd naar het AanpassenOpmerkingen scherm
         /// Er wordt een opmerking meegegeven
         /// </summary>
@@ -244,6 +264,7 @@ namespace PiXeL_Apps
         }
         
         /// <summary>
+        /// This method handles navigating to the ProblemenTest screen.
         /// Via deze methode wordt er genavigeerd naar het problemen scherm
         /// </summary>
         /// <param name="sender"></param>
@@ -253,11 +274,20 @@ namespace PiXeL_Apps
             this.Frame.Navigate(typeof(ProblemenTest), null);
         }
 
+        /// <summary>
+        /// This method handles the navigation of the back button to the Hoofdscherm screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Hoofdscherm));
         }
 
+        /// <summary>
+        /// This method gets the selected index to pass to other screens.
+        /// </summary>
+        /// <returns></returns>
         public static int getSelectedIndex()
         {
             return geselecteerdeIndex;

@@ -628,6 +628,33 @@ namespace PiXeL_Apps
                         bool.TryParse(settingRapporteerDubbele.ToString(), out rapporteerDubbele) &&
                         rapporteerDubbele)
                     {
+                        var commentList = await LocalDB.database.GetComments();
+                        Comment LastComment = commentList[0];
+                        for (int i = 0; i < Photos.Count(); i++)
+                        {
+                            if (i == 0)
+                            {
+                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                            }
+                            else
+                            {
+                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                            }
+                            await movePhotoVideo(Photos[i], photoFolder);
+                        }
+
+                        for (int i = 0; i < Videos.Count(); i++)
+                        {
+                            if (i == 0)
+                            {
+                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                            }
+                            else
+                            {
+                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                            }
+                            await movePhotoVideo(Videos[i], videoFolder);
+                        }
                         await ControleerOpmerking();
                     }
                     else
@@ -676,6 +703,8 @@ namespace PiXeL_Apps
         /// <param name="commentaar">De opmerking die aangemaakt moet worden van het type comment</param>
         private async Task<bool> CommentaarToevoegen(Comment commentaar)
         {
+            countPhoto = 0;
+            countVideo = 0;
             Comment toegevoegdeCommentaar = await LocalDB.database.AddComment(commentaar);
             if (toegevoegdeCommentaar != null)
             {

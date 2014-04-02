@@ -27,6 +27,8 @@ namespace PiXeL_Apps
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private Point beginPunt;
+        private UserControls.Menu ucMenu;
 
         public ObservableDictionary DefaultViewModel
         {
@@ -48,6 +50,53 @@ namespace PiXeL_Apps
             //Event voor het kijken naar internetconnectie
             NetworkInformation.NetworkStatusChanged += VeranderingConnectiviteit;
             VeranderToggle();
+
+            //Dynamisch menu (usercontrol inladen)
+            ucMenu = new UserControls.Menu(false);
+            menuPanel.Children.Add(ucMenu);
+
+            //Pagina grid linken aan twee events die lijsteren naar gestures
+            paginaGrid.ManipulationDelta += PaginaGrid_ManipulationDelta;
+            paginaGrid.ManipulationStarted += PaginaGrid_ManipulationStarted;
+        }
+        /// <summary>
+        /// Get's called when a swype gesture starts.
+        /// The difference between ManipulationStarting and this method is that this function needs
+        /// the absolute starting point (X & Y).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void PaginaGrid_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            beginPunt = e.Position;
+        }
+
+        /// <summary>
+        /// Called during swyoe
+        /// Checks if the swype is done (e.IsInertial) and when it's done determines the end point.
+        /// there will be checked if the distance on the X-axis is far enough to start the menu animation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void PaginaGrid_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            if (e.IsInertial)
+            {
+                Point eindPunt = e.Position;
+                double afstand = eindPunt.X - beginPunt.X;
+                if (afstand >= 500)//500 is the threshold value, where you want to trigger the swipe right event
+                {
+                    e.Complete();
+                    if (!ucMenu.IsMenuOpen())
+                        ucMenu.BeginMenuAnimatie();
+                }
+                else if (afstand <= -500)
+                {
+                    e.Complete();
+                    if (ucMenu.IsMenuOpen())
+                        ucMenu.BeginMenuAnimatie();
+                }
+            }
         }
 
         /// <summary>
