@@ -36,5 +36,19 @@ namespace PiXeL_Apps.Classes
             Reason = reason;
             Remarks = remarks;
         }
+        public Oilsample(int id, string username, int vehicle_id, DateTime date, int odo, double oillevel, int oiltaken, int oilfilled, string oilunit, string reason, string remarks)
+        {
+            Id = id;
+            Username = username;
+            Vehicle_Id = vehicle_id;
+            Date = date;
+            Odo = odo;
+            Oillevel = oillevel;
+            Oiltaken = oiltaken;
+            OilUnit = oilunit;
+            Oilfilled = oilfilled;
+            Reason = reason;
+            Remarks = remarks;
+        }
     }
 }

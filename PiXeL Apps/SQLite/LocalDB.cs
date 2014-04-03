@@ -1849,7 +1849,7 @@ namespace PiXeL_Apps
                     {
                         foreach (OILSAMPLE sample in samples)
                         {
-                            oilsamples.Add(new Oilsample(sample.Username, sample.Vehicle_Id, sample.Date, sample.Odo, sample.Oillevel, sample.Oiltaken, sample.Oilfilled, sample.OilUnit, sample.Reason, sample.Remarks));
+                            oilsamples.Add(new Oilsample(sample.Id, sample.Username, sample.Vehicle_Id, sample.Date, sample.Odo, sample.Oillevel, sample.Oiltaken, sample.Oilfilled, sample.OilUnit, sample.Reason, sample.Remarks));
                         }
                         return oilsamples;
                     }
