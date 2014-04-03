@@ -1751,18 +1751,20 @@ namespace PiXeL_Apps
             List<string> lijstGegevens = new List<string>();
             List<Oilsample> samples = await Oilsampling.GetOilsamples();
             var av = await GetToegewezenAuto();
+            lijstGegevens.Add("Id,Gebruiker,Wagen,Datum,Kilometerstand,Oliepeil,Genomen staal,Bijgevuld,Eenheid,Reden,Opmerking");
             foreach (Oilsample sample in samples)
             {
-                lijstGegevens.Add("Id: " + sample.Id +
-                    ", Gebruiker: " + sample.Username +
-                    ", Wagen: " + av.Number +
-                    ", Datum: " + sample.Date +
-                    ", Kilometerstand: " + sample.Odo +
-                    ", Oilepeil: " + sample.Oillevel +
-                    ", Genomen staal: " + sample.Oiltaken + " " + sample.OilUnit +
-                    ", Bijgevuld: " + sample.Oilfilled + " " + sample.OilUnit +
-                    ", Reden: " + sample.Reason +
-                    ", Opmerking: " + sample.Remarks);
+                lijstGegevens.Add(sample.Id +
+                    "," + sample.Username +
+                    "," + av.Number +
+                    "," + sample.Date +
+                    "," + sample.Odo +
+                    "," + sample.Oillevel +
+                    "," + sample.Oiltaken +
+                    "," + sample.Oilfilled +
+                    "," + sample.OilUnit +
+                    "," + sample.Reason +
+                    "," + sample.Remarks);
             }
             return lijstGegevens;
         }
@@ -1771,18 +1773,19 @@ namespace PiXeL_Apps
         {
             List<Comment> alleCommentaren = await OverzichtOpmerkingen.HaalCommentsOp();
             List<string> csvLijnen = new List<string>();
+            csvLijnen.Add("Chauffeur,OpmerkingId,Datum,Objectcode,Defectcode,Positie,Rating,Omschrijving,Duplicate,Origineel");
             foreach (Comment commentaar in alleCommentaren)
             {
-                csvLijnen.Add("Chauffeur: " + commentaar.Chauffeur +
-                    ", OpmerkingID: " + commentaar.Id.ToString() +
-                    ", Aangemaakt op: " + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
-                    ", Objectcode: " + commentaar.ObjectCode +
-                    ", Defectcode: " + commentaar.DefectCode +
-                    ", Positie: " + commentaar.Position +
-                    ", Rating: " + commentaar.Rating +
-                    ", Omschrijving: " + commentaar.Omschrijving +
-                    ", Duplicate: " + commentaar.Duplicate +
-                    ", Origineel: " + commentaar.OriginalId);
+                csvLijnen.Add(commentaar.Chauffeur +
+                    "," + commentaar.Id.ToString() +
+                    "," + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
+                    "," + commentaar.ObjectCode +
+                    "," + commentaar.DefectCode +
+                    "," + commentaar.Position +
+                    "," + commentaar.Rating +
+                    "," + commentaar.Omschrijving +
+                    "," + commentaar.Duplicate +
+                    "," + commentaar.OriginalId);
             }
             return csvLijnen;
         }

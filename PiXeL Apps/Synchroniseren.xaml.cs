@@ -194,18 +194,20 @@ namespace PiXeL_Apps
                 List<string> lijstGegevens = new List<string>();
                 List<Oilsample> samples = await Oilsampling.GetOilsamples();
                 var av = await LocalDB.database.GetToegewezenAuto();
+                lijstGegevens.Add("Id,Gebruiker,Wagen,Datum,Kilometerstand,Oliepeil,Genomen staal,Bijgevuld,Eenheid,Reden,Opmerking");
                 foreach (Oilsample sample in samples)
                 {
-                    lijstGegevens.Add("Id: " + sample.Id +
-                        ", Gebruiker: " + sample.Username +
-                        ", Wagen: " + av.Number+
-                        ", Datum: " + sample.Date +
-                        ", Kilometerstand: " + sample.Odo +
-                        ", Oilepeil: " + sample.Oillevel +
-                        ", Genomen staal: " + sample.Oiltaken + " " + sample.OilUnit +
-                        ", Bijgevuld: " + sample.Oilfilled + " " + sample.OilUnit +
-                        ", Reden: " + sample.Reason +
-                        ", Opmerking: " + sample.Remarks);
+                    lijstGegevens.Add(sample.Id +
+                        "," + sample.Username +
+                        "," + av.Number +
+                        "," + sample.Date +
+                        "," + sample.Odo +
+                        "," + sample.Oillevel +
+                        "," + sample.Oiltaken +
+                        "," + sample.Oilfilled +
+                        "," + sample.OilUnit +
+                        "," + sample.Reason +
+                        "," + sample.Remarks);
                 }
 
                 ArrayOfString aosStaalnames = new ArrayOfString();
@@ -213,18 +215,19 @@ namespace PiXeL_Apps
 
                 List < Comment > opmerkingen = await OverzichtOpmerkingen.GetOverzichtComments();
                 List<string> lijstStringGegevens = new List<string>();
-                foreach (Comment opmerking in opmerkingen)
+                lijstStringGegevens.Add("Chauffeur,OpmerkingId,Datum,Objectcode,Defectcode,Positie,Rating,Omschrijving,Duplicate,Origineel");
+                foreach (Comment commentaar in opmerkingen)
                 {
-                    lijstStringGegevens.Add("Chauffeur: " + opmerking.Chauffeur +
-                        ", OpmerkingID: " + opmerking.Id.ToString() +
-                        ", Aangemaakt op: " + opmerking.Datum.ToString("dd/MM/yyyy HH:mm") +
-                        ", Objectcode: " + opmerking.ObjectCode +
-                        ", Defectcode: " + opmerking.DefectCode +
-                        ", Positie: " + opmerking.Position +
-                        ", Rating: " + opmerking.Rating +
-                        ", Omschrijving: " + opmerking.Omschrijving +
-                        ", Duplicate: " + opmerking.Duplicate +
-                        ", Origineel: " + opmerking.OriginalId);
+                    lijstStringGegevens.Add(commentaar.Chauffeur +
+                    "," + commentaar.Id.ToString() +
+                    "," + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
+                    "," + commentaar.ObjectCode +
+                    "," + commentaar.DefectCode +
+                    "," + commentaar.Position +
+                    "," + commentaar.Rating +
+                    "," + commentaar.Omschrijving +
+                    "," + commentaar.Duplicate +
+                    "," + commentaar.OriginalId);
                 }
 
                 ArrayOfString aosGegevens = new ArrayOfString(); //Een ArrayOfString is nodig voor de web service

@@ -629,64 +629,126 @@ namespace PiXeL_Apps
                         rapporteerDubbele)
                     {
                         var commentList = await LocalDB.database.GetComments();
-                        Comment LastComment = commentList[0];
-                        for (int i = 0; i < Photos.Count(); i++)
+                        if (commentList.Count() > 0)
                         {
-                            if (i == 0)
+                            Comment LastComment = commentList[0];
+                            for (int i = 0; i < Photos.Count(); i++)
                             {
-                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                if (i == 0)
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                }
+                                else
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                                }
+                                await movePhotoVideo(Photos[i], photoFolder);
                             }
-                            else
-                            {
-                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
-                            }
-                            await movePhotoVideo(Photos[i], photoFolder);
-                        }
 
-                        for (int i = 0; i < Videos.Count(); i++)
-                        {
-                            if (i == 0)
+                            for (int i = 0; i < Videos.Count(); i++)
                             {
-                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                if (i == 0)
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                }
+                                else
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                }
+                                await movePhotoVideo(Videos[i], videoFolder);
                             }
-                            else
-                            {
-                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
-                            }
-                            await movePhotoVideo(Videos[i], videoFolder);
                         }
-                        await ControleerOpmerking();
+                        else
+                        {
+                            for (int i = 0; i < Photos.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                }
+                                else
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + 0+ "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                                }
+                                await movePhotoVideo(Photos[i], photoFolder);
+                            }
+
+                            for (int i = 0; i < Videos.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                }
+                                else
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                }
+                                await movePhotoVideo(Videos[i], videoFolder);
+                            }
+                        }
+                    await ControleerOpmerking();
                     }
                     else
                     {
                         await CommentaarToevoegen(nieuwCommentaar);
 
                         var commentList = await LocalDB.database.GetComments();
-                        Comment LastComment = commentList[0];
-                        for (int i = 0; i < Photos.Count(); i++)
+                        if (commentList.Count() > 0)
                         {
-                            if (i == 0)
+                            Comment LastComment = commentList[0];
+                            for (int i = 0; i < Photos.Count(); i++)
                             {
-                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                if (i == 0)
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                }
+                                else
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                                }
+                                await movePhotoVideo(Photos[i], photoFolder);
                             }
-                            else
-                            {
-                                await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
-                            }                        
-                            await movePhotoVideo(Photos[i], photoFolder);
-                        }
 
-                        for (int i = 0; i < Videos.Count(); i++)
+                            for (int i = 0; i < Videos.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                }
+                                else
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                }
+                                await movePhotoVideo(Videos[i], videoFolder);
+                            }
+                        }
+                        else
                         {
-                            if (i == 0)
+                            for (int i = 0; i < Photos.Count(); i++)
                             {
-                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                if (i == 0)
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                }
+                                else
+                                {
+                                    await Photos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                                }
+                                await movePhotoVideo(Photos[i], photoFolder);
                             }
-                            else
+
+                            for (int i = 0; i < Videos.Count(); i++)
                             {
-                                await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                if (i == 0)
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                }
+                                else
+                                {
+                                    await Videos[i].RenameAsync(ca.Number + "_" + 0 + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                }
+                                await movePhotoVideo(Videos[i], videoFolder);
                             }
-                            await movePhotoVideo(Videos[i], videoFolder);
                         }
                         this.Frame.Navigate(typeof(OverzichtOpmerkingen));
                     }
