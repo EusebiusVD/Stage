@@ -31,6 +31,7 @@ namespace PiXeL_Apps
         private List<Script> scripten = new List<Script>();
         private List<string> categoriëën = new List<string>();
         private List<Comment> commentaren = new List<Comment>();
+        private List<Oilsample> oilsamples = new List<Oilsample>();
         private static PixelAppsWebserviceSoapClient webService;
 
         private CompleteAuto completeAuto = null;
@@ -1629,9 +1630,147 @@ namespace PiXeL_Apps
         /// <returns></returns>
         public async Task<bool> SynchroniseerNaarUSB()
         {
+            List<String> lijstGegevens = await schrijfStaalnames();
+            List<String> csvLijnen = await schrijfRijberichten();
+
+            ArrayOfString aosStaalnames = new ArrayOfString();
+            aosStaalnames.AddRange(lijstGegevens);
+
+           
+
+            if (csvLijnen.Count() == 0 && lijstGegevens.Count() == 0) //Als er geen commentaren zijn...
+            {
+                MessageDialog okAnnuleer = new MessageDialog(String.Format("Er zijn geen gegevens om te synchroniseren voor auto {0}.", completeAuto.Number), "Synchronisatie niet toepasselijk");
+                okAnnuleer.Commands.Add(new UICommand("Begrepen"));
+                await okAnnuleer.ShowAsync();
+                return false; //Melding geven en methode afbreken
+            }
+            else if (csvLijnen.Count() == 0)
+            {
+                StorageFolder usbFolder = null, autoFolder = null;
+
+                var usbApparaten = await DeviceInformation.FindAllAsync(StorageDevice.GetDeviceSelector()); //DeviceInformation gebruiken om alle USB-apparaten op te halen.
+
+                if (usbApparaten.Count > 0) //Als er USB-apparaten zijn, neem de eerste (tabblet met 1 usb poort)
+                    usbFolder = StorageDevice.FromId(usbApparaten[0].Id);
+                if (usbFolder != null) //Als er een USB-apparaat gebruikt is, en hier een auto folder aangetroffen werd...
+                {
+                    bool autoFolderAanmaken = true;
+                    try
+                    {
+                        autoFolder = await usbFolder.GetFolderAsync(completeAuto.Number); //Auto folder ophalen
+                        autoFolderAanmaken = false; //Als deze code bereikt wordt, dan bestaat de auto folder op de USB.
+                    }
+                    catch
+                    {
+                        paLogging.log.Info(String.Format("Map voor auto {0} aangemaakt op de USB-stick.", completeAuto.Number));
+                    }
+                    if (autoFolderAanmaken) //als dit nog true is, is de auto folder niet aangetroffen op de USB-stick
+                        autoFolder = await usbFolder.CreateFolderAsync(completeAuto.Number); //en maken we hier een folder voor aan
+                }
+                String bestandsNaamStaalnames = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m staalnames.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
+                                                                                    DateTime.Now.Hour, DateTime.Now.Minute);
+                StorageFile exportStaalnames = await autoFolder.CreateFileAsync(bestandsNaamStaalnames, CreationCollisionOption.GenerateUniqueName);
+                await FileIO.AppendLinesAsync(exportStaalnames, lijstGegevens);
+                //StorageFolder test = await ApplicationData.Current.LocalFolder.GetFolderAsync(@"\Photos");
+
+                return true;
+            }
+            else if (lijstGegevens.Count() == 0)
+            {
+                StorageFolder usbFolder = null, autoFolder = null;
+
+                var usbApparaten = await DeviceInformation.FindAllAsync(StorageDevice.GetDeviceSelector()); //DeviceInformation gebruiken om alle USB-apparaten op te halen.
+
+                if (usbApparaten.Count > 0) //Als er USB-apparaten zijn, neem de eerste (tabblet met 1 usb poort)
+                    usbFolder = StorageDevice.FromId(usbApparaten[0].Id);
+                if (usbFolder != null) //Als er een USB-apparaat gebruikt is, en hier een auto folder aangetroffen werd...
+                {
+                    bool autoFolderAanmaken = true;
+                    try
+                    {
+                        autoFolder = await usbFolder.GetFolderAsync(completeAuto.Number); //Auto folder ophalen
+                        autoFolderAanmaken = false; //Als deze code bereikt wordt, dan bestaat de auto folder op de USB.
+                    }
+                    catch
+                    {
+                        paLogging.log.Info(String.Format("Map voor auto {0} aangemaakt op de USB-stick.", completeAuto.Number));
+                    }
+                    if (autoFolderAanmaken) //als dit nog true is, is de auto folder niet aangetroffen op de USB-stick
+                        autoFolder = await usbFolder.CreateFolderAsync(completeAuto.Number); //en maken we hier een folder voor aan
+                }
+
+                string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m opmerkingen.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
+                                                                                    DateTime.Now.Hour, DateTime.Now.Minute); //bestandsnaam voor CSV-bestand aanmaken op basis van de datum en tijd.
+                StorageFile exportBestand = await autoFolder.CreateFileAsync(bestandsNaam, CreationCollisionOption.GenerateUniqueName); //CSV-bestand aanmaken op de USB-stick
+                await FileIO.AppendLinesAsync(exportBestand, csvLijnen); //Elke string in de lijst van CSV-lijnen asynchroon wegschrijven.
+                //StorageFolder test = await ApplicationData.Current.LocalFolder.GetFolderAsync(@"\Photos");
+
+                return true;
+            }
+            else
+            {
+                StorageFolder usbFolder = null, autoFolder = null;
+
+                var usbApparaten = await DeviceInformation.FindAllAsync(StorageDevice.GetDeviceSelector()); //DeviceInformation gebruiken om alle USB-apparaten op te halen.
+
+                if (usbApparaten.Count > 0) //Als er USB-apparaten zijn, neem de eerste (tabblet met 1 usb poort)
+                    usbFolder = StorageDevice.FromId(usbApparaten[0].Id);
+                if (usbFolder != null) //Als er een USB-apparaat gebruikt is, en hier een auto folder aangetroffen werd...
+                {
+                    bool autoFolderAanmaken = true;
+                    try
+                    {
+                        autoFolder = await usbFolder.GetFolderAsync(completeAuto.Number); //Auto folder ophalen
+                        autoFolderAanmaken = false; //Als deze code bereikt wordt, dan bestaat de auto folder op de USB.
+                    }
+                    catch
+                    {
+                        paLogging.log.Info(String.Format("Map voor auto {0} aangemaakt op de USB-stick.", completeAuto.Number));
+                    }
+                    if (autoFolderAanmaken) //als dit nog true is, is de auto folder niet aangetroffen op de USB-stick
+                        autoFolder = await usbFolder.CreateFolderAsync(completeAuto.Number); //en maken we hier een folder voor aan
+                }
+
+                string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m opmerkingen.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
+                                                                                    DateTime.Now.Hour, DateTime.Now.Minute); //bestandsnaam voor CSV-bestand aanmaken op basis van de datum en tijd.
+                String bestandsNaamStaalnames = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m staalnames.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
+                                                                                    DateTime.Now.Hour, DateTime.Now.Minute);
+                StorageFile exportBestand = await autoFolder.CreateFileAsync(bestandsNaam, CreationCollisionOption.GenerateUniqueName); //CSV-bestand aanmaken op de USB-stick
+                StorageFile exportStaalnames = await autoFolder.CreateFileAsync(bestandsNaamStaalnames, CreationCollisionOption.GenerateUniqueName);
+                await FileIO.AppendLinesAsync(exportBestand, csvLijnen); //Elke string in de lijst van CSV-lijnen asynchroon wegschrijven.
+                await FileIO.AppendLinesAsync(exportStaalnames, lijstGegevens);
+
+                return true;
+            }
+        }
+
+
+        private async Task<List<String>> schrijfStaalnames()
+        {
+            List<string> lijstGegevens = new List<string>();
+            List<Oilsample> samples = await Oilsampling.GetOilsamples();
+            var av = await GetToegewezenAuto();
+            foreach (Oilsample sample in samples)
+            {
+                lijstGegevens.Add("Id: " + sample.Id +
+                    ", Gebruiker: " + sample.Username +
+                    ", Wagen: " + av.Number +
+                    ", Datum: " + sample.Date +
+                    ", Kilometerstand: " + sample.Odo +
+                    ", Oilepeil: " + sample.Oillevel +
+                    ", Genomen staal: " + sample.Oiltaken + " " + sample.OilUnit +
+                    ", Bijgevuld: " + sample.Oilfilled + " " + sample.OilUnit +
+                    ", Reden: " + sample.Reason +
+                    ", Opmerking: " + sample.Remarks);
+            }
+            return lijstGegevens;
+        }
+
+        private async Task<List<String>> schrijfRijberichten()
+        {
             List<Comment> alleCommentaren = await OverzichtOpmerkingen.HaalCommentsOp();
             List<string> csvLijnen = new List<string>();
-            //bool csvGeschreven = false;
             foreach (Comment commentaar in alleCommentaren)
             {
                 csvLijnen.Add("Chauffeur: " + commentaar.Chauffeur +
@@ -1645,55 +1784,15 @@ namespace PiXeL_Apps
                     ", Duplicate: " + commentaar.Duplicate +
                     ", Origineel: " + commentaar.OriginalId);
             }
-
-            if (csvLijnen.Count() == 0) //Als er geen commentaren zijn...
-            {
-                MessageDialog okAnnuleer = new MessageDialog(String.Format("Er zijn geen rijberichten om te synchroniseren voor auto {0}.", completeAuto.Number), "Synchronisatie niet toepasselijk");
-                okAnnuleer.Commands.Add(new UICommand("Begrepen"));
-                await okAnnuleer.ShowAsync();
-                return false; //Melding geven en methode afbreken
-            }
-
-
-            StorageFolder usbFolder = null, autoFolder = null;
-
-            var usbApparaten = await DeviceInformation.FindAllAsync(StorageDevice.GetDeviceSelector()); //DeviceInformation gebruiken om alle USB-apparaten op te halen.
-
-            if (usbApparaten.Count > 0) //Als er USB-apparaten zijn, neem de eerste (tabblet met 1 usb poort)
-                usbFolder = StorageDevice.FromId(usbApparaten[0].Id);
-            if (usbFolder != null) //Als er een USB-apparaat gebruikt is, en hier een auto folder aangetroffen werd...
-            {
-                bool autoFolderAanmaken = true;
-                try
-                {
-                    autoFolder = await usbFolder.GetFolderAsync(completeAuto.Number); //Auto folder ophalen
-                    autoFolderAanmaken = false; //Als deze code bereikt wordt, dan bestaat de auto folder op de USB.
-                }
-                catch
-                {
-                    paLogging.log.Info(String.Format("Map voor auto {0} aangemaakt op de USB-stick.", completeAuto.Number));
-                }
-                if (autoFolderAanmaken) //als dit nog true is, is de auto folder niet aangetroffen op de USB-stick
-                    autoFolder = await usbFolder.CreateFolderAsync(completeAuto.Number); //en maken we hier een folder voor aan
-            }
-
-            string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m opmerkingen.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
-                                                                                DateTime.Now.Hour, DateTime.Now.Minute); //bestandsnaam voor CSV-bestand aanmaken op basis van de datum en tijd.
-
-            StorageFile exportBestand = await autoFolder.CreateFileAsync(bestandsNaam, CreationCollisionOption.GenerateUniqueName); //CSV-bestand aanmaken op de USB-stick
-            await FileIO.AppendLinesAsync(exportBestand, csvLijnen); //Elke string in de lijst van CSV-lijnen asynchroon wegschrijven.
-            //StorageFolder test = await ApplicationData.Current.LocalFolder.GetFolderAsync(@"\Photos");
-            
-            return true;
+            return csvLijnen;
         }
-
         public async Task<int> getAantalCommentaren()
         {
             return aantalCommentaren;
         }
         #endregion
 
-
+        #region Staalnames
         /// <summary>
         /// Adding an oilsample
         /// </summary>
@@ -1731,5 +1830,37 @@ namespace PiXeL_Apps
             }
         }
 
+        /// <summary>
+        /// Gets all the oilsamples from the SQLite database.
+        /// </summary>
+        /// <returns><list type="Oilsample"</returns>
+        public async Task<List<Oilsample>> getOilsamples()
+        {
+            if (oilsamples.Count > 0)
+            {
+                return oilsamples;
+            }
+            else
+            {
+                try
+                {
+                    var samples = await db.QueryAsync<OILSAMPLE>("SELECT * FROM DSS_OILSAMPLE where Vehicle_Id=?", new object[] { completeAuto.Id });
+                    if (samples.Any())
+                    {
+                        foreach (OILSAMPLE sample in samples)
+                        {
+                            oilsamples.Add(new Oilsample(sample.Username, sample.Vehicle_Id, sample.Date, sample.Odo, sample.Oillevel, sample.Oiltaken, sample.Oilfilled, sample.OilUnit, sample.Reason, sample.Remarks));
+                        }
+                        return oilsamples;
+                    }
+                }
+                catch (Exception e)
+                {
+                    paLogging.log.Error("Fout bij het ophalen van de oliestaalnames uit de database\n Foutmelding: " + e.Message);
+                }
+                return oilsamples;
+            }
+        }
+        #endregion
     }
 }

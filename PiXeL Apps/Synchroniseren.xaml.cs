@@ -190,15 +190,33 @@ namespace PiXeL_Apps
             {
                 await CopyFiles.copyPhotosViaNetwork();
                 await CopyFiles.copyVideosViaNetwork();
+                
+                List<string> lijstGegevens = new List<string>();
+                List<Oilsample> samples = await Oilsampling.GetOilsamples();
+                var av = await LocalDB.database.GetToegewezenAuto();
+                foreach (Oilsample sample in samples)
+                {
+                    lijstGegevens.Add("Id: " + sample.Id +
+                        ", Gebruiker: " + sample.Username +
+                        ", Wagen: " + av.Number+
+                        ", Datum: " + sample.Date +
+                        ", Kilometerstand: " + sample.Odo +
+                        ", Oilepeil: " + sample.Oillevel +
+                        ", Genomen staal: " + sample.Oiltaken + " " + sample.OilUnit +
+                        ", Bijgevuld: " + sample.Oilfilled + " " + sample.OilUnit +
+                        ", Reden: " + sample.Reason +
+                        ", Opmerking: " + sample.Remarks);
+                }
 
-                List<String> lijstGegevens = new List<String>();
-                List<Comment> opmerkingen = await OverzichtOpmerkingen.GetOverzichtComments();
+                ArrayOfString aosStaalnames = new ArrayOfString();
+                aosStaalnames.AddRange(lijstGegevens);
 
+                List < Comment > opmerkingen = await OverzichtOpmerkingen.GetOverzichtComments();
                 List<string> lijstStringGegevens = new List<string>();
                 foreach (Comment opmerking in opmerkingen)
                 {
                     lijstStringGegevens.Add("Chauffeur: " + opmerking.Chauffeur +
-                        ", OpmperkingID: " + opmerking.Id.ToString() +
+                        ", OpmerkingID: " + opmerking.Id.ToString() +
                         ", Aangemaakt op: " + opmerking.Datum.ToString("dd/MM/yyyy HH:mm") +
                         ", Objectcode: " + opmerking.ObjectCode +
                         ", Defectcode: " + opmerking.DefectCode +
@@ -218,11 +236,12 @@ namespace PiXeL_Apps
                                                                                 DateTime.Now.Hour, DateTime.Now.Minute);
 
                 string bestandsNaam = String.Format("{0} opmerkingen.csv", datum);
+                string bestandsNaamStaalnames = String.Format("{0} staalnames.csv", datum);
 
                 //await CopyFiles.copyVideosViaNetwork();
                 lblBoodschap.Text = "Videos uploaden";
 
-                if (await LocalDB.database.SetMaakSVCvoorWebSync(aosGegevens, bestandsNaam))
+                if (await LocalDB.database.SetMaakSVCvoorWebSync(aosGegevens, bestandsNaam) && await LocalDB.database.SetMaakSVCvoorWebSync(aosStaalnames, bestandsNaamStaalnames))
                 {
                     lblBoodschap.Text = "De gegevens zijn met succes verstuurd naar de server!";
                 }

@@ -33,6 +33,7 @@ namespace PiXeL_Apps
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         double oliepeil;
+        private static List<Oilsample> oilsamples = new List<Oilsample>();
         private Point beginPunt;
         private UserControls.Menu ucMenu;
 
@@ -159,6 +160,19 @@ namespace PiXeL_Apps
         /// serializable state.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+        }
+
+        /// <summary>
+        /// This method handles the passing of Oilsamples to other screens.
+        /// Via deze methode kunnen we indien er opmerkingen aanwezig zijn, deze aan een andere pagina in de app doorgeven 
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<List<Oilsample>> GetOilsamples()
+        {
+            if (oilsamples.Count == 0)
+                oilsamples = await LocalDB.database.getOilsamples();
+
+            return oilsamples;
         }
 
         #region NavigationHelper registration
