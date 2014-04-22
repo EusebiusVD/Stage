@@ -55,6 +55,11 @@ namespace PiXeL_Apps
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
 
+            //cbbApplicatie vullen
+            cbbApplicatie.PlaceholderText = "Duid hier aan welk deel van de applicatie";
+            cbbApplicatie.Items.Add("Navigatie gedeelte (Samsung)");
+            cbbApplicatie.Items.Add("Documentatie gedeelte (Toshiba)");
+
             //Dynamisch menu (usercontrol inladen)
             ucMenu = new UserControls.Menu(false);
             menuPanel.Children.Add(ucMenu);
@@ -63,6 +68,7 @@ namespace PiXeL_Apps
             paginaGrid.ManipulationDelta += PaginaGrid_ManipulationDelta;
             paginaGrid.ManipulationStarted += PaginaGrid_ManipulationStarted;
 
+            lblApplicatie.Text = "Duid hier aan om welk deel van de applicatie het gaat";
             lblFeedback.Text = "In onderstaand tekstvak kan u feedback geven over deze applicatie, duw op de knop om de feedback op te slaan";
         }
 
@@ -120,7 +126,12 @@ namespace PiXeL_Apps
         {
             lblError.Text = "";
             string text = txtFeedback.Text.Trim();
-            if (!text.Equals(""))
+            if (!text.Equals("") && cbbApplicatie.SelectedValue != null)
+            {
+                Logging.Feedback.writeFeedback(cbbApplicatie.SelectedValue.ToString() +" " + text);
+                Frame.GoBack();
+            }
+            else if (!text.Equals(""))
             {
                 Logging.Feedback.writeFeedback(text);
                 Frame.GoBack();

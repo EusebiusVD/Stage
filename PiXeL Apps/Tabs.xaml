@@ -66,10 +66,10 @@
                     </StackPanel>
                     <Grid>
                         <Image Height="350" Source="Assets/CarTop.png" Margin="10"/>
-                        <TextBlock x:Name="lblVooraanRechts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="50" />
-                        <TextBlock x:Name="lblVooraanLichts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,207,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" RenderTransformOrigin="0.552,2.687"  Text="35"/>
-                        <TextBlock x:Name="lblAchteraanRechts" FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="40"/>
-                        <TextBlock x:Name="lblAchteraanMidden" FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,185,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="25"/>
+                        <TextBlock x:Name="lblVooraanRechts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text="" />
+                        <TextBlock x:Name="lblVooraanLichts"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="660,207,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" RenderTransformOrigin="0.552,2.687"  Text=""/>
+                        <TextBlock x:Name="lblAchteraanRechts" FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,134,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text=""/>
+                        <TextBlock x:Name="lblAchteraanMidden" FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,185,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top" Text=""/>
                         <TextBlock x:Name="lblAchteraanLinks"  FontSize="18" Foreground="Black" HorizontalAlignment="Left" Margin="863,235,0,0" TextWrapping="Wrap" Width="50" Height="30" VerticalAlignment="Top"/>
                         <TextBlock x:Name="lblMelding" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Margin="62,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1253"/>
                     </Grid>
@@ -101,6 +101,16 @@
                     <StackPanel x:Name="rijinstructiesPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
                 </ScrollViewer>
             </Grid>
+            <Grid x:Name="spSBlijst" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+                <ScrollViewer x:Name="srvSBlijst" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                    <StackPanel x:Name="SBlijstPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+                </ScrollViewer>
+            </Grid>
+            <Grid x:Name="spBelading" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+                <ScrollViewer x:Name="srvBelading" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                    <StackPanel x:Name="beladingPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+                </ScrollViewer>
+            </Grid>
             <TextBlock x:Name="lblErrorWagenmap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" TextWrapping="Wrap" Foreground="{StaticResource DefaultTextErrorColor}"/>
             <TextBlock x:Name="lblErrorVoorschriften" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" TextWrapping="Wrap" Foreground="{StaticResource DefaultTextErrorColor}"/>
         </Grid>
@@ -108,7 +118,9 @@
             <TextBlock x:Name="lblVoorschriften" Margin="20" Text="Voorschriften" FontSize="30" Tapped="LblVoorschriften_Tapped" />
             <TextBlock x:Name="lblMetingen" Margin="20" Text="Metingen" FontSize="30" Tapped="LblMetingen_Tapped" />
             <TextBlock x:Name="lblWagenSpecs" Margin="20" Text="Wagenspecificaties" FontSize="30" Tapped="LblWagenmap_Tapped" />
+            <TextBlock x:Name="lblBelading" Margin="20" Text="Belading" FontSize="30" Tapped="lblBelading_Tapped" />
             <TextBlock x:Name="lblWagenRijinstr" Margin="20" Text="Rij-instructies" FontSize="30" Tapped="lblWagenRijinstr_Tapped" />
+            <TextBlock x:Name="lblSBlijst" Margin="20" Text="SB-lijst" FontSize="30" Tapped="lblSBlijst_Tapped" />
         </StackPanel>
         <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
         </StackPanel>

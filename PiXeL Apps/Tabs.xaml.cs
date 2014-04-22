@@ -81,10 +81,12 @@ namespace PiXeL_Apps
 
             try
             {
-                HaalGewichtenOp();
+                //HaalGewichtenOp();
                 VulVoorschriften();
                 VulWagenmap();
                 vulRijinstructies();
+                vulBelading();
+                vulSBlijst();
               
             }
             catch (Exception)
@@ -141,11 +143,11 @@ namespace PiXeL_Apps
             var lijstGewichten = await LocalDB.database.GetGewichtenExcel();
             if (lijstGewichten!= null)
             {
-                lblVooraanRechts.Text = lijstGewichten.ElementAt(1);
+                /*lblVooraanRechts.Text = lijstGewichten.ElementAt(1);
                 lblVooraanLichts.Text = lijstGewichten.ElementAt(0);
                 lblAchteraanRechts.Text = lijstGewichten.ElementAt(3);
                 lblAchteraanMidden.Text = lijstGewichten.ElementAt(4);
-                lblAchteraanLinks.Text = lijstGewichten.ElementAt(2);
+                lblAchteraanLinks.Text = lijstGewichten.ElementAt(2);*/
             }
             else
             {
@@ -193,7 +195,6 @@ namespace PiXeL_Apps
                 }
             }
         }
-
      
         /// <summary>
         /// Via deze methode worden de voorschiften opgehaald en getoont op het scherm
@@ -226,6 +227,9 @@ namespace PiXeL_Apps
             }
         }
 
+        /// <summary>
+        /// Via deze methode worden de rijinstructies opgehaald en getoont op het scherm
+        /// </summary>
         private async void vulRijinstructies()
         {
             if (pdfNamen.Count == 0)
@@ -253,6 +257,66 @@ namespace PiXeL_Apps
                 }
             }
         }
+
+        /// <summary>
+        /// via deze methode wordt het beladingsschema opgehaald en getoont
+        /// </summary>
+        private async void vulBelading()
+        {
+            if (pdfNamen.Count == 0)
+            {
+                await HaalPdfNamenOp();
+            }
+
+            foreach (string pdfNaam in pdfNamen)
+            {
+                if (pdfNaam.ToLower().Equals("belading"))
+                {
+                    panel = "belading";
+                    try
+                    {
+                        await VoegPdfToeAanBijlagen(pdfNaam, panel);
+                    }
+                    catch (NullReferenceException)
+                    {
+                        TextBlock txtFout = new TextBlock();
+                        txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
+                        txtFout.FontSize = 25;
+                        txtFout.Margin = new Thickness(30, 20, 0, 10);
+                        beladingPanel.Children.Add(txtFout);
+                    }
+                }
+            }
+        }
+
+        private async void vulSBlijst()
+        {
+            if (pdfNamen.Count == 0)
+            {
+                await HaalPdfNamenOp();
+            }
+
+            foreach (string pdfNaam in pdfNamen)
+            {
+                if (pdfNaam.ToLower().Equals("sb-lijst"))
+                {
+                    panel = "sb-lijst";
+                    try
+                    {
+                        await VoegPdfToeAanBijlagen(pdfNaam, panel);
+                    }
+                    catch (NullReferenceException)
+                    {
+                        TextBlock txtFout = new TextBlock();
+                        txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
+                        txtFout.FontSize = 25;
+                        txtFout.Margin = new Thickness(30, 20, 0, 10);
+                        SBlijstPanel.Children.Add(txtFout);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// De pdf's toevoegen aan het Stackpanel
         /// </summary>
@@ -282,9 +346,17 @@ namespace PiXeL_Apps
                     {
                         wagenMapPanel.Children.Add(paginaAfbeeldingControl);
                     }
-                    else
+                    if (panel.Equals("belading"))
+                    {
+                        beladingPanel.Children.Add(paginaAfbeeldingControl);
+                    }
+                    if (panel.Equals("rijinstructies"))
                     {
                         rijinstructiesPanel.Children.Add(paginaAfbeeldingControl);
+                    }
+                    if (panel.Equals("sb-lijst"))
+                    {
+                        SBlijstPanel.Children.Add(paginaAfbeeldingControl);
                     }
                 }
             }
@@ -375,6 +447,8 @@ namespace PiXeL_Apps
             spVoorschriften.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spMetingen.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spRijinstructies.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spSBlijst.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spBelading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spWagenmap.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             pageTitle.Text = "Tabs: Wagenspecificaties";
@@ -389,6 +463,8 @@ namespace PiXeL_Apps
             spWagenmap.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spVoorschriften.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spRijinstructies.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spSBlijst.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spBelading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spMetingen.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             pageTitle.Text = "Tabs: Metingen";
@@ -403,6 +479,8 @@ namespace PiXeL_Apps
             spWagenmap.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spMetingen.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spRijinstructies.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spSBlijst.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spBelading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spVoorschriften.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             pageTitle.Text = "Tabs: Voorschriften";
@@ -462,9 +540,35 @@ namespace PiXeL_Apps
             spWagenmap.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spMetingen.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spVoorschriften.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spSBlijst.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spBelading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             spRijinstructies.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             pageTitle.Text = "Tabs: Rij-instructies";
+        }
+
+        private void lblSBlijst_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            spWagenmap.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spMetingen.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spVoorschriften.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spRijinstructies.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spBelading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spSBlijst.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            pageTitle.Text = "Tabs: SB-lijst";
+        }
+
+        private void lblBelading_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            spWagenmap.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spMetingen.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spVoorschriften.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spRijinstructies.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spSBlijst.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            spBelading.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            pageTitle.Text = "Tabs: Belading";
         }
     }
 }

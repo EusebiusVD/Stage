@@ -14,8 +14,8 @@
         <Grid x:Name="grInloggen" Margin="0,6,0,-6">
             <Image x:Name="imgLogo" HorizontalAlignment="Left" Height="175" Margin="139,59,0,0" VerticalAlignment="Top" Width="311" Source="Assets/LogoPA.png"/>
 
-            <TextBlock x:Name="lblPersoneelsnummer" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Personeelsnummer:" VerticalAlignment="Top" Margin="75,306,0,0" Width="173" FontSize="18"/>
-            <TextBox x:Name="txtPersoneelsnummer" HorizontalAlignment="Left" Margin="253,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Personeelsnummer" Width="254" InputScope="Number" FontFamily="Global User Interface"/>
+            <TextBlock x:Name="lblPersoneelsnummer" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Gebruikersnaam:" VerticalAlignment="Top" Margin="75,306,0,0" Width="173" FontSize="18"/>
+            <TextBox x:Name="txtPersoneelsnummer" HorizontalAlignment="Left" Margin="253,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Gebruikersnaam" Width="254" InputScope="Number" FontFamily="Global User Interface"/>
 
             <TextBlock x:Name="lblWachtwoord" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Wachtwoord:" VerticalAlignment="Top" Margin="75,343,0,0" Width="173" FontSize="18"/>
             <PasswordBox x:Name="txtWachtwoord" HorizontalAlignment="Left" Margin="253,338,0,0" VerticalAlignment="Top" Width="254" PlaceholderText="Wachtwoord"/>

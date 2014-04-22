@@ -209,7 +209,6 @@ namespace PiXeL_Apps
                 btnWijzigAuto.IsEnabled = false;
                 prSynchroniseren.IsActive = true;
                 lblFeedback.Text = "De tablet wordt toegewezen aan wagen " + v.Number;
-                await LocalDB.database.CreateDatabase(false);
 
                 if (InternetControle.ControleerInternet())
                     await PdfSupport.pdfSupport.maakPDFBestanden(true);

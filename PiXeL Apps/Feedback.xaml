@@ -46,11 +46,12 @@
             <TextBlock x:Name="pageTitle" Text="Feedback ingeven" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <ComboBox x:Name="cbbApplicatie" HorizontalAlignment="Left" Margin="121,44,0,0" Grid.Row="1" VerticalAlignment="Top" Width="300"/>
+        <TextBlock x:Name="lblApplicatie" HorizontalAlignment="Left" Margin="121,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="18"/>
         <TextBox x:Name="txtFeedback" HorizontalAlignment="Left" Margin="121,136,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="295" Width="841"/>
         <TextBlock x:Name="lblFeedback" HorizontalAlignment="Left" Margin="121,78,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="18" />
         <Button x:Name="btnFeedback"  Content="Feedback opslaan" FontSize="18" HorizontalAlignment="Left" Margin="118,482,0,0" Grid.Row="1" VerticalAlignment="Top" Height="74" Width="261" Click="btnFeedback_Click"/>
         <TextBlock x:Name="lblError" HorizontalAlignment="Left" Margin="494,517,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource DefaultTextErrorColor}" />
-        <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">
-        </StackPanel>
+        <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}"/>
     </Grid>
 </Page>
