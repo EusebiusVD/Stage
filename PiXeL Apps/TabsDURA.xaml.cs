@@ -28,7 +28,7 @@ namespace PiXeL_Apps
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class Tabs : Page
+    public sealed partial class TabsDURA : Page
     {
         private List<KeyValuePair<string, string>> inhoudExcel;
         private double oliepeil;
@@ -60,7 +60,7 @@ namespace PiXeL_Apps
         /// <summary>
         /// In deze constructor worden de methodes VulVoorschriften, Vulwagenmap en haalGewichtenOp opgeroepen
         /// </summary>
-        public Tabs()
+        public TabsDURA()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -569,6 +569,16 @@ namespace PiXeL_Apps
             spBelading.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             pageTitle.Text = "Tabs: Belading";
+        }
+
+        /// <summary>
+        /// This method handles the navigation of the back button to the Hoofdscherm screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Hoofdscherm));
         }
     }
 }

@@ -288,5 +288,15 @@ namespace PiXeL_Apps
             else
                 return false;
         }
+
+        /// <summary>
+        /// This method handles the navigation of the back button to the Hoofdscherm screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Hoofdscherm));
+        }
     }
 }

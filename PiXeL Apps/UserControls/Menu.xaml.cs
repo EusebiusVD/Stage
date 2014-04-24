@@ -24,6 +24,7 @@ namespace PiXeL_Apps.UserControls
     public sealed partial class Menu : UserControl
     {
         private Point beginPunt;
+        bool durability = Convert.ToBoolean(Common.LocalStorage.localStorage.LaadGegevens("afdeling"));
 
         /// <summary>
         /// This constructor makes the menu.
@@ -39,7 +40,19 @@ namespace PiXeL_Apps.UserControls
                 btnHideShow.IsEnabled = false;
                 menuGrid.Margin = new Thickness(0);
             }
+            btnRoutes.Visibility = Visibility.Collapsed;
+            btnInspecties.Visibility = Visibility.Collapsed;
 
+            if (!durability)
+            {
+                btnInspecties.Visibility = Visibility.Collapsed;
+                btnRoutes.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnInspecties.Visibility = Visibility.Visible;
+                btnRoutes.Visibility = Visibility.Collapsed;
+            }
             try
             {
                 ToonGebruikerWagen();
@@ -128,7 +141,15 @@ namespace PiXeL_Apps.UserControls
         /// <param name="e"></param>
         private void BtnTabs_Click(object sender, RoutedEventArgs e)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(Tabs));
+            if (durability)
+            {
+                ((Frame)Window.Current.Content).Navigate(typeof(TabsDURA));
+            }
+            else
+            {
+                ((Frame)Window.Current.Content).Navigate(typeof(TabsVOCF));
+            }
+
         }
 
         /// <summary>
@@ -193,5 +214,10 @@ namespace PiXeL_Apps.UserControls
             ((Frame)Window.Current.Content).Navigate(typeof(Inspecties));
         }
         #endregion
+
+        private void btnRoutes_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(Routes));
+        }
     }
 }

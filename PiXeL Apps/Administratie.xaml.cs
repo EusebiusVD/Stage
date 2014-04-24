@@ -108,6 +108,16 @@ namespace PiXeL_Apps
             else
                 Common.LocalStorage.localStorage.SlaGegevensOp("afstandsaanduiding", false);
 
+            object boolAfdeling = LocalStorage.localStorage.LaadGegevens("afdeling");
+            if (boolAfdeling != null)
+            {
+                swtAfdeling.IsOn = Convert.ToBoolean(boolAfdeling);
+            }
+            else
+            {
+                Common.LocalStorage.localStorage.SlaGegevensOp("afdeling", false);
+            }
+
             PopulateCombobox();
 
             //object vl = Common.LocalStorage.localStorage.LaadGegevens("bandVoorLinks");
@@ -482,6 +492,18 @@ namespace PiXeL_Apps
             //True = Mile
             //False = Kilometers
             Common.LocalStorage.localStorage.SlaGegevensOp("afstandsaanduiding", swtAfstandsaanduiding.IsOn);
+        }
+
+        /// <summary>
+        /// Defines for which department the app is currently running
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SwtAfdeling_Toggled(object sender, RoutedEventArgs e)
+        {
+            //True = Durability
+            //False = VOCF
+            Common.LocalStorage.localStorage.SlaGegevensOp("afdeling", swtAfdeling.IsOn);
         }
 
     

@@ -154,6 +154,12 @@
     <Compile Include="Logging\Feedback.cs" />
     <Compile Include="Logging\paLogging.cs" />
     <Compile Include="Logging\paLogWriter.cs" />
+    <Compile Include="Routes.xaml.cs">
+      <DependentUpon>Routes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TabsDURA.xaml.cs">
+      <DependentUpon>TabsDURA.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -202,8 +208,8 @@
     <Compile Include="Administratie.xaml.cs">
       <DependentUpon>Administratie.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tabs.xaml.cs">
-      <DependentUpon>Tabs.xaml</DependentUpon>
+    <Compile Include="TabsVOCF.xaml.cs">
+      <DependentUpon>TabsVOCF.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\VisueleAuto.xaml.cs">
       <DependentUpon>VisueleAuto.xaml</DependentUpon>
@@ -327,6 +333,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Routes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TabsDURA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -359,7 +373,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tabs.xaml">
+    <Page Include="TabsVOCF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

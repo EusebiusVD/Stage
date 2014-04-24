@@ -238,7 +238,7 @@ namespace PiXeL_Apps
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             GegevensOpslaan();
-        }
+            this.Frame.Navigate(typeof(Hoofdscherm));        }
 
         #endregion
 

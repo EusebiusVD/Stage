@@ -73,6 +73,16 @@
                     <TextBlock x:Name="lbInspecties" Text="Inspecties" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
                 </Grid>
             </Button>
+            <Button x:Name="btnRoutes" Height="50" Width="289" Click="btnRoutes_Click" FontFamily="Global User Interface" Margin="7,7,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="lblInspectiesIcon1" Text="🚦" FontSize="25" FontFamily="Segoe UI Symbol" Width="100" Grid.ColumnSpan="2" Margin="0,-4,130,4" />
+                    <TextBlock x:Name="lbInspecties1" Text="Routes" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" />
+                </Grid>
+            </Button>
 
             <TextBlock x:Name="lblGegevensverwerking" Margin="37,25,26,0" Height="30" Width="240"
     		Text="Gegevensverwerking"  FontSize="24" Foreground="White" />
