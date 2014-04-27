@@ -26,8 +26,7 @@ namespace Webservice
         public ExcelReader(String pad)
         {
 
-            string padIngave = @"C:/Pixel-Apps/TestBandingspanningGewichten.xlsx";
-            ReadExcelFileSAX(padIngave);
+            ReadExcelFileSAX(pad);
         }
         /// <summary>
         /// Deze methode gaat de gegevens op een bepaalde plaats in een excel document ophalen

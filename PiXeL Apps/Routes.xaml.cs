@@ -37,6 +37,19 @@ namespace PiXeL_Apps
         {
             this.InitializeComponent();
 
+            cbbRoute.PlaceholderText = "Selecteer uw route...";
+            cbbRoute.Items.Add("Inter city A");
+            cbbRoute.Items.Add("Inter city B");
+            cbbRoute.Items.Add("Inter city C");
+            cbbRoute.Items.Add("Rural");
+            cbbRoute.Items.Add("Highway");
+            cbbRoute.Items.Add("Shakedown");
+            cbbRoute.Items.Add("Hasselt Stop/Start");
+            cbbRoute.Items.Add("Interne Stop/Start");
+            cbbRoute.Items.Add("Interne Transit");
+            cbbRoute.Items.Add("Interne Highway");
+            cbbRoute.Items.Add("Interne Rural");
+
             //Dynamisch menu (usercontrol) inladen
             ucMenu = new UserControls.Menu(false);
             menuPanel.Children.Add(ucMenu);
@@ -127,7 +140,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InnercityAPanel.Children.Add(txtFout);
+                        IntercityAPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -155,7 +168,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InnercityBPanel.Children.Add(txtFout);
+                        IntercityBPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -183,7 +196,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InnercityCPanel.Children.Add(txtFout);
+                        IntercityCPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -320,7 +333,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InternStopStartPanel.Children.Add(txtFout);
+                        InterneStopStartPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -347,7 +360,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InternTransitPanel.Children.Add(txtFout);
+                        InterneTransitPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -375,7 +388,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InternHighwayPanel.Children.Add(txtFout);
+                        InterneHighwayPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -402,7 +415,7 @@ namespace PiXeL_Apps
                         txtFout.Text = pdfNaam + " bevindt zich niet op deze tablet.";
                         txtFout.FontSize = 25;
                         txtFout.Margin = new Thickness(30, 20, 0, 10);
-                        InternRuralPanel.Children.Add(txtFout);
+                        InterneRuralPanel.Children.Add(txtFout);
                     }
                 }
             }
@@ -425,15 +438,15 @@ namespace PiXeL_Apps
 
                     if (panel.Equals("intercitya"))
                     {
-                        InnercityAPanel.Children.Add(paginaAfbeeldingControl);
+                        IntercityAPanel.Children.Add(paginaAfbeeldingControl);
                     }
                     if (panel.Equals("intercityb"))
                     {
-                        InnercityBPanel.Children.Add(paginaAfbeeldingControl);
+                        IntercityBPanel.Children.Add(paginaAfbeeldingControl);
                     }
                     if (panel.Equals("intercityc"))
                     {
-                        InnercityCPanel.Children.Add(paginaAfbeeldingControl);
+                        IntercityCPanel.Children.Add(paginaAfbeeldingControl);
                     }
                     if (panel.Equals("rural"))
                     {
@@ -453,19 +466,19 @@ namespace PiXeL_Apps
                     }
                     if (panel.Equals("internstopstart"))
                     {
-                        InternStopStartPanel.Children.Add(paginaAfbeeldingControl);
+                        InterneStopStartPanel.Children.Add(paginaAfbeeldingControl);
                     }
                     if (panel.Equals("interntransit"))
                     {
-                        InternTransitPanel.Children.Add(paginaAfbeeldingControl);
+                        InterneTransitPanel.Children.Add(paginaAfbeeldingControl);
                     }
                     if (panel.Equals("internhighway"))
                     {
-                        InternHighwayPanel.Children.Add(paginaAfbeeldingControl);
+                        InterneHighwayPanel.Children.Add(paginaAfbeeldingControl);
                     }
                     if (panel.Equals("internrural"))
                     {
-                        InternRuralPanel.Children.Add(paginaAfbeeldingControl);
+                        InterneRuralPanel.Children.Add(paginaAfbeeldingControl);
                     }
                 }
             }
@@ -501,13 +514,13 @@ namespace PiXeL_Apps
         {
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
 
             spShakedown.Visibility = Visibility.Visible;
@@ -518,14 +531,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Visible;
+            spIntercityA.Visibility = Visibility.Visible;
         }
 
         private void lblIntercityB_Tapped(object sender, TappedRoutedEventArgs e)
@@ -533,14 +546,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Visible;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Visible;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblIntercityC_Tapped(object sender, TappedRoutedEventArgs e)
@@ -548,14 +561,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Visible;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Visible;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblRural_Tapped(object sender, TappedRoutedEventArgs e)
@@ -563,14 +576,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Visible;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblHighway_Tapped(object sender, TappedRoutedEventArgs e)
@@ -578,14 +591,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Visible;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblHasseltStopStart_Tapped(object sender, TappedRoutedEventArgs e)
@@ -593,14 +606,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Visible;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblInternStopStart_Tapped(object sender, TappedRoutedEventArgs e)
@@ -608,14 +621,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Visible;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Visible;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblInternTransit_Tapped(object sender, TappedRoutedEventArgs e)
@@ -623,14 +636,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Visible;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Visible;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblInternHighway_Tapped(object sender, TappedRoutedEventArgs e)
@@ -638,14 +651,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Visible;
-            spInternRural.Visibility = Visibility.Collapsed;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Visible;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         private void lblInternRural_Tapped(object sender, TappedRoutedEventArgs e)
@@ -653,14 +666,14 @@ namespace PiXeL_Apps
             spHasseltStopStart.Visibility = Visibility.Collapsed;
             spHighway.Visibility = Visibility.Collapsed;
             spShakedown.Visibility = Visibility.Collapsed;
-            spInnercityB.Visibility = Visibility.Collapsed;
-            spInnercityC.Visibility = Visibility.Collapsed;
-            spInternHighway.Visibility = Visibility.Collapsed;
-            spInternRural.Visibility = Visibility.Visible;
-            spInternStopStart.Visibility = Visibility.Collapsed;
-            spInternTransit.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Visible;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
             spRural.Visibility = Visibility.Collapsed;
-            spInnercityA.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -671,6 +684,70 @@ namespace PiXeL_Apps
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Hoofdscherm));
+        }
+
+        private void cbbRoute_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string route = cbbRoute.SelectedValue.ToString();
+            route = route.Replace(" ", "");
+            route = route.Replace("/", "");
+            route = "sp" + route;
+            spHasseltStopStart.Visibility = Visibility.Collapsed;
+            spHighway.Visibility = Visibility.Collapsed;
+            spShakedown.Visibility = Visibility.Collapsed;
+            spIntercityB.Visibility = Visibility.Collapsed;
+            spIntercityC.Visibility = Visibility.Collapsed;
+            spInterneHighway.Visibility = Visibility.Collapsed;
+            spInterneRural.Visibility = Visibility.Collapsed;
+            spInterneStopStart.Visibility = Visibility.Collapsed;
+            spInterneTransit.Visibility = Visibility.Collapsed;
+            spRural.Visibility = Visibility.Collapsed;
+            spIntercityA.Visibility = Visibility.Collapsed;
+
+            if (spHighway.Name.Equals(route))
+            {
+                spHighway.Visibility = Visibility.Visible;
+            }
+            if (spIntercityA.Name.Equals(route))
+            {
+                spIntercityA.Visibility = Visibility.Visible;
+            }
+            if (spIntercityB.Name.Equals(route))
+            {
+                spIntercityB.Visibility = Visibility.Visible;
+            }
+            if (spIntercityC.Name.Equals(route))
+            {
+                spIntercityC.Visibility = Visibility.Visible;
+            }
+            if (spInterneHighway.Name.Equals(route))
+            {
+                spInterneHighway.Visibility = Visibility.Visible;
+            }
+            if (spInterneRural.Name.Equals(route))
+            {
+                spInterneRural.Visibility = Visibility.Visible;
+            }
+            if (spInterneStopStart.Name.Equals(route))
+            {
+                spInterneStopStart.Visibility = Visibility.Visible;
+            }
+            if (spInterneTransit.Name.Equals(route))
+            {
+                spInterneTransit.Visibility = Visibility.Visible;
+            }
+            if (spRural.Name.Equals(route))
+            {
+                spRural.Visibility = Visibility.Visible;
+            }
+            if (spShakedown.Name.Equals(route))
+            {
+                spShakedown.Visibility = Visibility.Visible;
+            }
+            if (spHasseltStopStart.Name.Equals(route))
+            {
+                spHasseltStopStart.Visibility = Visibility.Visible;
+            }
         }
     }
 }

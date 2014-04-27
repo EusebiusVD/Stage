@@ -45,10 +45,11 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"
                         Click="backButton_Click" />
+            <ComboBox x:Name="cbbRoute" Grid.Column="1" HorizontalAlignment="Left" Margin="25,59,0,0" VerticalAlignment="Top" Width="301" SelectionChanged="cbbRoute_SelectionChanged"/>
         </Grid>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="87,41,0,0"  Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="60">
+           <!-- <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="60">
                 <TextBlock x:Name="lblIntercityA" Margin="20,20,20,0" Text="Inter City A" FontSize="25" Tapped="lblIntercityA_Tapped" Height="33" VerticalAlignment="Top" />
                 <TextBlock x:Name="lblIntercityB" Margin="20,20,20,0" Text="Inter City B" FontSize="25" Tapped="lblIntercityB_Tapped" Height="33" VerticalAlignment="Top" />
                 <TextBlock x:Name="lblIntercityC" Margin="20,20,20,0" Text="Inter City C" FontSize="25" Tapped="lblIntercityC_Tapped" Height="33" VerticalAlignment="Top" />
@@ -62,21 +63,21 @@
                 <TextBlock x:Name="lblInternTransit" Margin="20,0,20,7" Text="Interne Transit" FontSize="25" Tapped="lblInternTransit_Tapped" VerticalAlignment="Top" />
                 <TextBlock x:Name="lblInternHighway" Margin="20,0,20,7" Text="Interne Highway" FontSize="25" Tapped="lblInternHighway_Tapped" VerticalAlignment="Top" />
                 <TextBlock x:Name="lblInternRural" Margin="20,0,20,7" Text="Interne Rural" FontSize="25" Tapped="lblInternRural_Tapped" VerticalAlignment="Top" />
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
-        <Grid x:Name="spInnercityA" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInnercityA" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InnercityAPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spIntercityA" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvIntercityA" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="IntercityAPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="spInnercityB" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInnercityB" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InnercityBPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spIntercityB" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvIntercityB" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="IntercityBPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="spInnercityC" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInnercityC" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InnercityCPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spIntercityC" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvIntercityC" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="IntercityCPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
         <Grid x:Name="spRural" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
@@ -99,24 +100,24 @@
                 <StackPanel x:Name="HasseltStopStartPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="spInternStopStart" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInternStopStart" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InternStopStartPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spInterneStopStart" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvInterneStopStart" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="InterneStopStartPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="spInternTransit" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInternTransit" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InternTransitPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spInterneTransit" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvInterneTransit" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="InterneTransitPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="spInternHighway" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInternHighway" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InternHighwayPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spInterneHighway" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvInterneHighway" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="InterneHighwayPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="spInternRural" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
-            <ScrollViewer x:Name="srvInternRural" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
-                <StackPanel x:Name="InternRuralPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
+        <Grid x:Name="spInterneRural" Visibility="Collapsed" Grid.Row="1" Margin="10,70,10,20" Width="{Binding Width, ElementName=rootGrid - 20}">
+            <ScrollViewer x:Name="srvInterneRural" VerticalScrollMode="Enabled" HorizontalScrollMode="Auto" >
+                <StackPanel x:Name="InterneRuralPanel" Orientation="Vertical" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Auto" />
             </ScrollViewer>
         </Grid>
         <StackPanel Name="menuPanel" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="350" Height="{Binding Height, ElementName=page}">

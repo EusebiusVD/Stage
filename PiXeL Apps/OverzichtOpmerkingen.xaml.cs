@@ -29,7 +29,6 @@ namespace PiXeL_Apps
         private static List<DefectCodes> defectCodes = new List<DefectCodes>();
         private static List<ObjectCodes> objectCodes = new List<ObjectCodes>();
         private static List<Comment> Opmerking = new List<Comment>();
-        private static int geselecteerdScript;
         private static int geselecteerdeIndex = 0;
         private UserControls.Menu ucMenu;
         private Point beginPunt;
@@ -117,10 +116,9 @@ namespace PiXeL_Apps
         /// In deze methode wordt de gridview opgevuld met opmerkingen
         /// Als er opmerkingen aanwezig zijn dan wordt de eerste opmerking geselecteerd
         /// </summary>
-        private void VulGridview()
+        private async void VulGridview()
         {
             gvwOpmerkingen.HorizontalContentAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-
             gvwOpmerkingen.DataContext = opmerkingen;
             gvwOpmerkingen.CanReorderItems = false;
             gvwOpmerkingen.CanDragItems = false;
@@ -166,8 +164,23 @@ namespace PiXeL_Apps
             if (opmerkingen.Count == 0) //Als de lijst leeg is, probeer ze opnieuw op te halen.
             {
                 opmerkingen = await LocalDB.database.GetComments();
+                /*foreach (Comment opmerking in opmerkingen)
+                {
+                    if (opmerking.Datum < DateTime.Now.AddHours(-24) || !opmerking.Chauffeur.Equals(LocalDB.database.GetIngelogdeGebruiker().Username.ToString()))
+                    {
+                        opmerkingen.Remove(opmerking);
+                    }
+                }*/
                 opmerkingen.Reverse(); //Volgorde omdraaien (laatste eerst)
             }
+
+            /*foreach (Comment opmerking in opmerkingen)
+            {
+                if (opmerking.Datum < DateTime.Now.AddHours(-24) || !opmerking.Chauffeur.Equals(LocalDB.database.GetIngelogdeGebruiker().Username.ToString()))
+                {
+                    opmerkingen.Remove(opmerking);
+                }
+            }*/
             return opmerkingen;
         }
 

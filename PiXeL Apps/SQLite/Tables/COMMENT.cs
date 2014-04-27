@@ -24,5 +24,7 @@ namespace PiXeL_Apps.SQLite.Tables
         public int OriginalId { get; set; }
         public String Position { get; set; }
         public String Rating { get; set; }
+        public int NumberOfPhotos { get; set; }
+        public int NumberOfVideos { get; set; }
     }
 }

@@ -213,21 +213,28 @@ namespace PiXeL_Apps
                 ArrayOfString aosStaalnames = new ArrayOfString();
                 aosStaalnames.AddRange(lijstGegevens);
 
-                List < Comment > opmerkingen = await OverzichtOpmerkingen.GetOverzichtComments();
+                List<Comment> opmerkingen = await LocalDB.database.GetComments();
+                opmerkingen.Reverse();
                 List<string> lijstStringGegevens = new List<string>();
-                lijstStringGegevens.Add("Chauffeur,OpmerkingId,Datum,Objectcode,Defectcode,Positie,Rating,Omschrijving,Duplicate,Origineel");
+                lijstStringGegevens.Add("Chauffeur,OpmerkingId,Datum,Objectcode,ObjectOmschrijving,Defectcode,DefectOmschrijving,Positie,Rating,Omschrijving,Duplicate,Origineel,AantalFotos,AantalVideos");
                 foreach (Comment commentaar in opmerkingen)
                 {
+                    string objomschr = await LocalDB.database.getObjectcodeOmschr(commentaar.ObjectCode);
+                    string defomschr = await LocalDB.database.getDefectcodeOmschr(commentaar.DefectCode);
                     lijstStringGegevens.Add(commentaar.Chauffeur +
                     "," + commentaar.Id.ToString() +
                     "," + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
                     "," + commentaar.ObjectCode +
+                    "," + objomschr +
                     "," + commentaar.DefectCode +
+                    "," + defomschr +
                     "," + commentaar.Position +
                     "," + commentaar.Rating +
                     "," + commentaar.Omschrijving +
                     "," + commentaar.Duplicate +
-                    "," + commentaar.OriginalId);
+                    "," + commentaar.OriginalId +
+                    "," + commentaar.AantalFotos + 
+                    "," + commentaar.AantalVideos);
                 }
 
                 ArrayOfString aosGegevens = new ArrayOfString(); //Een ArrayOfString is nodig voor de web service
@@ -238,7 +245,7 @@ namespace PiXeL_Apps
                 string datum = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m", avAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
                                                                                 DateTime.Now.Hour, DateTime.Now.Minute);
 
-                string bestandsNaam = String.Format("{0} opmerkingen.csv", datum);
+                string bestandsNaam = String.Format("{0} rijberichten.csv", datum);
                 string bestandsNaamStaalnames = String.Format("{0} staalnames.csv", datum);
 
                 //await CopyFiles.copyVideosViaNetwork();

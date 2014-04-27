@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using System.Collections.Generic;
 
 namespace PiXeL_Apps.Common
 {

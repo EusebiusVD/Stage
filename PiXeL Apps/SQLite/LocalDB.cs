@@ -1362,10 +1362,12 @@ namespace PiXeL_Apps
                     Duplicate = commentaar.Duplicate,
                     OriginalId = commentaar.OriginalId,
                     Position = commentaar.Position,
-                    Rating = commentaar.Rating
+                    Rating = commentaar.Rating,
+                    NumberOfPhotos = commentaar.AantalFotos,
+                    NumberOfVideos = commentaar.AantalVideos
                 };
                 await db.InsertAsync(nieuwCommentaar);
-                Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.DefectCode, nieuwCommentaar.ObjectCode, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum, nieuwCommentaar.Duplicate, nieuwCommentaar.OriginalId, nieuwCommentaar.Position, nieuwCommentaar.Rating);
+                Comment opmerking = new Comment(nieuwCommentaar.Id, nieuwCommentaar.Omschrijving, nieuwCommentaar.ObjectCodeId, nieuwCommentaar.DefectCodeId, nieuwCommentaar.Vehicle_Id, nieuwCommentaar.DefectCode, nieuwCommentaar.ObjectCode, nieuwCommentaar.Chauffeur, nieuwCommentaar.Datum, nieuwCommentaar.Duplicate, nieuwCommentaar.OriginalId, nieuwCommentaar.Position, nieuwCommentaar.Rating, nieuwCommentaar.NumberOfPhotos, nieuwCommentaar.NumberOfVideos  );
                 aantalCommentaren++;
                 return opmerking;
             }
@@ -1455,7 +1457,7 @@ namespace PiXeL_Apps
                         int hulp = 0;
                         foreach (COMMENT opmerking in opmerkingen)
                         {
-                            commentaren.Add(new Comment(opmerking.Id, opmerking.Omschrijving, opmerking.ObjectCodeId, opmerking.DefectCodeId, opmerking.Vehicle_Id, opmerking.DefectCode, opmerking.ObjectCode, opmerking.Chauffeur, opmerking.Datum, opmerking.Duplicate, opmerking.OriginalId, opmerking.Position, opmerking.Rating));
+                            commentaren.Add(new Comment(opmerking.Id, opmerking.Omschrijving, opmerking.ObjectCodeId, opmerking.DefectCodeId, opmerking.Vehicle_Id, opmerking.DefectCode, opmerking.ObjectCode, opmerking.Chauffeur, opmerking.Datum, opmerking.Duplicate, opmerking.OriginalId, opmerking.Position, opmerking.Rating, opmerking.NumberOfPhotos, opmerking.NumberOfVideos));
                             
                             if (hulp < opmerking.Id)
                             {
@@ -1476,6 +1478,64 @@ namespace PiXeL_Apps
                 }
                 return commentaren;
             }
+        }
+
+        /// <summary>
+        /// This method gets the explanation of a Object code.
+        /// </summary>
+        /// <param name="objcode"></param>
+        /// <returns>string Omschr</returns>
+        public async Task<String> getObjectcodeOmschr(string objcode)
+        {
+            string omschr = "";
+            try
+            {
+                var codes =  await db.QueryAsync<OBJECT_CODES>("SELECT Beschrijving from DSS_OBJECT_CODES WHERE Code =?",new Object []{ objcode });
+                if (codes.Any())
+                {
+                    foreach (OBJECT_CODES code in codes)
+                    {
+                        omschr = code.Beschrijving.ToString();
+                        return omschr;
+                    }
+                    return omschr;
+                }
+                return omschr;
+            }
+            catch
+            {
+                paLogging.log.Error("Fout bij het ophalen van de objectcodes");
+            }
+            return omschr;
+        }
+
+        /// <summary>
+        /// This method gets the explanation of a Defect code.
+        /// </summary>
+        /// <param name="defcode"></param>
+        /// <returns>string Omschr</returns>
+        public async Task<String> getDefectcodeOmschr(string defcode)
+        {
+            string omschr = "";
+            try
+            {
+                var codes = await db.QueryAsync<DEFECT_CODES>("SELECT Beschrijving from DSS_DEFECT_CODES WHERE Code =?", new Object[] { defcode });
+                if (codes.Any())
+                {
+                    foreach (DEFECT_CODES code in codes)
+                    {
+                        omschr = code.Beschrijving.ToString();
+                        return omschr;
+                    }
+                    return omschr;
+                }
+                return omschr;
+            }
+            catch (Exception e)
+            {
+                paLogging.log.Error("Fout bij het ophalen van de objectcodes");
+            }
+            return omschr;
         }
 
         #endregion
@@ -1700,7 +1760,7 @@ namespace PiXeL_Apps
                         autoFolder = await usbFolder.CreateFolderAsync(completeAuto.Number); //en maken we hier een folder voor aan
                 }
 
-                string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m opmerkingen.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
+                string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m rijberichten.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
                                                                                     DateTime.Now.Hour, DateTime.Now.Minute); //bestandsnaam voor CSV-bestand aanmaken op basis van de datum en tijd.
                 StorageFile exportBestand = await autoFolder.CreateFileAsync(bestandsNaam, CreationCollisionOption.GenerateUniqueName); //CSV-bestand aanmaken op de USB-stick
                 await FileIO.AppendLinesAsync(exportBestand, csvLijnen); //Elke string in de lijst van CSV-lijnen asynchroon wegschrijven.
@@ -1732,7 +1792,7 @@ namespace PiXeL_Apps
                         autoFolder = await usbFolder.CreateFolderAsync(completeAuto.Number); //en maken we hier een folder voor aan
                 }
 
-                string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m opmerkingen.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
+                string bestandsNaam = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m rijberichten.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
                                                                                     DateTime.Now.Hour, DateTime.Now.Minute); //bestandsnaam voor CSV-bestand aanmaken op basis van de datum en tijd.
                 String bestandsNaamStaalnames = String.Format("Wagen {0} - {1}-{2}-{3} {4}h{5}m staalnames.csv", completeAuto.Number, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year,
                                                                                     DateTime.Now.Hour, DateTime.Now.Minute);
@@ -1771,21 +1831,28 @@ namespace PiXeL_Apps
 
         private async Task<List<String>> schrijfRijberichten()
         {
-            List<Comment> alleCommentaren = await OverzichtOpmerkingen.HaalCommentsOp();
+            List<Comment> alleCommentaren = await LocalDB.database.GetComments();
+            alleCommentaren.Reverse();
             List<string> csvLijnen = new List<string>();
-            csvLijnen.Add("Chauffeur,OpmerkingId,Datum,Objectcode,Defectcode,Positie,Rating,Omschrijving,Duplicate,Origineel");
+            csvLijnen.Add("Chauffeur,OpmerkingId,Datum,Objectcode,ObjectOmschrijving,Defectcode,DefectOmschrijving,Positie,Rating,Omschrijving,Duplicate,Origineel,AantalFotos,AantalVideos");
             foreach (Comment commentaar in alleCommentaren)
             {
+                string objomschr = await LocalDB.database.getObjectcodeOmschr(commentaar.ObjectCode);
+                string defomschr = await LocalDB.database.getDefectcodeOmschr(commentaar.DefectCode);
                 csvLijnen.Add(commentaar.Chauffeur +
                     "," + commentaar.Id.ToString() +
                     "," + commentaar.Datum.ToString("dd/MM/yyyy HH:mm") +
                     "," + commentaar.ObjectCode +
+                    "," + objomschr +
                     "," + commentaar.DefectCode +
+                    "," + defomschr + 
                     "," + commentaar.Position +
                     "," + commentaar.Rating +
                     "," + commentaar.Omschrijving +
                     "," + commentaar.Duplicate +
-                    "," + commentaar.OriginalId);
+                    "," + commentaar.OriginalId + 
+                    "," + commentaar.AantalFotos +
+                    "," + commentaar.AantalVideos);
             }
             return csvLijnen;
         }

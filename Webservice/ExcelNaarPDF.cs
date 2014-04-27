@@ -201,7 +201,7 @@ namespace Webservice
                         Type.Missing, false,
                         paramMissing);
                     //Het ophalen van de gewichten en bandenspanning
-                    if (bestandsnaam.Equals("TestBandingspanningGewichten.xlsx"))
+                    if (bestandsnaam.Equals("BandingspanningGewichten.xlsx"))
                     {
                         string currentSheet = "Sheet1";
                         Excel.Sheets excelSheets = excelWorkBook.Worksheets;

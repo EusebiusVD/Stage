@@ -29,7 +29,6 @@ namespace PiXeL_Apps
     {
         private static int geselecteerdeIndex = 0;
         private static float kilometerstandWagen = 0;
-        private static int teller = 0;
         private static List<DefectCodes> defectCodes = new List<DefectCodes>();
         private static List<ObjectCodes> objectCodes = new List<ObjectCodes>();
         private static double oliepeil = 0.0;

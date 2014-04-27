@@ -144,7 +144,6 @@ namespace PiXeL_Apps
         {
             wagenOpties = await LocalDB.database.GetAutos(true);
             cbbSelecteerWagen.ItemsSource = wagenOpties;
-            string a;
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace PiXeL_Apps.UserControls
 {
     public sealed partial class Menu : UserControl
     {
-        private Point beginPunt;
+        //private Point beginPunt;
         bool durability = Convert.ToBoolean(Common.LocalStorage.localStorage.LaadGegevens("afdeling"));
 
         /// <summary>

@@ -71,8 +71,6 @@ namespace PiXeL_Apps
         public static List<Comment> opmerkingen = new List<Comment>();
         private static StorageFolder photoFolder;
         private static StorageFolder videoFolder;
-        int photoCounter = 1;
-        int videoCounter = 1;
 
         /// <summary>
         /// In deze constructor wordt de combobox opgevuld
@@ -581,6 +579,8 @@ namespace PiXeL_Apps
                     nieuwCommentaar.Datum = DateTime.Now;
                     nieuwCommentaar.Position = cbbPosition.SelectedValue.ToString();
                     nieuwCommentaar.Rating = cbbRating.SelectedValue.ToString();
+                    nieuwCommentaar.AantalFotos = countPhoto;
+                    nieuwCommentaar.AantalVideos = countVideo;
                     CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
                     
                     for (int i = 0; i < Photos.Count(); i++)
@@ -619,6 +619,8 @@ namespace PiXeL_Apps
                     nieuwCommentaar.Datum = DateTime.Now;
                     nieuwCommentaar.Position = cbbPosition.SelectedItem.ToString();
                     nieuwCommentaar.Rating = cbbRating.SelectedItem.ToString();
+                    nieuwCommentaar.AantalFotos = countPhoto;
+                    nieuwCommentaar.AantalVideos = countVideo;
 
                     CompleteAuto ca = await LocalDB.database.GetToegewezenAuto();
 
@@ -632,15 +634,16 @@ namespace PiXeL_Apps
                         if (commentList.Count() > 0)
                         {
                             Comment LastComment = commentList[0];
+                            int lastcommentid = LastComment.Id + 1;
                             for (int i = 0; i < Photos.Count(); i++)
                             {
                                 if (i == 0)
                                 {
-                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                    await Photos[i].RenameAsync(ca.Number + "_" + lastcommentid + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
                                 }
                                 else
                                 {
-                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                                    await Photos[i].RenameAsync(ca.Number + "_" + lastcommentid + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
                                 }
                                 await movePhotoVideo(Photos[i], photoFolder);
                             }
@@ -649,11 +652,11 @@ namespace PiXeL_Apps
                             {
                                 if (i == 0)
                                 {
-                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                    await Videos[i].RenameAsync(ca.Number + "_" + lastcommentid + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
                                 }
                                 else
                                 {
-                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                    await Videos[i].RenameAsync(ca.Number + "_" + lastcommentid + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
                                 }
                                 await movePhotoVideo(Videos[i], videoFolder);
                             }
@@ -696,15 +699,16 @@ namespace PiXeL_Apps
                         if (commentList.Count() > 0)
                         {
                             Comment LastComment = commentList[0];
+                            int lastcommentid = LastComment.Id + 1;
                             for (int i = 0; i < Photos.Count(); i++)
                             {
                                 if (i == 0)
                                 {
-                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
+                                    await Photos[i].RenameAsync(ca.Number + "_" + lastcommentid+ "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".png");
                                 }
                                 else
                                 {
-                                    await Photos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
+                                    await Photos[i].RenameAsync(ca.Number + "_" + lastcommentid + "_" + Photos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").png");
                                 }
                                 await movePhotoVideo(Photos[i], photoFolder);
                             }
@@ -713,11 +717,11 @@ namespace PiXeL_Apps
                             {
                                 if (i == 0)
                                 {
-                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
+                                    await Videos[i].RenameAsync(ca.Number + "_" + lastcommentid+ "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + ".mp4");
                                 }
                                 else
                                 {
-                                    await Videos[i].RenameAsync(ca.Number + "_" + LastComment.Id + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
+                                    await Videos[i].RenameAsync(ca.Number + "_" + lastcommentid + "_" + Videos[i].DateCreated.ToString("ddMMyyyy-HHmmssff") + "_" + gebruiker.Username + "(" + i + ").mp4");
                                 }
                                 await movePhotoVideo(Videos[i], videoFolder);
                             }
@@ -1159,7 +1163,7 @@ namespace PiXeL_Apps
                 {
                     status = file.MoveAsync(folder).Status.ToString();
                 }
-                catch(Exception e)
+                catch
                 {
                     goto BREAK;
                 }
